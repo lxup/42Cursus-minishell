@@ -6,7 +6,7 @@
 #    By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/06 19:51:48 by lquehec           #+#    #+#              #
-#    Updated: 2024/02/08 17:55:49 by lquehec          ###   ########.fr        #
+#    Updated: 2024/02/08 20:58:51 by lquehec          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,11 +25,15 @@ CYAN=\x1b[36m
 WHITE=\x1b[37m
 
 OS 			:= $(shell uname)
-VPATH		= srcs srcs/main
+VPATH		= srcs srcs/main srcs/cmds
 HEADER_DIR	= includes
 OBJ_DIR 	= .obj
 
-SRCS 		= main.c
+MAIN		= main
+CMDS		= cd echo env exit export pwd unset
+
+SRCS 		= $(addsuffix .c, $(MAIN)) \
+				$(addsuffix .c, $(CMDS))
 
 OBJS		= $(SRCS:%.c=$(OBJ_DIR)/%.o)
 
