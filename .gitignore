@@ -1,0 +1,6 @@
+*.a
+*.o
+*.out
+*.txt
+minishell
+.DS_Store
