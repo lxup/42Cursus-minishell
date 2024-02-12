@@ -6,7 +6,7 @@
 #    By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/06 19:51:48 by lquehec           #+#    #+#              #
-#    Updated: 2024/02/12 22:31:56 by lquehec          ###   ########.fr        #
+#    Updated: 2024/02/12 22:46:08 by lquehec          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,19 +14,32 @@
 #                                     VARS                                     #
 # **************************************************************************** #
 
+END				=	\033[0m
+
 # COLORS
-END=\x1b[0m
-BOLD=\x1b[1m
-UNDER=\x1b[4m
-REV=\x1b[7m
-GREY=\x1b[30m
-RED=\x1b[31m
-GREEN=\x1b[32m
-YELLOW=\x1b[33m
-BLUE=\x1b[34m
-PURPLE=\x1b[35m
-CYAN=\x1b[36m
-WHITE=\x1b[37m
+BLACK			=	\033[0;30m
+RED				=	\033[0;31m
+GREEN			=	\033[0;32m
+ORANGE			=	\033[0;33m
+BLUE			=	\033[0;34m
+PURPLE			=	\033[0;35m
+CYAN			=	\033[0;36m
+LIGHT_GRAY		=	\033[0;37m
+DARK_GRAY		=	\033[1;30m
+LIGHT_RED		=	\033[1;31m
+LIGHT_GREEN		=	\033[1;32m
+YELLOW			=	\033[1;33m
+LIGHT_BLUE		=	\033[1;34m
+LIGHT_PURPLE	=	\033[1;35m
+LIGHT_CYAN		=	\033[1;36m
+WHITE			=	\033[1;37m
+
+# FONTS
+BOLD			=	\033[1m
+DIM				=	\033[2m
+UNDERLINED		=	\033[4m
+BLINK			=	\033[5m
+REVERSE			=	\033[7m
 
 # OS
 OS				=	$(shell uname)
@@ -162,13 +175,6 @@ $(OBJ_PATH):
 $(OBJ_PATH)/%.o: %.c
 			@printf "${BLUE}>Generating minishell objects... %-33.33s\r" $@
 			@$(CC) $(CFLAGS) $(INCL_RDL_HEADER) -c $< -o $@
-# @/bin/echo -n .
-# ifeq ($(OS), Darwin)
-# 			@printf "${BLUE}>Generating minishell objects... %-33.33s\r" $@
-# 			@$(CC) $(CFLAGS) $(INCL_RDL_HEADER) -c $< -o $@
-# else
-# 			@$(CC) $(CFLAGS) $(INCL_RDL_HEADER) -c $< -o $@
-# endif
 
 clean:
 			@make clean -C $(LIBFT_DIR)
