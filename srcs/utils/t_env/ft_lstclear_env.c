@@ -1,39 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstclear_env.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/08 17:38:04 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/08 21:18:01 by lquehec          ###   ########.fr       */
+/*   Created: 2024/02/09 16:12:34 by lquehec           #+#    #+#             */
+/*   Updated: 2024/02/11 10:31:42 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	main(int ac, char **av, char **env)
+void	ft_lstclear_env(t_env **lst)
 {
-	t_mini	mini;
-	
-	(void)ac;
-	(void)av;
-	(void)env;
-	(void)mini;
-	// for (int i = 0; env[i]; i++)
-	// 	printf("%s\n", env[i]);
-	for (int i = 0; av[i]; i++)
-		printf("%s\n", av[i]);
+	t_env	*start;
+	t_env	*current;
+	t_env	*tmp;
 
-	/*
-		LEXER
-		Operators:
-			> < += -= = | || >> << & && , . ; : ! ? * % / + - ~ ^
-	*/ 
-	
-
-	// PARAING
-
-	
-	return (0);
+	start = *lst;
+	current = start;
+	tmp = NULL;
+	while (current)
+	{
+		if (current->next)
+			tmp = current->next;
+		else
+			tmp = NULL;
+		if (current->name)
+			free(current->name);
+		if (current->value)
+			free(current->value);
+		free(current);
+		current = tmp;
+		if (current == start)
+			break ;
+	}
+	*lst = NULL;
 }

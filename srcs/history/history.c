@@ -1,0 +1,92 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   history.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/02/09 16:31:56 by lquehec           #+#    #+#             */
+/*   Updated: 2024/02/11 11:55:59 by lquehec          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "minishell.h"
+
+int	get_history_fd_write(t_mini *mini)
+{
+	char	*file_path;
+	int		fd;
+
+	if (!ft_lstfind_env(&mini->env, "HOME"))
+		return (ft_exit(mini, EXIT_FAILURE, ERR_ENV_HOME), -1);
+	file_path = ft_strjoin(ft_lstfind_env(&mini->env, "HOME"), \
+		"/.minishell_history");
+	if (!file_path)
+		return (ft_exit(mini, EXIT_FAILURE, ERR_MALLOC), -1);
+	fd = open(file_path, O_CREAT | O_RDWR | O_APPEND, 0644);
+	if (fd < 0)
+		return (free(file_path), \
+			ft_exit(mini, EXIT_FAILURE, ERR_OPEN_FILE), -1);
+	free(file_path);
+	return (fd);
+}
+
+int	get_history_fd_read(t_mini *mini)
+{
+	char	*file_path;
+	int		fd;
+
+	if (!ft_lstfind_env(&mini->env, "HOME"))
+		return (ft_exit(mini, EXIT_FAILURE, ERR_ENV_HOME), -1);
+	file_path = ft_strjoin(ft_lstfind_env(&mini->env, "HOME"), \
+		"/.minishell_history");
+	if (!file_path)
+		return (ft_exit(mini, EXIT_FAILURE, ERR_MALLOC), -1);
+	fd = open(file_path, O_RDONLY, 0600);
+	if (fd < 0)
+		return (free(file_path), -1);
+	free(file_path);
+	return (fd);
+}
+
+void	*init_history(t_mini *mini)
+{
+	int		fd;
+	char	*line;
+	char	*tmp;
+
+	fd = get_history_fd_read(mini);
+	if (fd < 0)
+		return (NULL);
+	while (1)
+	{
+		line = get_next_line(fd);
+		if (!line)
+			break ;
+		tmp = ft_strtrim(line, " \n");
+		add_history(tmp);
+		free(line);
+		free(tmp);
+	}
+	return (close(fd), NULL);
+}
+
+void	*add_to_history(t_mini *mini)
+{
+	int		fd;
+
+	if (!ft_strlen(mini->prompt) || is_new_prompt(mini) == 0 \
+		|| is_only_space(mini->prompt) == 1)
+		return (free(mini->prompt), NULL);
+	fd = get_history_fd_write(mini);
+	if (fd >= 0)
+	{
+		write(fd, mini->prompt, ft_strlen(mini->prompt));
+		write(fd, "\n", 1);
+		close(fd);
+	}
+	add_history(mini->prompt);
+	free(mini->prev_prompt);
+	mini->prev_prompt = mini->prompt;
+	return (NULL);
+}
