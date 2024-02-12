@@ -1,0 +1,19 @@
+{
+	"files.associations": {
+		"*.json.liquid": "json",
+		"*.yaml.liquid": "yaml",
+		"*.md.liquid": "markdown",
+		"*.js.liquid": "liquid-javascript",
+		"*.css.liquid": "liquid-css",
+		"*.scss.liquid": "liquid-scss",
+		"typedef.h": "c",
+		"minishell.h": "c",
+		"wait.h": "c",
+		"signal.h": "c",
+		"unistd.h": "c",
+		"history.h": "c",
+		"define.h": "c",
+		"lib.h": "c",
+		"stdio.h": "c"
+	}
+}
