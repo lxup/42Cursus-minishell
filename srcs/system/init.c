@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 12:14:28 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/11 15:12:59 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/12 19:16:45 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,13 @@ static void	init_env(t_mini *mini, char **env)
 	i = -1;
 	while (env && env[++i])
 	{
-		tmp = ft_split(env[i], '=');
+		tmp = ft_split(env[i], "=");
 		if (!tmp)
 			ft_exit(mini, EXIT_FAILURE, ERR_MALLOC); // TODO: handle error and free memory
 		ft_lstadd_back_env(&mini->env, ft_lstnew_env(tmp[0], tmp[1]));
 		ft_free_array((void **)tmp);
 	}
-	mini->cmd_path = ft_split(ft_lstfind_env(&mini->env, "PATH"), ':');
+	mini->cmd_path = ft_split(ft_lstfind_env(&mini->env, "PATH"), ":");
 	if (!mini->cmd_path)
 		ft_exit(mini, EXIT_FAILURE, ERR_MALLOC);
 	// if (ft_lstfind_env(&mini->env, "USER"))

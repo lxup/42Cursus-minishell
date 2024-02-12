@@ -6,7 +6,7 @@
 #    By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/06 19:51:48 by lquehec           #+#    #+#              #
-#    Updated: 2024/02/12 19:08:52 by lquehec          ###   ########.fr        #
+#    Updated: 2024/02/12 19:17:47 by lquehec          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -104,7 +104,7 @@ NAME		:= minishell
 all: 		$(NAME)
 
 $(NAME):	${OBJ_DIR} $(OBJS)
-			@make all bonus -C $(LIBFT_DIR)
+			@make -C $(LIBFT_DIR)
 			@$(CC) $(FLAGS) $(CFLAGS) $(CINCLUDES) -o $(NAME) $(OBJS)
 			@echo "\n${GREEN}> $(NAME) was successfuly compiled 🎉${END}"
 			@echo ""

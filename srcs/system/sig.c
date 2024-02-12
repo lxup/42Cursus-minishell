@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 12:18:31 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/12 11:01:45 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/12 19:17:02 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,6 @@ void	sig_handler(int sig)
 	{
 		rl_on_new_line();
 		rl_redisplay();
-		ft_putstr_fd(MSG_EXIT, 1);
+		ft_putstr_fd(1, MSG_EXIT);
 	}	
 }
