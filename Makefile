@@ -6,7 +6,7 @@
 #    By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/06 19:51:48 by lquehec           #+#    #+#              #
-#    Updated: 2024/02/12 10:25:05 by lquehec          ###   ########.fr        #
+#    Updated: 2024/02/12 19:08:52 by lquehec          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -89,7 +89,7 @@ OBJS			:= $(SRCS:%.c=$(OBJ_DIR)/%.o)
 
 # LIBFT
 LIBFT_DIR 			:= libft
-LIBFT_HEADER_DIR	:= $(LIBFT_DIR)
+LIBFT_HEADER_DIR	:= $(LIBFT_DIR)/includes
 LIBFT_PATH			:= -L $(LIBFT_DIR) -lft
 
 RM			:= rm -rf
@@ -132,13 +132,11 @@ else
 endif
 
 clean:
-			@echo "${YELLOW}>Cleaning libft..."
 			@make clean -C $(LIBFT_DIR)
 			@$(RM) $(OBJ_DIR)
 			@echo "${YELLOW}> All objects files of $(NAME) have been deleted ❌${END}"
 
 fclean:		clean
-			@echo "${YELLOW}>Cleaning libft..."
 			@make fclean -C $(LIBFT_DIR)
 			@$(RM) $(NAME)
 			@echo "${YELLOW}> Cleaning of $(NAME) has been done ❌${END}"
