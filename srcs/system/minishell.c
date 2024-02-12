@@ -6,11 +6,13 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 19:35:42 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/12 19:43:33 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/12 22:37:48 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+pid_t	g_pid;
 
 void	sig_ctrl_c(void)
 {

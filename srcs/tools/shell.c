@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 00:30:40 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/12 19:43:29 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/12 22:39:21 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ char	*get_os(void)
 {
 	if (ft_strcmp(OS, "macos") == 0)
 		return ("");
-	else if (ft_strcmp(OS, "Linux") == 0)
+	else if (ft_strcmp(OS, "linux") == 0)
 		return ("🐧");
 	else
 		return ("?");
@@ -109,10 +109,10 @@ void	build_left_side(t_mini *mini, char *os, char *path)
 	else
 		mini->shell_prompt.prompt = ft_strjoin(tmp, PROMPTE_ERROR_TEMPLATE);
 	free(tmp);
-	mini->shell_prompt.prompt_size = ft_strlen("╭─     ") \
-		+ ft_strlen(os) + ft_strlen(path);
-	if (mini->last_exec_status == EXIT_SUCCESS)
-		mini->shell_prompt.prompt_size += ft_strlen(" ✔ ");
-	else
-		mini->shell_prompt.prompt_size += ft_strlen(" ✘ ");
+	// mini->shell_prompt.prompt_size = ft_strlen("╭─     ") \
+	// 	+ ft_strlen(os) + ft_strlen(path);
+	// if (mini->last_exec_status == EXIT_SUCCESS)
+	// 	mini->shell_prompt.prompt_size += ft_strlen(" ✔ ");
+	// else
+	// 	mini->shell_prompt.prompt_size += ft_strlen(" ✘ ");
 }

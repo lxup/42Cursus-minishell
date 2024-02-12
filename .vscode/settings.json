@@ -3,6 +3,17 @@
 		"lib.h": "c",
 		"minishell.h": "c",
 		"term.h": "c",
-		"termios.h": "c"
+		"termios.h": "c",
+		"limits.h": "c",
+		"curses.h": "c",
+		"libft.h": "c",
+		"libft_display.h": "c",
+		"libft_display_str.h": "c",
+		"libft_display_char.h": "c",
+		"libft_display_nbr.h": "c",
+		"get_next_line.h": "c",
+		"libft_strings.h": "c",
+		"typedef.h": "c",
+		"define.h": "c"
 	}
 }
