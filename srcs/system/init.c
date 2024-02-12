@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 12:14:28 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/12 19:16:45 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/12 19:20:29 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,12 @@ static void	init_shell_level(t_mini *mini)
 			ft_lstadd_back_env(&mini->env, ft_lstnew_env("SHLVL", level));
 	}
 	else
+	{		
 		level = ft_itoa(1);
 		if (!level)
 			ft_exit(mini, EXIT_FAILURE, ERR_MALLOC);
 		ft_lstadd_back_env(&mini->env, ft_lstnew_env("SHLVL", level));
+	}
 }
 
 static void	init_env(t_mini *mini, char **env)
