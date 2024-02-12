@@ -6,36 +6,23 @@
 #    By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/06 19:51:48 by lquehec           #+#    #+#              #
-#    Updated: 2024/02/12 19:48:05 by lquehec          ###   ########.fr        #
+#    Updated: 2024/02/12 19:53:29 by lquehec          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-END				:=	\033[0m
-
 # COLORS
-BLACK			:=	\033[0;30m
-RED				:=	\033[0;31m
-GREEN			:=	\033[0;32m
-ORANGE			:=	\033[0;33m
-BLUE			:=	\033[0;34m
-PURPLE			:=	\033[0;35m
-CYAN			:=	\033[0;36m
-LIGHT_GRAY		:=	\033[0;37m
-DARK_GRAY		:=	\033[1;30m
-LIGHT_RED		:=	\033[1;31m
-LIGHT_GREEN		:=	\033[1;32m
-YELLOW			:=	\033[1;33m
-LIGHT_BLUE		:=	\033[1;34m
-LIGHT_PURPLE	:=	\033[1;35m
-LIGHT_CYAN		:=	\033[1;36m
-WHITE			:=	\033[1;37m
-
-# FONTS
-BOLD			:=	\033[1m
-DIM				:=	\033[2m
-UNDERLINED		:=	\033[4m
-BLINK			:=	\033[5m
-REVERSE			:=	\033[7m
+END=\x1b[0m
+BOLD=\x1b[1m
+UNDER=\x1b[4m
+REV=\x1b[7m
+GREY=\x1b[30m
+RED=\x1b[31m
+GREEN=\x1b[32m
+YELLOW=\x1b[33m
+BLUE=\x1b[34m
+PURPLE=\x1b[35m
+CYAN=\x1b[36m
+WHITE=\x1b[37m
 
 OS 				:= $(shell uname)
 VPATH			:= srcs \
@@ -54,14 +41,14 @@ HEADER_DIR		:= includes
 OBJ_DIR 		:= .obj
 
 ifeq ($(OS), Darwin)
-INCL_RDL_LIB	:= -lreadline -L/opt/homebrew/opt/readline/lib -lncurses
+INCL_RDL_LIB	:= -L/opt/homebrew/opt/readline/lib -lncurses
 INCL_RDL_HEADER	:= -I/opt/homebrew/opt/readline/include
 else
-INCL_RDL_LIB	:= -lreadline -L/Users/${USER}/.brew/opt/readline/lib -lncurses
-INCL_RDL_HEADER	:= -I/Users/${USER}/.brew/opt/readline/include
+INCL_RDL_LIB	:= -lreadline -L /home/linuxbrew/.linuxbrew/opt/readline/lib
+INCL_RDL_HEADER	:= -I /home/linuxbrew/.linuxbrew/opt/readline/include/readline
 endif
 
-SRC_SYSTEM	:= main \
+	SRC_SYSTEM	:= main \
 					minishell \
 					prompt \
 					init \
@@ -106,7 +93,7 @@ RM			:= rm -rf
 CC			:= cc
 CFLAGS		:= -Wall -Wextra -Werror -g3
 # CFLAGS		:= 
-FLAGS		:=	$(INCL_RDL_LIB) $(LIBFT_PATH)
+FLAGS		:=	$(INCL_RDL_LIB) -lreadline -L$(LIBFT_DIR) -lft
 
 CINCLUDES	:= -I $(HEADER_DIR) -I $(LIBFT_HEADER_DIR)
 NAME		:= minishell

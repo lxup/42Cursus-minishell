@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 17:31:59 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/12 19:40:55 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/12 19:52:40 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include "define.h"
 
 /* Global variables */
-extern pid_t	g_pid;
+pid_t	g_pid;
 
 /* ================================= SYSTEM ================================= */
 
@@ -86,9 +86,6 @@ int		ft_lstreplace_env(t_env **env, char *name, char *value);
 
 /* free */
 void	ft_free_array(void **array);
-
-/* Libft Enhanced */
-char	**ft_split_enhanced(char const *s, char *charset);
 
 /* ================================= DEBUG ================================= */
 void	print_env(t_mini *mini);
