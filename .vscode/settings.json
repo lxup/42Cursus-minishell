@@ -16,6 +16,8 @@
 		"typedef.h": "c",
 		"define.h": "c",
 		"stdio.h": "c",
-		"stdlib.h": "c"
+		"stdlib.h": "c",
+		"libft_memory.h": "c",
+		"ft_printf.h": "c"
 	}
 }
