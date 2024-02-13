@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 17:31:59 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/13 18:03:40 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/13 21:21:57 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int			is_dlesser(char *prompt);
 ** Check if the token is a word
 ** ./lexer/lexer_check_type.c
 */
-int			is_word(char *prompt, int *i, int *start);
+int			is_word(char *prompt, int *i);
 
 /* ================================= PARSER ================================= */
 

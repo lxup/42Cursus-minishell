@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 17:23:38 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/13 21:15:23 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/13 21:22:14 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,20 +80,17 @@ int	is_dlesser(char *prompt)
 	return (0);
 }
 
-int	is_word(char *prompt, int *i, int *start)
+int	is_word(char *prompt, int *i)
 {
-	int	start_word;
 	int	cursor; 
 	int	quote_count;
 	
-	start_word = *start;
 	cursor = *i;
 	if (!prompt || !prompt[cursor])
 		return (0);
 	if (prompt[cursor] == '\"')
 	{
 		cursor++;
-		start_word++;
 		quote_count = 1;
 		while (prompt[cursor] == '\"')
 		{

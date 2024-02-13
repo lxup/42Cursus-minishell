@@ -6,13 +6,13 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 10:28:00 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/13 21:11:58 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/13 21:24:24 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	define_token_type(char *prompt, t_token_type *type, int *i, int *start)
+int	define_token_type(char *prompt, t_token_type *type, int *i)
 {
 	if (is_greater(prompt + *i))
 		return (*type = TOKEN_GREATER, *i += 1, 1);
@@ -22,7 +22,7 @@ int	define_token_type(char *prompt, t_token_type *type, int *i, int *start)
 		return (*type = TOKEN_LESSER, *i += 1, 1);
 	else if (is_dlesser(prompt + *i))
 		return (*type = TOKEN_DLESSER, *i += 2, 1);
-	else if (is_word(prompt, i, start))
+	else if (is_word(prompt, i))
 		return (*type = TOKEN_WORD, 1);
 	return (0);
 }
@@ -58,7 +58,7 @@ void	create_token_for_pipeline(t_pipeline *pipeline)
 		while (pipeline->prompt[i] && ft_iswhitespace(pipeline->prompt[i]))
 			i++;
 		start = i;
-		define_token_type(pipeline->prompt, &type, &i, &start);
+		define_token_type(pipeline->prompt, &type, &i);
 		if (type == TOKEN_NOT_SET)
 			break ;
 		ft_lstadd_back_token(&pipeline->tokens, \
@@ -83,7 +83,8 @@ void	adjust_token_type(t_token *tokens)
 				tmp->type = TOKEN_FILE;
 			else if (tmp == tokens || tmp->prev->type == TOKEN_FILE)
 				tmp->type = TOKEN_CMD;
-			else if (tmp->prev != tmp && tmp->prev->type == TOKEN_CMD)
+			else if (tmp->prev != tmp && (tmp->prev->type == TOKEN_CMD \
+				|| tmp->prev->type == TOKEN_ARGS))
 				tmp->type = TOKEN_ARGS;
 		}
 		tmp = tmp->next;
@@ -127,7 +128,6 @@ int	create_pipeline(t_mini *mini)
 	ft_free_array((void **)pipelines);
 	return (1);
 }
-
 
 int	lexer(t_mini *mini)
 {
