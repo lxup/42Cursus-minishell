@@ -1,5 +1,11 @@
 {
 	"files.associations": {
+		"*.json.liquid": "json",
+		"*.yaml.liquid": "yaml",
+		"*.md.liquid": "markdown",
+		"*.js.liquid": "liquid-javascript",
+		"*.css.liquid": "liquid-css",
+		"*.scss.liquid": "liquid-scss",
 		"lib.h": "c",
 		"minishell.h": "c",
 		"term.h": "c",
@@ -14,6 +20,8 @@
 		"get_next_line.h": "c",
 		"libft_strings.h": "c",
 		"typedef.h": "c",
-		"define.h": "c"
+		"define.h": "c",
+		"ft_printf.h": "c",
+		"get_next_line_bonus.h": "c"
 	}
 }
