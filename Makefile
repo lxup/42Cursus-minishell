@@ -6,7 +6,7 @@
 #    By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/06 19:51:48 by lquehec           #+#    #+#              #
-#    Updated: 2024/02/12 22:46:08 by lquehec          ###   ########.fr        #
+#    Updated: 2024/02/13 01:14:03 by lquehec          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -119,32 +119,32 @@ SRCS 			=	$(addsuffix .c, $(SRC_SYSTEM)) \
 					$(addsuffix .c, $(SRC_UTILS_T_ENV)) \
 					$(addsuffix .c, $(SRC_DEBUG)) \
 
-OBJS			:= $(SRCS:%.c=$(OBJ_PATH)/%.o)
+OBJS			=	$(SRCS:%.c=$(OBJ_PATH)/%.o)
 
 # **************************************************************************** #
 #                                     LIBS                                     #
 # **************************************************************************** #
 
-LDLIBS				= -lft
+LDLIBS			=	-lft
 
 ifeq ($(OS), Darwin)
-INCL_RDL_LIB	:= -L/opt/homebrew/opt/readline/lib -lncurses
-INCL_RDL_HEADER	:= -I/opt/homebrew/opt/readline/include
+INCL_RDL_LIB	=	-L/opt/homebrew/opt/readline/lib -lncurses
+INCL_RDL_HEADER	=	-I/opt/homebrew/opt/readline/include
 else
-INCL_RDL_LIB	:= -L/Users/${USER}/.linuxbrew/opt/readline/lib -lncurses
-INCL_RDL_HEADER	:= -I/Users/${USER}/.linuxbrew/opt/readline/include
+INCL_RDL_LIB	=	-L/Users/${USER}/.linuxbrew/opt/readline/lib -lncurses
+INCL_RDL_HEADER	=	-I/Users/${USER}/.linuxbrew/opt/readline/include
 endif
 
-LDLIBS				+=  -lreadline $(INCL_RDL_LIB)
+LDLIBS			+=	-lreadline $(INCL_RDL_LIB)
 
 # LIBFT
-LIBFT_DIR 			=	libft
-LIBFT_INC_PATH		=	$(LIBFT_DIR)/includes
-LIBFT				=	$(LIBFT_DIR)/libft.a
+LIBFT_DIR 		=	libft
+LIBFT_INC_PATH	=	$(LIBFT_DIR)/includes
+LIBFT			=	$(LIBFT_DIR)/libft.a
 
-CFLAGS				+=	-I$(LIBFT_INC_PATH)
+CFLAGS			+=	-I$(LIBFT_INC_PATH)
 
-LDLIBS				+=	-L$(LIBFT_DIR)
+LDLIBS			+=	-L$(LIBFT_DIR)
 
 
 # **************************************************************************** #

@@ -14,6 +14,8 @@
 		"get_next_line.h": "c",
 		"libft_strings.h": "c",
 		"typedef.h": "c",
-		"define.h": "c"
+		"define.h": "c",
+		"stdio.h": "c",
+		"stdlib.h": "c"
 	}
 }

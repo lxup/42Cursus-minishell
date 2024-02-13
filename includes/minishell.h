@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 17:31:59 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/12 20:51:27 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/12 23:18:31 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,26 @@ int		is_new_prompt(t_mini *mini);
 int		is_only_space(char *str);
 
 /* ================================= LEXER ================================= */
-/* Lexer */
+
+/*
+** Lexer
+** Allowing to split the prompt into tokens
+** ./lexer/lexer.c
+*/
 int		lexer(t_mini *mini);
-/* Syntax */
+
+/*
+** Check if the syntax is valid
+** ./lexer/is_valid_syntax.c
+*/
 int		is_valid_syntax(char *str);
 /* ================================= PARSER ================================= */
+
+/*
+** Parser
+** Allowing to parse the tokens
+** ./parser/parser.c
+*/
 int		parser(t_mini *mini);
 
 /* ================================= EXECUTOR ================================= */
@@ -63,9 +78,29 @@ int		executor(t_mini *mini);
 /* ================================= TOOLS ================================= */
 
 /* Shell */
+
+/*
+** Get the OS
+** ./tools/shell/get_os.c
+*/
 char	*get_os(void);
+
+/*
+** Get the pwd
+** ./tools/shell/get_path.c
+*/
 char	*get_path(t_mini *mini);
+
+/*
+** Build the left side of the prompt
+** ./tools/shell/build_left_side.c
+*/
 void	build_left_side(t_mini *mini, char *os, char *path);
+
+/*
+** Get the terminal width
+** ./tools/shell/get_terminal_width.c
+*/
 int		get_terminal_width(void);
 
 /* FD */
