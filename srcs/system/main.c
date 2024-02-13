@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 17:38:04 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/13 12:30:12 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/13 13:11:00 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int		main(int ac, char **av, char **env)
 	t_mini	mini;
 	
 	(void)ac, (void)av;
-	ft_printf("Welcome to minishell\n");
+	ft_printf(NULL);
 	ft_dprintf("Error: %s\n", "test");
 	// for (int i = 0; env[i]; i++)
 	// 	printf("%s\n", env[i]);
