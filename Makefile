@@ -6,7 +6,7 @@
 #    By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/06 19:51:48 by lquehec           #+#    #+#              #
-#    Updated: 2024/02/13 15:04:41 by lquehec          ###   ########.fr        #
+#    Updated: 2024/02/13 17:30:17 by lquehec          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -98,7 +98,8 @@ SRC_SYSTEM		=	main \
 SRC_HISTORY		=	history \
 					history_utils
 SRC_LEXER		=	lexer \
-					syntax
+					syntax \
+					lexer_check_type
 SRC_PARSER		=	parser
 SRC_EXECUTOR	=	executor
 SRC_TOOLS		=	fd shell
@@ -112,8 +113,9 @@ SRC_UTILS_T_ENV	=	ft_lstadd_back_env \
 SRC_UTILS_T_TOKEN=	ft_lstadd_back_token \
 					ft_lstclear_token \
 					ft_lstlast_token \
-					ft_lstnew_token
-SRC_UTILS_T_PIPILINE=	ft_lstadd_back_pipeline \
+					ft_lstnew_token \
+					ft_lstprint_token
+SRC_UTILS_T_PIPELINE=	ft_lstadd_back_pipeline \
 						ft_lstclear_pipeline \
 						ft_lstlast_pipeline \
 						ft_lstnew_pipeline \
@@ -129,7 +131,7 @@ SRCS 			=	$(addsuffix .c, $(SRC_SYSTEM)) \
 					$(addsuffix .c, $(SRC_UTILS)) \
 					$(addsuffix .c, $(SRC_UTILS_T_ENV)) \
 					$(addsuffix .c, $(SRC_UTILS_T_TOKEN)) \
-					$(addsuffix .c, $(SRC_UTILS_T_PIPILINE)) \
+					$(addsuffix .c, $(SRC_UTILS_T_PIPELINE)) \
 					$(addsuffix .c, $(SRC_DEBUG)) \
 
 OBJS			=	$(SRCS:%.c=$(OBJ_PATH)/%.o)

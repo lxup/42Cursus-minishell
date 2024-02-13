@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 17:31:59 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/13 15:13:48 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/13 18:03:40 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,37 @@ int			lexer(t_mini *mini);
 ** ./lexer/is_valid_syntax.c
 */
 int			is_valid_syntax(char *str);
+
+/*
+** Check if the token is a greater '>'
+** ./lexer/lexer_check_type.c
+*/
+int			is_greater(char *prompt);
+
+/*
+** Check if the token is a double greater '>>'
+** ./lexer/lexer_check_type.c
+*/
+int			is_dgreater(char *prompt);
+
+/*
+** Check if the token is a lesser '<'
+** ./lexer/lexer_check_type.c
+*/
+int			is_lesser(char *prompt);
+
+/*
+** Check if the token is a double lesser '<<'
+** ./lexer/lexer_check_type.c
+*/
+int			is_dlesser(char *prompt);
+
+/*
+** Check if the token is a word
+** ./lexer/lexer_check_type.c
+*/
+int			is_word(char *prompt, int *i, int *start);
+
 /* ================================= PARSER ================================= */
 
 /*
@@ -116,6 +147,7 @@ void		ft_lstadd_back_token(t_token **lst, t_token *new);
 void		ft_lstclear_token(t_token **lst);
 t_token		*ft_lstlast_token(t_token *lst);
 t_token		*ft_lstnew_token(char *value, t_token_type type);
+void		ft_lstprint_token(t_token *token);
 
 /* t_pipeline */
 void		ft_lstadd_back_pipeline(t_pipeline **lst, t_pipeline *new);

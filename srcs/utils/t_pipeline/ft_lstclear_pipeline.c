@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 16:12:34 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/13 15:13:34 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/13 16:52:20 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	ft_lstclear_pipeline(t_pipeline **lst)
 	t_pipeline	*current;
 	t_pipeline	*tmp;
 
+	if (!lst || !*lst)
+		return ;
 	start = *lst;
 	current = start;
 	tmp = NULL;
