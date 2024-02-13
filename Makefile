@@ -6,7 +6,7 @@
 #    By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/06 19:51:48 by lquehec           #+#    #+#              #
-#    Updated: 2024/02/13 03:23:57 by lquehec          ###   ########.fr        #
+#    Updated: 2024/02/13 03:30:58 by lquehec          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -82,8 +82,6 @@ OBJ_PATH		=	.obj
 # **************************************************************************** #
 
 CFLAGS			+=	-I$(INC_PATH)
-CFLAGS			+=	-I libft/srcs/gnl
-CFLAGS			+=	-I libft/ft_printf/includes
 
 # **************************************************************************** #
 #                                   SOURCES                                    #
@@ -145,6 +143,8 @@ LIBFT_INC_PATH	=	$(LIBFT_DIR)/includes
 LIBFT			=	$(LIBFT_DIR)/libft.a
 
 CFLAGS			+=	-I$(LIBFT_INC_PATH)
+CFLAGS			+=	-I libft/srcs/gnl
+CFLAGS			+=	-I libft/ft_printf/includes
 
 LDLIBS			+=	-L$(LIBFT_DIR)
 
