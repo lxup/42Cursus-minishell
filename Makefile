@@ -146,15 +146,7 @@ LIBFT_DIR 		=	libft
 LIBFT_INC_PATH	=	$(LIBFT_DIR)/includes
 LIBFT			=	$(LIBFT_DIR)/libft.a
 
-<<<<<<< HEAD
 CFLAGS				+=	-I$(LIBFT_INC_PATH)
-# CFLAGS				+=	-I$(LIBFT_DIR)/srcs/gnl
-# CFLAGS				+=	-I$(LIBFT_DIR)/srcs/ft_printf
-=======
-CFLAGS			+=	-I$(LIBFT_INC_PATH)
-CFLAGS			+=	-I libft/srcs/gnl
-CFLAGS			+=	-I libft/ft_printf/includes
->>>>>>> e6cb0d4dfe0de2379eccbf5a6ad6141660ddbc63
 
 LDLIBS			+=	-L$(LIBFT_DIR)
 
