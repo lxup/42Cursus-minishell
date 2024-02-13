@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 12:03:17 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/12 11:01:19 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/12 23:40:20 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,24 +19,40 @@
 #  define OS "linux"
 # endif
 
-/* File descriptors (FD) */
+/* **************************************************************************** */
+/*                            FILE DESCRIPTORS (FD)                             */
+/* **************************************************************************** */
+
 # define STDIN 0
 # define STDOUT 1
 # define STDERR 2
+
+/* **************************************************************************** */
+/*                                     EXIT                                     */
+/* **************************************************************************** */
 
 # define EXIT_CTRL_D 130
 # define EXIT_CMD_NOT_FOUND 127
 # define EXIT_SYNTAX_ERROR 258
 
-/* Exec status */
+/* **************************************************************************** */
+/*                                     EXEC                                     */
+/* **************************************************************************** */
+
 # define EXEC_SUCCESS 0
 # define EXEC_FAILURE 1
 # define EXEC_SYNTAX_ERROR 130
 
-/* Default messages */
-# define MSG_EXIT "Bye\n"
+/* **************************************************************************** */
+/*                                     MSG                                      */
+/* **************************************************************************** */
 
-/* ================================= ERRORS ================================= */
+# define MSG_EXIT "Bye"
+
+/* **************************************************************************** */
+/*                                   ERRORS                                     */
+/* **************************************************************************** */
+
 // General errors
 # define ERR_MALLOC "Error->Malloc failed\n"
 # define ERR_TERM "Error->Failed to get terminal type\n"
@@ -46,39 +62,42 @@
 // Environment errors
 # define ERR_ENV_HOME "Error->HOME not found in env\n"
 
-/* ================================= PROMPT ================================= */
+/* **************************************************************************** */
+/*                                   PROMPT                                     */
+/* **************************************************************************** */
+
 # define NEW_PROMPT 0
 
 /* Fonts */
-# define F_BOLD "\033[1m"
-# define F_UNDERLINE "\033[4m"
-# define F_BLINK "\033[5m"
-# define F_REVERSE "\033[7m"
-# define F_CONCEAL "\033[8m"
-# define F_RESET "\033[0m"
+# define F_BOLD "\033[1m" /* - Bold font */
+# define F_UNDERLINE "\033[4m" /* - Underline font */
+# define F_BLINK "\033[5m" /* - Blink font */
+# define F_REVERSE "\033[7m" /* - Reverse font */
+# define F_CONCEAL "\033[8m" /* - Conceal font */
+# define F_RESET "\033[0m" /* - Reset font */
 
 /* Colors */
-# define C_BLACK "\033[30m"
-# define C_RED "\033[31m"
-# define C_GREEN "\033[32m"
-# define C_YELLOW "\033[33m"
-# define C_BLUE "\033[34m"
-# define C_MAGENTA "\033[35m"
-# define C_CYAN "\033[36m"
-# define C_WHITE "\033[37m"
-# define C_GRAY "\033[90m"
-# define C_LIGHT_GRAY "\033[37m"
+# define C_BLACK "\033[30m" /* - Black color */
+# define C_RED "\033[31m" /* - Red color */
+# define C_GREEN "\033[32m" /* - Green color */
+# define C_YELLOW "\033[33m" /* - Yellow color */
+# define C_BLUE "\033[34m" /* Blue - color */
+# define C_MAGENTA "\033[35m" /* - Magenta color */
+# define C_CYAN "\033[36m" /* - Cyan color */
+# define C_WHITE "\033[37m" /* - White color */
+# define C_GRAY "\033[90m" /* - Gray color */
+# define C_LIGHT_GRAY "\033[37m" /* - Light gray color */
 
 /* Backgrounds */
-# define BG_BLACK "\033[40m"
-# define BG_RED "\033[41m"
-# define BG_GREEN "\033[42m"
-# define BG_YELLOW "\033[43m"
-# define BG_BLUE "\033[44m"
-# define BG_MAGENTA "\033[45m"
-# define BG_CYAN "\033[46m"
-# define BG_WHITE "\033[47m"
-# define BG_TRANSPARENT "\033[49m"
+# define BG_BLACK "\033[40m" /* - Black background */
+# define BG_RED "\033[41m" /* - Red background */
+# define BG_GREEN "\033[42m" /* - Green background */
+# define BG_YELLOW "\033[43m" /* - Yellow background */
+# define BG_BLUE "\033[44m" /* - Blue background */
+# define BG_MAGENTA "\033[45m" /* - Magenta background */
+# define BG_CYAN "\033[46m" /* - Cyan background */
+# define BG_WHITE "\033[47m" /* - White background */
+# define BG_TRANSPARENT "\033[49m" /* - Transparent background */
 
 /* Prompt */
 # define PROMPT_TEMPLATE BG_WHITE C_BLACK " %s " BG_BLUE C_WHITE "  %s " \

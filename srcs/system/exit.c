@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 16:19:54 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/12 19:17:20 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/12 23:04:29 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ft_exit(t_mini *mini, int status, char *error)
 	// if (mini->exit_status != -1)
 	// 	status = mini->exit_status;
 	if (error)
-		ft_putstr_fd(2, error);
+		ft_putstr_err(error);
 	if (mini->env)
 		ft_lstclear_env(&mini->env);
 	if (mini->cmd_path)

@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 11:52:43 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/12 11:21:15 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/13 00:10:04 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,53 @@
 // 	TOKEN_END,
 // }	t_token_type;
 
+// typedef enum e_token_type
+// {
+// 	TOKEN_COMMAND,
+// 	TOKEN_OPERATOR,
+// 	TOKEN_ARGUMENT,
+// 	TOKEN_UNKNOWN,
+// }	t_token_type;
+
 typedef enum e_token_type
 {
-	TOKEN_COMMAND,
-	TOKEN_OPERATOR,
-	TOKEN_ARGUMENT,
-	TOKEN_UNKNOWN,
+	TOKEN_ID,
+	TOKEN_STR,
+	TOKEN_INT,
+	TOKEN_DOUBLE,
+	TOKEN_MAYBE_DOUBLE,
+	TOKEN_PLUS,
+	TOKEN_PLUS_PLUS,
+	TOKEN_MINUS,
+	TOKEN_MINUS_MINUS,
+	TOKEN_MULTIPLY,
+	TOKEN_LT,
+	TOKEN_GT,
+	TOKEN_EQ,
+	TOKEN_EQ_EQ,
+	TOKEN_NOT_EQ,
+	TOKEN_PLUS_EQ,
+	TOKEN_MINUS_EQ,
+	TOKEN_MULTIPLY_EQ,
+	TOKEN_DIVIDE_EQ,
+	TOKEN_MODULO_EQ,
+	TOKEN_LT_EQ,
+	TOKEN_GT_EQ,
+	TOKEN_DIVIDE,
+	TOKEN_MODULO,
+	TOKEN_L_PARAN,
+	TOKEN_R_PARAN,
+	TOKEN_L_BRACKET,
+	TOKEN_R_BRACKET,
+	TOKEN_L_CURLY,
+	TOKEN_R_CURLY,
+	TOKEN_L_ARROW,
+	TOKEN_R_ARROW,
+	TOKEN_PIPE,
+	TOKEN_PIPE_PIPE,
+	TOKEN_COMMA,
+	TOKEN_PERIOD,
+	TOKEN_SEMICOLON,
 }	t_token_type;
 
 /* Chained list for tokens */

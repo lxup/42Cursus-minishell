@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 14:40:29 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/11 15:46:19 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/12 23:28:26 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,9 +91,11 @@ int	is_valid_syntax(char *str)
 	while (str && str[++i])
 	{
 		if (str[i] == '\'')
-			while (str[++i] && str[i] != '\'');
+			while (str[i] && str[i] != '\'')
+				i++;
 		if (str[i] == '\"')
-			while (str[++i] && str[i] != '\"');
+			while (str[i] && str[i] != '\"')
+				i++;
 		if (str[i] == '(')
 			if (!is_valid_open_bracket(str, i))
 				return (0);

@@ -21,7 +21,14 @@
 		"libft_strings.h": "c",
 		"typedef.h": "c",
 		"define.h": "c",
+<<<<<<< HEAD
 		"ft_printf.h": "c",
 		"get_next_line_bonus.h": "c"
+=======
+		"stdio.h": "c",
+		"stdlib.h": "c",
+		"libft_memory.h": "c",
+		"ft_printf.h": "c"
+>>>>>>> e6cb0d4dfe0de2379eccbf5a6ad6141660ddbc63
 	}
 }
