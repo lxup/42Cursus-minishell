@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 12:14:28 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/12 22:54:04 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/13 14:50:22 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ void	init_mini(t_mini *mini, char **env)
 {
 	(void)env;
 	mini->env = NULL;
+	mini->pipeline = NULL;
 	mini->cmd_path = NULL;
 	mini->prompt = NULL;
 	mini->prev_prompt = NULL;

@@ -6,7 +6,7 @@
 #    By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/06 19:51:48 by lquehec           #+#    #+#              #
-#    Updated: 2024/02/13 12:30:03 by lquehec          ###   ########.fr        #
+#    Updated: 2024/02/13 15:04:41 by lquehec          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -72,6 +72,8 @@ VPATH			=	srcs \
 					srcs/tools \
 					srcs/utils \
 					srcs/utils/t_env \
+					srcs/utils/t_token \
+					srcs/utils/t_pipeline \
 					srcs/debug
 				
 INC_PATH		=	includes
@@ -107,6 +109,15 @@ SRC_UTILS_T_ENV	=	ft_lstadd_back_env \
 					ft_lstlast_env \
 					ft_lstnew_env \
 					ft_lstreplace_env
+SRC_UTILS_T_TOKEN=	ft_lstadd_back_token \
+					ft_lstclear_token \
+					ft_lstlast_token \
+					ft_lstnew_token
+SRC_UTILS_T_PIPILINE=	ft_lstadd_back_pipeline \
+						ft_lstclear_pipeline \
+						ft_lstlast_pipeline \
+						ft_lstnew_pipeline \
+						ft_lstsize_pipeline
 SRC_DEBUG		=	tools
 
 SRCS 			=	$(addsuffix .c, $(SRC_SYSTEM)) \
@@ -117,6 +128,8 @@ SRCS 			=	$(addsuffix .c, $(SRC_SYSTEM)) \
 					$(addsuffix .c, $(SRC_TOOLS)) \
 					$(addsuffix .c, $(SRC_UTILS)) \
 					$(addsuffix .c, $(SRC_UTILS_T_ENV)) \
+					$(addsuffix .c, $(SRC_UTILS_T_TOKEN)) \
+					$(addsuffix .c, $(SRC_UTILS_T_PIPILINE)) \
 					$(addsuffix .c, $(SRC_DEBUG)) \
 
 OBJS			=	$(SRCS:%.c=$(OBJ_PATH)/%.o)

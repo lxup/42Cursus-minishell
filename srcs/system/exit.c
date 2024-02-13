@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 16:19:54 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/12 23:04:29 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/13 14:50:35 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ int	ft_exit(t_mini *mini, int status, char *error)
 		ft_putstr_err(error);
 	if (mini->env)
 		ft_lstclear_env(&mini->env);
+	if (mini->pipeline)
+		ft_lstclear_pipeline(&mini->pipeline);
 	if (mini->cmd_path)
 		ft_free_array((void **)mini->cmd_path);
 	if (mini->prompt)
 		free(mini->prompt);
-	// if (mini->os)
-	// 	free(mini->os);
 	if (mini->shell_prompt.prompt)
 		free(mini->shell_prompt.prompt);
 	if (mini->prompt)
