@@ -6,60 +6,37 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 22:38:23 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/14 11:49:45 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/14 18:12:09 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	is_word_quote(char *prompt, int *i, char c)
-{
-	int	cursor;
-	int	quote_count;
-
-	cursor = *i;
-	if (!prompt || !prompt[cursor])
-		return (0);
-	cursor++;
-	quote_count = 1;
-	while (prompt[cursor] == '\"' || prompt[cursor] == '\'')
-	{
-		if (prompt[cursor] == c)
-			quote_count++;
-		cursor++;
-	}
-	while (prompt[cursor] && prompt[cursor] != '\"' && prompt[cursor] != '\'')
-		cursor++;
-	while (prompt[cursor] == '\"' || prompt[cursor] == '\'')
-	{
-		if (prompt[cursor] == c)
-			quote_count--;
-		cursor++;
-		if (quote_count == 0)
-			return (*i = cursor, 1);
-	}
-	return (*i = cursor, 1);
-}
-
 int	is_word(char *prompt, int *i)
 {
-	int	cursor;
+	char	quote;
+	int		inside_quote;
+	int		cursor;
 
-	cursor = *i;
-	if (!prompt || !prompt[cursor])
-		return (0);
-	if (prompt[cursor] == '\"')
-		return (is_word_quote(prompt, i, '\"'));
-	else if (prompt[cursor] == '\'')
-		return (is_word_quote(prompt, i, '\''));
-	else
+	cursor = *i - 1;
+	quote = 0;
+	inside_quote = 0;
+	while (++cursor >= 0 && prompt[cursor] && ft_isprint(prompt[cursor]) \
+		&& !ft_iswhitespace(prompt[cursor]) \
+		&& (inside_quote || (prompt[cursor] != '>' && prompt[cursor] != '<')))
 	{
-		while (prompt[cursor] && ft_isprint(prompt[cursor]) \
-			&& !ft_iswhitespace(prompt[cursor]) \
-			&& prompt[cursor] != '>' && prompt[cursor] != '<')
-			cursor++;
-		if (cursor == *i)
-			return (0);
-		return (*i = cursor, 1);
+		if ((prompt[cursor] == '\'' || prompt[cursor] == '\"'))
+		{
+			if (inside_quote && quote == prompt[cursor])
+				inside_quote = 0;
+			else if (!inside_quote )
+			{
+				quote = prompt[cursor];
+				inside_quote = 1;
+			}
+		}
 	}
+	if (cursor == *i)
+		return (0);
+	return (*i = cursor, 1);
 }

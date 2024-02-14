@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 13:47:35 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/14 10:24:31 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/14 17:13:53 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,4 @@ t_pipeline	*ft_lstlast_pipeline(t_pipeline *lst)
 	while (lst->next)
 		lst = lst->next;
 	return (lst);
-	// if (!lst)
-	// 	return (NULL);
-	// return (lst->prev);
 }

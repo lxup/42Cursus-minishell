@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstsize_pipeline.c                              :+:      :+:    :+:   */
+/*   ft_lstcount_type_token.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/13 15:03:17 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/14 17:13:56 by lquehec          ###   ########.fr       */
+/*   Created: 2024/02/14 19:38:27 by lquehec           #+#    #+#             */
+/*   Updated: 2024/02/14 19:38:55 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_lstsize_pipeline(t_pipeline *lst)
+int	ft_lstcount_type_token(t_token *lst, t_token_type type)
 {
-	int			i;
-	t_pipeline	*tmp;
+	int		count;
 
-	i = 0;
-	tmp = lst;
-	while (tmp)
+	count = 0;
+	while (lst)
 	{
-		i++;
-		tmp = tmp->next;
+		if (lst->type == type)
+			count++;
+		lst = lst->next;
 	}
-	return (i);
+	return (count);
 }

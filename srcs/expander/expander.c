@@ -1,28 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstsize_pipeline.c                              :+:      :+:    :+:   */
+/*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/13 15:03:17 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/14 17:13:56 by lquehec          ###   ########.fr       */
+/*   Created: 2024/02/14 20:44:56 by lquehec           #+#    #+#             */
+/*   Updated: 2024/02/14 20:50:09 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_lstsize_pipeline(t_pipeline *lst)
+int	expander(t_mini *mini)
 {
-	int			i;
-	t_pipeline	*tmp;
-
-	i = 0;
-	tmp = lst;
-	while (tmp)
-	{
-		i++;
-		tmp = tmp->next;
-	}
-	return (i);
+	printf("Expander\n");
+	if (!expander_env_var(mini))
+		return (0);
+	return (0);
 }

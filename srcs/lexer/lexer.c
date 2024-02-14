@@ -6,26 +6,11 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 10:28:00 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/14 11:55:51 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/14 19:48:08 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int	define_token_type(char *prompt, t_token_type *type, int *i)
-{
-if (is_greater(prompt + *i))
-		return (*type = TOKEN_GREATER, *i += 1, 1);
-	else if (is_dgreater(prompt + *i))
-		return (*type = TOKEN_DGREATER, *i += 2, 1);
-	else if (is_lesser(prompt + *i))
-		return (*type = TOKEN_LESSER, *i += 1, 1);
-	else if (is_dlesser(prompt + *i))
-		return (*type = TOKEN_DLESSER, *i += 2, 1);
-	else if (is_word(prompt, i))
-		return (*type = TOKEN_WORD, 1);
-	return (0);
-}
 
 char	*token_clear_quote(char *prompt, int end, int start)
 {
@@ -50,7 +35,7 @@ char	*token_clear_quote(char *prompt, int end, int start)
 	return (token);
 }
 
-void	create_token_for_pipeline(t_pipeline *pipeline)
+int	create_token_for_pipeline(t_pipeline *pipeline)
 {
 	t_token_type	type;
 	int				i;
@@ -63,29 +48,25 @@ void	create_token_for_pipeline(t_pipeline *pipeline)
 		while (pipeline->prompt[i] && ft_iswhitespace(pipeline->prompt[i]))
 			i++;
 		start = i;
-		define_token_type(pipeline->prompt, &type, &i);
-		if (type == TOKEN_NOT_SET)
-			printf("Error: Token not set\n");
-			// break ;
+		if (!define_token_type(pipeline->prompt, &type, &i))
+			return (0);
 		ft_lstadd_back_token(&pipeline->tokens, \
-			ft_lstnew_token(ft_strndup(pipeline->prompt + start, i - start, 0), type));
-		// ft_lstadd_back_token(&pipeline->tokens, \
-		// 	ft_lstnew_token(token_clear_quote(pipeline->prompt, \
-		// 		i, start), type));
+			ft_lstnew_token(ft_strndup(pipeline->prompt + start, \
+				i - start, 0), type));
 	}
+	return (1);
 }
 
 int	create_tokens(t_mini *mini)
 {
 	t_pipeline	*tmp;
-	
+
 	tmp = mini->pipeline;
 	while (tmp)
 	{
-		create_token_for_pipeline(tmp);
+		if (!create_token_for_pipeline(tmp))
+			return (0);
 		adjust_token_type(tmp->tokens);
-		printf("Pipeline: %s\n", tmp->prompt);
-		ft_lstprint_token(tmp->tokens);
 		tmp = tmp->next;
 	}
 	return (1);
@@ -95,6 +76,7 @@ int	create_pipeline(t_mini *mini)
 {
 	int		i;
 	char	**pipelines;
+	char	*tmp;
 
 	pipelines = ft_split(mini->prompt, "|");
 	if (!pipelines)
@@ -104,7 +86,12 @@ int	create_pipeline(t_mini *mini)
 	{
 		if (ft_strwhitespace(pipelines[i]))
 			return (mini->exec_status = EXEC_SYNTAX_ERROR, 0);
-		ft_lstadd_back_pipeline(&mini->pipeline, ft_lstnew_pipeline(pipelines[i]));
+		tmp = ft_strtrim(pipelines[i], " \n\t\v\f\r");
+		if (!tmp)
+			return (mini->exec_status = EXEC_FAILURE, 0);
+		ft_lstadd_back_pipeline(&mini->pipeline, \
+			ft_lstnew_pipeline(tmp));
+		free(tmp);
 	}
 	ft_free_array((void **)pipelines);
 	return (1);
@@ -112,7 +99,6 @@ int	create_pipeline(t_mini *mini)
 
 int	lexer(t_mini *mini)
 {
-	printf("Step->lexer\n");
 	if (!is_valid_syntax(mini->prompt))
 		return (mini->exec_status = EXEC_SYNTAX_ERROR, 0);
 	ft_lstclear_pipeline(&mini->pipeline);

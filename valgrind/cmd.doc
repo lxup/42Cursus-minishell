@@ -1,0 +1,1 @@
+valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes --track-origins=yes --tool=memcheck --keep-debuginfo=yes --trace-children=yes --suppressions=valgrind/valgrind.doc --quiet ./minishell

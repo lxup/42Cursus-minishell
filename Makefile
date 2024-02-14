@@ -6,7 +6,7 @@
 #    By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/06 19:51:48 by lquehec           #+#    #+#              #
-#    Updated: 2024/02/14 11:02:33 by lquehec          ###   ########.fr        #
+#    Updated: 2024/02/14 20:50:42 by lquehec          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,6 +67,7 @@ VPATH			=	srcs \
 					srcs/history \
 					srcs/lexer \
 					srcs/parser \
+					srcs/expander \
 					srcs/executor \
 					srcs/cmds \
 					srcs/tools \
@@ -102,8 +103,12 @@ SRC_LEXER		=	lexer \
 					lexer_is_1 \
 					lexer_is_2 \
 					lexer_token_type
-SRC_PARSER		=	parser
-SRC_EXECUTOR	=	executor
+SRC_PARSER		=	parser \
+					parser_quote_fix
+SRC_EXPANDER	=	expander \
+					expander_env_var
+SRC_EXECUTOR	=	executor \
+					heredoc
 SRC_TOOLS		=	fd shell
 SRC_UTILS		=	utils free
 SRC_UTILS_T_ENV	=	ft_lstadd_back_env \
@@ -116,18 +121,22 @@ SRC_UTILS_T_TOKEN=	ft_lstadd_back_token \
 					ft_lstclear_token \
 					ft_lstlast_token \
 					ft_lstnew_token \
-					ft_lstprint_token
+					ft_lstcount_type_token \
+					ft_lstnext_tokentype_token
 SRC_UTILS_T_PIPELINE=	ft_lstadd_back_pipeline \
 						ft_lstclear_pipeline \
 						ft_lstlast_pipeline \
 						ft_lstnew_pipeline \
-						ft_lstsize_pipeline
+						ft_lstsize_pipeline \
+						ft_lstcount_tokentype_pipeline \
+						ft_lstnext_tokentype_pipeline
 SRC_DEBUG		=	tools
 
 SRCS 			=	$(addsuffix .c, $(SRC_SYSTEM)) \
 					$(addsuffix .c, $(SRC_HISTORY)) \
 					$(addsuffix .c, $(SRC_LEXER)) \
 					$(addsuffix .c, $(SRC_PARSER)) \
+					$(addsuffix .c, $(SRC_EXPANDER)) \
 					$(addsuffix .c, $(SRC_EXECUTOR)) \
 					$(addsuffix .c, $(SRC_TOOLS)) \
 					$(addsuffix .c, $(SRC_UTILS)) \

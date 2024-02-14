@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 19:35:42 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/13 19:32:15 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/14 20:55:13 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,6 @@ int	*start_reading(t_mini *mini)
 	(void)mini;
 	char	*line;
 
-	// Todo: reset exec on pipe to 0 (NULL)
-	// Todo: reset should exec to 0 (NULL)
 	if (isatty(fileno(stdin)))
 		mini->prompt = readline(mini->shell_prompt.prompt);
 	else
@@ -74,6 +72,7 @@ int	*start_reading(t_mini *mini)
 	}
 	if (mini->prompt == NULL) // ctrl + D
 	{
+		printf("salam\n");
 		mini->exit_code = EXIT_CTRL_D;
 		return (NULL);
 	}

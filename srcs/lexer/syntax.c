@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 14:40:29 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/13 22:48:31 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/14 17:44:34 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,19 @@ int	count_chars(char *str, char c)
 	int	i;
 	int	count;
 
-	i = -1;
+	i = 0;
 	count = 0;
-	while (str && str[++i])
+	while (str && str[i])
 	{
 		if (str[i] == '\'')
-			while (str[++i] && str[i] != '\'');
+			while (str[i] && str[i] != '\'')
+				i++;
 		if (str[i] == '\"')
-			while (str[++i] && str[i] != '\"');
+			while (str[i] && str[i] != '\"')
+				i++;
 		if (str[i] == c)
 			count++;
+		i++;
 	}
 	return (count);
 }
@@ -35,7 +38,8 @@ int	is_valid_open_bracket(char *str, int i)
 {
 	if (!str)
 		return (0);
-	while ( --i > 0 && str[i] && ft_iswhitespace(str[i]));
+	while (--i > 0 && str[i] && ft_iswhitespace(str[i]))
+		;
 	if (i >= 0 && (str[i] != '&' && str[i] != '|' && str[i] != '('))
 		return (0);
 	return (1);
@@ -44,7 +48,7 @@ int	is_valid_open_bracket(char *str, int i)
 int	is_bracket_open(char *str, int i)
 {
 	int	count;
-	
+
 	count = 1;
 	while (str && --i >= 0)
 	{
@@ -61,13 +65,14 @@ int	is_bracket_open(char *str, int i)
 int	is_valid_pipe(char *str, int i)
 {
 	int	count;
-	
+
 	if (!str)
 		return (0);
 	if (str[0] == '|' || str[ft_strlen(str) - 1] == '|')
 		return (0);
 	count = i - 1;
-	while (--i > 0 && str[i] && str[i] != '|');
+	while (--i > 0 && str[i] && str[i] != '|')
+		;
 	if (count == i)
 		return (0);
 	return (1);
@@ -78,9 +83,8 @@ int	is_valid_syntax(char *str)
 	int	i;
 
 	i = -1;
-	if (!str)
-		return (0);
-	if (count_chars(str, '(') != count_chars(str, ')'))
+	if ((count_chars(str, '(') != count_chars(str, ')')) \
+		|| count_chars(str, ';') > 0 || count_chars(str, '\\') > 0)
 		return (0);
 	while (str && str[++i])
 	{
@@ -92,15 +96,13 @@ int	is_valid_syntax(char *str)
 				i++;
 		if (str[i] == '(')
 			if (!is_valid_open_bracket(str, i))
-				return (0);	
+				return (0);
 		if (str[i] == ')')
 			if (!is_bracket_open(str, i))
 				return (0);
 		if (str[i] == '|')
 			if (!is_valid_pipe(str, i))
 				return (0);
-		if (str[i] == ';' || str[i] == '\\')
-			return (0);
 	}
 	return (1);
 }

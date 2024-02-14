@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 17:31:59 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/14 11:07:14 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/14 20:50:27 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void		get_shell_prompt(t_mini *mini);
 /* Exit */
 int			ft_exit(t_mini *mini, int status, char *error);
 
-/* ================================= HISTORY ================================= */
+/* ================================ HISTORY ================================ */
 /* History */
 void		*init_history(t_mini *mini);
 void		*add_to_history(t_mini *mini);
@@ -59,6 +59,12 @@ int			is_only_space(char *str);
 int			lexer(t_mini *mini);
 
 /*
+** Define the token type
+** ./lexer/lexer_token_type.c
+*/
+int			define_token_type(char *prompt, t_token_type *type, int *i);
+
+/*
 ** Complete the token type for each token
 ** ./lexer/lexer_token_type.c
 */
@@ -72,31 +78,31 @@ int			is_valid_syntax(char *str);
 
 /*
 ** Check if the token is a greater '>'
-** ./lexer/lexer_check_type.c
+** ./lexer/lexer_is_1.c
 */
 int			is_greater(char *prompt);
 
 /*
 ** Check if the token is a double greater '>>'
-** ./lexer/lexer_check_type.c
+** ./lexer/lexer_is_1.c
 */
 int			is_dgreater(char *prompt);
 
 /*
 ** Check if the token is a lesser '<'
-** ./lexer/lexer_check_type.c
+** ./lexer/lexer_is_1.c
 */
 int			is_lesser(char *prompt);
 
 /*
 ** Check if the token is a double lesser '<<'
-** ./lexer/lexer_check_type.c
+** ./lexer/lexer_is_1.c
 */
 int			is_dlesser(char *prompt);
 
 /*
 ** Check if the token is a word
-** ./lexer/lexer_check_type.c
+** ./lexer/lexer_is_2.c
 */
 int			is_word(char *prompt, int *i);
 
@@ -109,8 +115,23 @@ int			is_word(char *prompt, int *i);
 */
 int			parser(t_mini *mini);
 
-/* ================================= EXECUTOR ================================= */
+/*
+** Fix the quote for tokens
+** ./parser/parser_quote_fix.c
+*/
+int			parser_quote_fix(t_mini *mini);
+
+/* =============================== EXECUTOR ================================ */
+
+int			expander(t_mini *mini);
+
+int			expander_env_var(t_mini *mini);
+
+/* =============================== EXECUTOR ================================ */
+
 int			executor(t_mini *mini);
+
+int			handle_heredoc(t_mini *mini);
 
 /* ================================= TOOLS ================================= */
 
@@ -153,7 +174,9 @@ void		ft_lstadd_back_token(t_token **lst, t_token *new);
 void		ft_lstclear_token(t_token **lst);
 t_token		*ft_lstlast_token(t_token *lst);
 t_token		*ft_lstnew_token(char *value, t_token_type type);
-void		ft_lstprint_token(t_token *token);
+int			ft_lstcount_type_token(t_token *lst, t_token_type type);
+t_token		*ft_lstnext_tokentype_token(t_token *lst, t_token_type type, \
+			t_token *current);
 
 /* t_pipeline */
 void		ft_lstadd_back_pipeline(t_pipeline **lst, t_pipeline *new);
@@ -161,7 +184,9 @@ void		ft_lstclear_pipeline(t_pipeline **lst);
 t_pipeline	*ft_lstlast_pipeline(t_pipeline *lst);
 t_pipeline	*ft_lstnew_pipeline(char *prompt);
 int			ft_lstsize_pipeline(t_pipeline *lst);
-
+int			ft_lstcount_tokentype_pipeline(t_pipeline *lst, t_token_type type);
+t_token		*ft_lstnext_tokentype_pipeline(t_pipeline *lst, \
+			t_token_type type, t_token *current);
 /* t_env */
 void		ft_lstadd_back_env(t_env **lst, t_env *new);
 void		ft_lstclear_env(t_env **lst);
@@ -177,5 +202,7 @@ void		ft_free_array(void **array);
 void		print_env(t_mini *mini);
 void		print_history(t_list *history);
 void		print_2d_array(char **str);
+void		print_pipeline(t_mini *mini);
+void		print_tokens(t_token *token);
 
 #endif
