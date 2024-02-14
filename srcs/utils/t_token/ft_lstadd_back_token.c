@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 13:40:57 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/13 14:07:39 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/14 10:21:08 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,6 @@ void	ft_lstadd_back_token(t_token **lst, t_token *new)
 	last = ft_lstlast_token(*lst);
 	last->next = new;
 	new->prev = last;
-	new->next = *lst;
-	(*lst)->prev = new;
+	// new->next = *lst;
+	// (*lst)->prev = new;
 }

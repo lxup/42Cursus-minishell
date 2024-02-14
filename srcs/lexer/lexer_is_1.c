@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer_check_type.c                                 :+:      :+:    :+:   */
+/*   lexer_is_1.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 17:23:38 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/13 21:22:14 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/13 22:38:22 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,44 +78,4 @@ int	is_dlesser(char *prompt)
 	if (count == 2)
 		return (1);
 	return (0);
-}
-
-int	is_word(char *prompt, int *i)
-{
-	int	cursor; 
-	int	quote_count;
-	
-	cursor = *i;
-	if (!prompt || !prompt[cursor])
-		return (0);
-	if (prompt[cursor] == '\"')
-	{
-		cursor++;
-		quote_count = 1;
-		while (prompt[cursor] == '\"')
-		{
-			cursor++;
-			quote_count++;
-		}
-		while (prompt[cursor] && prompt[cursor] != '\"')
-			cursor++;
-		while (prompt[cursor] == '\"')
-		{
-			quote_count--;
-			cursor++;
-			if (quote_count == 0)
-				return (*i = cursor, 1);
-		}
-		return (0);
-	}
-	else
-	{
-		while (prompt[cursor] && ft_isprint(prompt[cursor]) \
-			&& !ft_iswhitespace(prompt[cursor]) \
-			&& prompt[cursor] != '>' && prompt[cursor] != '<')
-			cursor++;
-		if (cursor == *i)
-			return (0);
-		return (*i = cursor, 1);
-	}
 }

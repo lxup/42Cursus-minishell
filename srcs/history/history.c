@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 16:31:56 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/11 11:55:59 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/13 23:31:20 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,11 @@ void	*init_history(t_mini *mini)
 	while (1)
 	{
 		line = get_next_line(fd);
-		if (!line)
+		if (!line || !ft_strlen(line))
 			break ;
 		tmp = ft_strtrim(line, " \n");
+		if (!tmp)
+			return (free(line), close(fd), NULL);
 		add_history(tmp);
 		free(line);
 		free(tmp);

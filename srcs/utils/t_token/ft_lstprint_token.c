@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 17:17:10 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/13 19:42:14 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/14 10:18:37 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,14 @@ void	ft_lstprint_token(t_token *token)
 			printf("type: TOKEN_CMD\n");
 		else if (tmp->type == TOKEN_FILE)
 			printf("type: TOKEN_FILE\n");
-		else if (tmp->type == TOKEN_UNKNOW)
-			printf("type: TOKEN_UNKNOW\n");
+		else if (tmp->type == TOKEN_UNKNOWN)
+			printf("type: TOKEN_UNKNOWN\n");
 		else if (tmp->type == TOKEN_NOT_SET)
 			printf("type: TOKEN_NOT_SET\n");
 		else
 			printf("type: UNKNOW\n");
 		tmp = tmp->next;
-		if (tmp == token)
-			break ;
+		// if (tmp == token)
+		// 	break ;
 	}
 }

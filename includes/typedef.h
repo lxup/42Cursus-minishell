@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 11:52:43 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/13 18:16:09 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/14 10:05:55 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 // 	TOKEN_DGREATER,
 // 	TOKEN_LESSER,
 // 	TOKEN_DLESSER,
-// 	TOKEN_UNKNOW,
+// 	TOKEN_UNKNOWN,
 // 	TOKEN_END,
 // }	t_token_type;
 
@@ -47,7 +47,7 @@ typedef enum e_token_type
 	TOKEN_CMD,
 	TOKEN_ARGS,
 	TOKEN_WORD,
-	TOKEN_UNKNOW,
+	TOKEN_UNKNOWN,
 	TOKEN_NOT_SET,
 }	t_token_type;
 

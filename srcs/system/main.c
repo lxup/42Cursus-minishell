@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 17:38:04 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/13 13:52:28 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/14 11:35:24 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,9 @@ int		main(int ac, char **av, char **env)
 	t_mini	mini;
 	
 	(void)ac, (void)av;
+	// printf("ac = %d\n", ac);
+	// for (int i = 0; av[i]; i++)
+	// 	printf("av[%d] = %s\n", i, av[i]);
 	// for (int i = 0; env[i]; i++)
 	// 	printf("%s\n", env[i]);
 	init(&mini, env);

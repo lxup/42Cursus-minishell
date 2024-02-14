@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 17:31:59 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/13 21:21:57 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/14 11:07:14 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,12 @@ int			is_only_space(char *str);
 ** ./lexer/lexer.c
 */
 int			lexer(t_mini *mini);
+
+/*
+** Complete the token type for each token
+** ./lexer/lexer_token_type.c
+*/
+void		adjust_token_type(t_token *tokens);
 
 /*
 ** Check if the syntax is valid

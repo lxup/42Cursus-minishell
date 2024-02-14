@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:03:17 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/13 15:04:24 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/14 10:24:55 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ int	ft_lstsize_pipeline(t_pipeline *lst)
 	{
 		i++;
 		tmp = tmp->next;
-		if (tmp == lst)
-			break ;
+		// if (tmp == lst)
+		// 	break ;
 	}
 	return (i);
 }

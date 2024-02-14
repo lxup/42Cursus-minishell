@@ -6,7 +6,7 @@
 #    By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/06 19:51:48 by lquehec           #+#    #+#              #
-#    Updated: 2024/02/13 17:30:17 by lquehec          ###   ########.fr        #
+#    Updated: 2024/02/14 11:02:33 by lquehec          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -99,7 +99,9 @@ SRC_HISTORY		=	history \
 					history_utils
 SRC_LEXER		=	lexer \
 					syntax \
-					lexer_check_type
+					lexer_is_1 \
+					lexer_is_2 \
+					lexer_token_type
 SRC_PARSER		=	parser
 SRC_EXECUTOR	=	executor
 SRC_TOOLS		=	fd shell
