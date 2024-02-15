@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 10:44:39 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/14 20:55:00 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/15 11:53:12 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int	parser(t_mini *mini)
 		return (0);
 	if (!expander_env_var(mini))
 		return (0);
-	// if (!parser_quote_fix(mini))
-	// 	return (0);
+	if (!parser_quote_fix(mini))
+		return (0);
 	return (1);
 }

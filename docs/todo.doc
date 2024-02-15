@@ -1,0 +1,8 @@
+/* **************************************************************************** */
+/*                                     TODO                                     */
+/* **************************************************************************** */
+
+
+Parsing :
+- Prompt: "" -> output: "" -> should_be: EMPTY
+- Prompt: salut "$HOME slaut" -> output: Syntax error -> should_be: salut /user/loup slaut

@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 12:03:17 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/12 23:40:20 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/15 11:27:41 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,10 @@
 # define EXIT_CTRL_D 130
 # define EXIT_CMD_NOT_FOUND 127
 # define EXIT_SYNTAX_ERROR 258
+# define EXEC_PIPE_ERROR 300
+# define EXEC_FORK_ERROR 301
+# define EXEC_DUP_ERROR 302
+
 
 /* **************************************************************************** */
 /*                                     EXEC                                     */
@@ -41,7 +45,7 @@
 
 # define EXEC_SUCCESS 0
 # define EXEC_FAILURE 1
-# define EXEC_SYNTAX_ERROR 130
+# define EXEC_SYNTAX_ERROR 258
 
 /* **************************************************************************** */
 /*                                     MSG                                      */
@@ -106,5 +110,12 @@
 	BG_TRANSPARENT C_BLACK ""
 # define PROMPTE_ERROR_TEMPLATE BG_BLACK C_RED " ✘ " \
 	BG_TRANSPARENT C_BLACK ""
+
+/* **************************************************************************** */
+/*                                   HEREDOC                                    */
+/* **************************************************************************** */
+
+# define HEREDOC_TEMPLATE_PATH_PREFIX "/tmp/.minishell_heredoc_"
+# define HEREDOC_TEMPLATE_PATH_SUFFIX ".tmp"
 
 #endif

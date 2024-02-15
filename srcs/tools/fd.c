@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 19:56:03 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/11 10:40:05 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/15 11:42:11 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,17 @@
 // 	ft_close_fd(mini->pip_in);
 // 	ft_close_fd(mini->pip_out);
 // }
+
+void close_dup_fds(t_mini *mini) {
+    if (mini->std_in != -1) {
+        close(mini->std_in);
+        mini->std_in = -1;
+    }
+    if (mini->std_out != -1) {
+        close(mini->std_out);
+        mini->std_out = -1;
+    }
+}
 
 void	reset_stds(t_mini *mini)
 {

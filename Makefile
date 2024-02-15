@@ -6,7 +6,7 @@
 #    By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/06 19:51:48 by lquehec           #+#    #+#              #
-#    Updated: 2024/02/14 20:50:42 by lquehec          ###   ########.fr        #
+#    Updated: 2024/02/15 10:05:08 by lquehec          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,21 +61,6 @@ CFLAGS			+=	-Wall -Wextra -Werror -g3
 # **************************************************************************** #
 #                                    PATHS                                     #
 # **************************************************************************** #
-
-VPATH			=	srcs \
-					srcs/system \
-					srcs/history \
-					srcs/lexer \
-					srcs/parser \
-					srcs/expander \
-					srcs/executor \
-					srcs/cmds \
-					srcs/tools \
-					srcs/utils \
-					srcs/utils/t_env \
-					srcs/utils/t_token \
-					srcs/utils/t_pipeline \
-					srcs/debug
 				
 INC_PATH		=	includes
 OBJ_PATH		=	.obj
@@ -90,60 +75,75 @@ CFLAGS			+=	-I$(INC_PATH)
 #                                   SOURCES                                    #
 # **************************************************************************** #
 
-SRC_SYSTEM		=	main \
+# SYSTEM
+SRCS 			=	$(addprefix srcs/system/, $(addsuffix .c, \
+					main \
 					minishell \
 					prompt \
 					init \
 					sig \
-					exit
-SRC_HISTORY		=	history \
-					history_utils
-SRC_LEXER		=	lexer \
+					exit))
+# HISTORY
+SRCS 			+=	$(addprefix srcs/history/, $(addsuffix .c, \
+					history \
+					history_utils))
+# LEXER
+SRCS 			+=	$(addprefix srcs/lexer/, $(addsuffix .c, \
+					lexer \
 					syntax \
 					lexer_is_1 \
 					lexer_is_2 \
-					lexer_token_type
-SRC_PARSER		=	parser \
-					parser_quote_fix
-SRC_EXPANDER	=	expander \
-					expander_env_var
-SRC_EXECUTOR	=	executor \
-					heredoc
-SRC_TOOLS		=	fd shell
-SRC_UTILS		=	utils free
-SRC_UTILS_T_ENV	=	ft_lstadd_back_env \
+					lexer_token_type))
+# PARSER
+SRCS 			+=	$(addprefix srcs/parser/, $(addsuffix .c, \
+					parser \
+					parser_quote_fix))
+# EXPANDER
+SRCS 			+=	$(addprefix srcs/expander/, $(addsuffix .c, \
+					expander \
+					expander_env_var))
+# EXECUTOR
+SRCS 			+=	$(addprefix srcs/executor/, $(addsuffix .c, \
+					executor))
+# EXECUTOR/HEREDOC
+SRCS 			+=	$(addprefix srcs/executor/heredoc/, $(addsuffix .c, \
+					heredoc))
+# TOOLS
+SRCS 			+=	$(addprefix srcs/tools/, $(addsuffix .c, \
+					fd \
+					shell))
+# UTILS
+SRCS 			+=	$(addprefix srcs/utils/, $(addsuffix .c, \
+					utils \
+					free))
+# UTILS/T_ENV
+SRCS 			+=	$(addprefix srcs/utils/t_env/, $(addsuffix .c, \
+					ft_lstadd_back_env \
 					ft_lstclear_env \
 					ft_lstfind_env \
 					ft_lstlast_env \
 					ft_lstnew_env \
-					ft_lstreplace_env
-SRC_UTILS_T_TOKEN=	ft_lstadd_back_token \
+					ft_lstreplace_env))
+# UTILS/T_TOKEN
+SRCS 			+=	$(addprefix srcs/utils/t_token/, $(addsuffix .c, \
+					ft_lstadd_back_token \
 					ft_lstclear_token \
 					ft_lstlast_token \
 					ft_lstnew_token \
 					ft_lstcount_type_token \
-					ft_lstnext_tokentype_token
-SRC_UTILS_T_PIPELINE=	ft_lstadd_back_pipeline \
-						ft_lstclear_pipeline \
-						ft_lstlast_pipeline \
-						ft_lstnew_pipeline \
-						ft_lstsize_pipeline \
-						ft_lstcount_tokentype_pipeline \
-						ft_lstnext_tokentype_pipeline
-SRC_DEBUG		=	tools
-
-SRCS 			=	$(addsuffix .c, $(SRC_SYSTEM)) \
-					$(addsuffix .c, $(SRC_HISTORY)) \
-					$(addsuffix .c, $(SRC_LEXER)) \
-					$(addsuffix .c, $(SRC_PARSER)) \
-					$(addsuffix .c, $(SRC_EXPANDER)) \
-					$(addsuffix .c, $(SRC_EXECUTOR)) \
-					$(addsuffix .c, $(SRC_TOOLS)) \
-					$(addsuffix .c, $(SRC_UTILS)) \
-					$(addsuffix .c, $(SRC_UTILS_T_ENV)) \
-					$(addsuffix .c, $(SRC_UTILS_T_TOKEN)) \
-					$(addsuffix .c, $(SRC_UTILS_T_PIPELINE)) \
-					$(addsuffix .c, $(SRC_DEBUG)) \
+					ft_lstnext_tokentype_token))
+# UTILS/T_PIPELINE
+SRCS 			+=	$(addprefix srcs/utils/t_pipeline/, $(addsuffix .c, \
+					ft_lstadd_back_pipeline \
+					ft_lstclear_pipeline \
+					ft_lstlast_pipeline \
+					ft_lstnew_pipeline \
+					ft_lstsize_pipeline \
+					ft_lstcount_tokentype_pipeline \
+					ft_lstnext_tokentype_pipeline))
+# DEBUG
+SRCS 			+=	$(addprefix srcs/debug/, $(addsuffix .c, \
+					tools))
 
 OBJS			=	$(SRCS:%.c=$(OBJ_PATH)/%.o)
 
@@ -199,6 +199,7 @@ $(OBJ_PATH):
 			@mkdir -p ${OBJ_PATH}
 
 $(OBJ_PATH)/%.o: %.c
+			@mkdir -p $(dir $@)
 			@printf "${BLUE}>Generating minishell objects... %-33.33s\r" $@
 			@$(CC) $(CFLAGS) $(INCL_RDL_HEADER) -c $< -o $@
 

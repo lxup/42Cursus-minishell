@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 17:31:59 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/14 20:50:27 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/15 11:42:48 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,6 +166,7 @@ int			get_terminal_width(void);
 // void	ft_close_fd(int fd);
 // void	close_fds(t_mini *mini);
 void		reset_stds(t_mini *mini);
+void		close_dup_fds(t_mini *mini);
 
 /* ================================= UTILS ================================= */
 

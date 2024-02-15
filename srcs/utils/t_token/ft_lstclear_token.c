@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 16:12:34 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/14 17:13:37 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/15 11:30:17 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,11 @@ void	ft_lstclear_token(t_token **lst)
 			tmp = NULL;
 		if (current->value)
 			free(current->value);
+		if (current->file)
+		{
+			unlink(current->file);
+			free(current->file);
+		}
 		free(current);
 		current = tmp;
 	}

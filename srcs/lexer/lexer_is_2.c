@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 22:38:23 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/14 18:12:09 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/15 13:06:22 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,8 @@ int	is_word(char *prompt, int *i)
 	cursor = *i - 1;
 	quote = 0;
 	inside_quote = 0;
-	while (++cursor >= 0 && prompt[cursor] && ft_isprint(prompt[cursor]) \
-		&& !ft_iswhitespace(prompt[cursor]) \
-		&& (inside_quote || (prompt[cursor] != '>' && prompt[cursor] != '<')))
+	while (++cursor >= 0 && prompt[cursor]
+		&& (inside_quote || (prompt[cursor] != '>' && prompt[cursor] != '<' && !ft_iswhitespace(prompt[cursor]))))
 	{
 		if ((prompt[cursor] == '\'' || prompt[cursor] == '\"'))
 		{
