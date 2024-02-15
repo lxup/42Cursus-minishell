@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 17:31:59 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/15 19:04:51 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/15 23:02:44 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,17 +127,22 @@ int			parser(t_mini *mini);
 */
 int			parser_quote_fix(t_mini *mini);
 
-/* =============================== EXECUTOR ================================ */
+/* =============================== EXPANDER ================================ */
 
 int			expander(t_mini *mini);
 
 int			expander_env_var(t_mini *mini);
 
+char		*expander_heredoc(t_mini *mini, char *str);
+
 /* =============================== EXECUTOR ================================ */
 
 int			executor(t_mini *mini);
 
+void		exec_multi_pipeline(t_mini *mini);
+
 int			handle_heredoc(t_mini *mini);
+char		*heredoc_filename(t_pipeline *pipeline);
 
 /* ================================= TOOLS ================================= */
 
@@ -194,7 +199,7 @@ t_pipeline	*ft_lstnew_pipeline(void);
 int			ft_lstsize_pipeline(t_pipeline *lst);
 int			ft_lstcount_tokentype_pipeline(t_pipeline *lst, t_token_type type);
 t_token		*ft_lstnext_tokentype_pipeline(t_pipeline *lst, \
-			t_token_type type, t_token *current);
+			t_token_type type, t_token *current, t_pipeline **pipeline);
 t_token		*ft_lstprev_cmd_token(t_token *current);
 char		*ft_lstfind_type_pipeline(t_pipeline *pipeline, t_token_type type);
 /* t_env */

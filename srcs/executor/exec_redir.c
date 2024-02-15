@@ -1,31 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew_pipeline.c                               :+:      :+:    :+:   */
+/*   exec_redir.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/09 13:42:05 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/15 22:39:18 by lquehec          ###   ########.fr       */
+/*   Created: 2024/02/15 23:33:17 by lquehec           #+#    #+#             */
+/*   Updated: 2024/02/15 23:35:53 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_pipeline	*ft_lstnew_pipeline(void)
+void	handle_redir(t_mini *mini, t_pipeline *cur_pipeline)
 {
-	t_pipeline	*new_lst;
+	(void)mini;
+	(void)cur_pipeline;
+}
 
-	new_lst = (t_pipeline *)malloc(sizeof(t_pipeline));
-	if (!new_lst)
-		return (NULL);
-	new_lst->tokens = NULL;
-	new_lst->pid = 0;
-	new_lst->redir_in = 0;
-	new_lst->redir_out = 0;
-	new_lst->redir_append = 0;
-	new_lst->file = NULL;
-	new_lst->next = NULL;
-	new_lst->prev = NULL;
-	return (new_lst);
+void	exec_redir_builtins(t_mini *mini, t_pipeline *cur_pipeline)
+{
+	(void)mini;
+	(void)cur_pipeline;
 }

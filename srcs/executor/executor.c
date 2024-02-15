@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 10:56:17 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/15 18:38:53 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/15 22:48:31 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,11 @@ int	create_pipeline(t_mini *mini)
 	{
 		if (cur_token->type == TOKEN_PIPE)
 		{
-			printf("PIPE\n");
 			ft_lstadd_back_pipeline(&mini->pipeline, ft_lstnew_pipeline());
 			cur_pipeline = cur_pipeline->next;
 			cur_token = cur_token->next;
 		}
 		ft_lstadd_back_token(&cur_pipeline->tokens, ft_lstnew_token(ft_strdup(cur_token->value), cur_token->type));
-		// cur_pipeline->tokens = 
 		cur_token = cur_token->next;
 	}
 
@@ -98,35 +96,39 @@ int	executor(t_mini *mini)
 	// TODO: Check if command is built-in
 	cur_pipeline = mini->pipeline;
 	handle_heredoc(mini);
-	while (cur_pipeline)
-	{
-		printf("pipeline cmd: %s\n", ft_lstfind_type_pipeline(cur_pipeline, TOKEN_CMD));
-		// if (mini->exec_status != EXEC_SUCCESS)
-		// 	break ;
-		// if (pipe(cur_pipeline->pipe) == -1)
-		// {
-		// 	mini->exec_status = EXEC_PIPE_ERROR;
-		// 	continue ;
-		// }
-		// cur_pipeline->pid = fork();
-		// if (cur_pipeline->pid == 0)
-		// {
-		// 	free(data->pid);
-		// 	redirections(data, i);
-		// 	if ((i == 0 || i == data->nbcmd - 1))
-		// 		open_files(i, data);
-		// 	ft_exec(data->cmd[i], data);
-		// 	exit(127);
-		// }
-		// else
-		// {
-		// 	// if (i)
-		// 	// 	close(cur_pipeline->prev->pipe);
-		// 	// cur_pipeline->prev-> = data->pipefd[0];
-		// 	// close(data->pipefd[1]);
-		// }
-		cur_pipeline = cur_pipeline->next;
-	}
+	// if (ft_lstsize_pipeline(mini->pipeline) == 1)
+	// 	exec_single_pipeline(mini);
+	// else
+	exec_multi_pipeline(mini);
+	// while (cur_pipeline)
+	// {
+	// 	// printf("pipeline cmd: %s\n", ft_lstfind_type_pipeline(cur_pipeline, TOKEN_CMD));
+	// 	if (mini->exec_status != EXEC_SUCCESS)
+	// 		break ;
+	// 	if (pipe(cur_pipeline->pipe) == -1)
+	// 	{
+	// 		mini->exec_status = EXEC_PIPE_ERROR;
+	// 		continue ;
+	// 	}
+	// 	cur_pipeline->pid = fork();
+	// 	if (cur_pipeline->pid == 0)
+	// 	{
+	// 		free(cur_pipeline->pid);
+	// 		redirections(cur_pipeline);
+	// 		if ((i == 0 || i == data->nbcmd - 1))
+	// 			open_files(i, data);
+	// 		ft_exec(data->cmd[i], data);
+	// 		exit(127);
+	// 	}
+	// 	else
+	// 	{
+	// 		// if (i)
+	// 		// 	close(cur_pipeline->prev->pipe);
+	// 		// cur_pipeline->prev-> = data->pipefd[0];
+	// 		// close(data->pipefd[1]);
+	// 	}
+	// 	cur_pipeline = cur_pipeline->next;
+	// }
 	
 	return (0);
 }

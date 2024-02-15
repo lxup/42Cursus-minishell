@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expander_env_var.c                                 :+:      :+:    :+:   */
+/*   expander_heredoc.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 20:49:58 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/15 19:46:03 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/15 19:46:31 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ static int	get_new_len(t_mini *mini, char *str)
 	return (len);
 }
 
-static int	set_new_value(t_mini *mini, char **str, t_token *token)
+static int	set_new_value(t_mini *mini, char **str, char *prev_str)
 {
 	int		i;
 	int		j;
@@ -109,14 +109,14 @@ static int	set_new_value(t_mini *mini, char **str, t_token *token)
 
 	i = 0;
 	j = 0;
-	while (token->value[i])
+	while (prev_str[i])
 	{
-		if (token->value[i] == '$' && token->value[i + 1] \
-			&& !ft_iswhitespace(token->value[i + 1]) \
-			&& token->value[i + 1] != '\'' && token->value[i + 1] != '\"')
+		if (prev_str[i] == '$' && prev_str[i + 1] \
+			&& !ft_iswhitespace(prev_str[i + 1]) \
+			&& prev_str[i + 1] != '\'' && prev_str[i + 1] != '\"')
 		{
 			i++;
-			env_var = get_env_var(mini, &token->value[i]);
+			env_var = get_env_var(mini, &prev_str[i]);
 			k = 0;
 			if (env_var)
 			{
@@ -124,11 +124,11 @@ static int	set_new_value(t_mini *mini, char **str, t_token *token)
 					(*str)[j++] = env_var[k++];
 				free(env_var);
 			}
-			i += get_env_var_name_len(&token->value[i]) - 1;
+			i += get_env_var_name_len(&prev_str[i]) - 1;
 		}
 		else
 		{
-			(*str)[j] = token->value[i];
+			(*str)[j] = prev_str[i];
 			j++;
 		}
 		i++;
@@ -136,42 +136,21 @@ static int	set_new_value(t_mini *mini, char **str, t_token *token)
 	return (1);
 }
 
-static int	fix_env_var(t_mini *mini, t_token *token)
+char	*expander_heredoc(t_mini *mini, char *str)
 {
 	char	*new_value;
 	char	*tmp;
 	int		new_len;
 
-	new_len = get_new_len(mini, token->value);
-	if (new_len == -1)
-		return (mini->exec_status = EXEC_SYNTAX_ERROR, 0);
-	if (new_len == (int)ft_strlen(token->value) || new_len == 0)
-		return (1);
+	if (!ft_contains_char(str, '$'))
+		return (str);
+	new_len = get_new_len(mini, str);
 	new_value = ft_calloc(new_len + 1, sizeof(char));
 	if (!new_value)
-		return (0);
-	set_new_value(mini, &new_value, token);
-	if (ft_strlen(new_value) != (size_t)new_len)
-		return (free(new_value), 0);
-	tmp = token->value;
-	token->value = new_value;
+		return (str);
+	set_new_value(mini, &new_value, str);
+	tmp = str;
+	str = new_value;
 	free(tmp);
-	return (1);
-}
-
-int	expander_env_var(t_mini *mini)
-{
-	t_token		*tmp_token;
-
-	tmp_token = mini->tokens;
-	while (tmp_token)
-	{
-		if (ft_contains_char(tmp_token->value, '$'))
-		{
-			if (!fix_env_var(mini, tmp_token))
-				return (0);
-		}
-		tmp_token = tmp_token->next;
-	}
-	return (1);
+	return (str);
 }

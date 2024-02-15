@@ -6,7 +6,7 @@
 #    By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/06 19:51:48 by lquehec           #+#    #+#              #
-#    Updated: 2024/02/15 19:04:06 by lquehec          ###   ########.fr        #
+#    Updated: 2024/02/15 23:03:56 by lquehec          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -101,13 +101,17 @@ SRCS 			+=	$(addprefix srcs/parser/, $(addsuffix .c, \
 # EXPANDER
 SRCS 			+=	$(addprefix srcs/expander/, $(addsuffix .c, \
 					expander \
-					expander_env_var))
+					expander_env_var \
+					expander_heredoc))
 # EXECUTOR
 SRCS 			+=	$(addprefix srcs/executor/, $(addsuffix .c, \
-					executor))
+					executor \
+					exec_multi_pipeline \
+					exec_child))
 # EXECUTOR/HEREDOC
 SRCS 			+=	$(addprefix srcs/executor/heredoc/, $(addsuffix .c, \
-					heredoc))
+					heredoc \
+					heredoc_utils))
 # TOOLS
 SRCS 			+=	$(addprefix srcs/tools/, $(addsuffix .c, \
 					fd \

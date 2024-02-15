@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 11:52:43 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/15 17:50:26 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/15 22:39:07 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ typedef struct s_token
 {
 	char				*value;
 	t_token_type		type;
-	char				*file;
 	struct s_token		*next;
 	struct s_token		*prev;
 }	t_token;
@@ -65,9 +64,11 @@ typedef struct s_token
 typedef struct s_pipeline
 {
 	t_token				*tokens;
+	char				*file;
 	pid_t				pid;
-	int					fd_in;
-	int					fd_out;
+	int					redir_in;
+	int					redir_out;
+	int					redir_append;
 	int					pipe[2];
 	struct s_pipeline	*next;
 	struct s_pipeline	*prev;

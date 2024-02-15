@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 12:03:17 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/15 11:27:41 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/15 22:52:20 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@
 
 # define EXEC_SUCCESS 0
 # define EXEC_FAILURE 1
+# define EXEC_CTRL_D 130
 # define EXEC_SYNTAX_ERROR 258
 
 /* **************************************************************************** */
@@ -115,7 +116,7 @@
 /*                                   HEREDOC                                    */
 /* **************************************************************************** */
 
-# define HEREDOC_TEMPLATE_PATH_PREFIX "/tmp/.minishell_heredoc_"
+# define HEREDOC_TEMPLATE_PATH_PREFIX "/tmp/.minishell_heredoc"
 # define HEREDOC_TEMPLATE_PATH_SUFFIX ".tmp"
 
 #endif

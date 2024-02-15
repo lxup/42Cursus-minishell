@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 16:31:56 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/15 15:00:16 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/15 19:29:30 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,7 @@ void	*add_to_history(t_mini *mini)
 {
 	int		fd;
 
-	if (!ft_strlen(mini->prompt) || is_new_prompt(mini) == 0 \
-		|| is_only_space(mini->prompt) == 1)
+	if (!ft_strlen(mini->prompt) || is_new_prompt(mini) == 0)
 		return (free(mini->prompt), NULL);
 	fd = get_history_fd_write(mini);
 	if (fd >= 0)
