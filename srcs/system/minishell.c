@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 19:35:42 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/14 20:55:13 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/15 18:49:39 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,18 +58,19 @@ void	sig_init(t_mini *mini)
 int	*start_reading(t_mini *mini)
 {
 	(void)mini;
-	char	*line;
+	// char	*line;
 
 	if (isatty(fileno(stdin)))
 		mini->prompt = readline(mini->shell_prompt.prompt);
-	else
-	{
-		line = get_next_line(fileno(stdin));
-		if (!line)
-			return (NULL);
-		mini->prompt = ft_strtrim(line, "\n");
-		free(line);
-	}
+	// else
+	// {
+	// 	printf("test\n");
+	// 	line = get_next_line(fileno(stdin));
+	// 	if (!line)
+	// 		return (NULL);
+	// 	mini->prompt = ft_strtrim(line, "\n");
+	// 	free(line);
+	// }
 	if (mini->prompt == NULL) // ctrl + D
 	{
 		printf("salam\n");
@@ -102,9 +103,6 @@ void	minishell(t_mini *mini)
 			executor(mini);
 		add_to_history(mini);
 		print_exec_msg(mini);
-		if (mini->exec_status == EXEC_SUCCESS)
-			mini->last_exec_status = EXEC_SUCCESS;
-		else
-			mini->last_exec_status = mini->exec_status;
+		mini->last_exec_status = mini->exec_status;
 	}
 }

@@ -1,32 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sig.c                                              :+:      :+:    :+:   */
+/*   ft_lstfind_pipeline.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/09 12:18:31 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/15 15:08:11 by lquehec          ###   ########.fr       */
+/*   Created: 2024/02/09 16:33:05 by lquehec           #+#    #+#             */
+/*   Updated: 2024/02/15 17:58:06 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	sig_handler(int sig)
+char	*ft_lstfind_type_pipeline(t_pipeline *pipeline, t_token_type type)
 {
-	if (g_pid)
-		return ;
-	if (sig == SIGINT)
+	t_token	*tmp;
+
+	if (!pipeline || !pipeline->tokens)
+		return (NULL);
+	tmp = pipeline->tokens;
+	while (tmp)
 	{
-		printf("\n");
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
+		if (tmp->type == type)
+			return (tmp->value);
+		tmp = tmp->next;
 	}
-	else if (sig == SIGQUIT)
-	{
-		rl_on_new_line();
-		rl_redisplay();
-		ft_putstr_nl(MSG_EXIT);
-	}	
+	return (NULL);
 }

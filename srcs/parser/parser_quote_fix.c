@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 15:17:34 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/14 18:15:33 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/15 16:36:40 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,24 +95,18 @@ static int	fix_quote(t_mini *mini, t_token *token)
 
 int	parser_quote_fix(t_mini *mini)
 {
-	t_pipeline	*tmp_pipeline;
 	t_token		*tmp_token;
 
-	tmp_pipeline = mini->pipeline;
-	while (tmp_pipeline)
+	tmp_token = mini->tokens;
+	while (tmp_token)
 	{
-		tmp_token = tmp_pipeline->tokens;
-		while (tmp_token)
+		if (ft_contains_char(tmp_token->value, '\'') \
+			|| ft_contains_char(tmp_token->value, '\"'))
 		{
-			if (ft_contains_char(tmp_token->value, '\'') \
-				|| ft_contains_char(tmp_token->value, '\"'))
-			{
-				if (!fix_quote(mini, tmp_token))
-					return (0);
-			}
-			tmp_token = tmp_token->next;
+			if (!fix_quote(mini, tmp_token))
+				return (0);
 		}
-		tmp_pipeline = tmp_pipeline->next;
+		tmp_token = tmp_token->next;
 	}
 	return (1);
 }

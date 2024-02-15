@@ -6,7 +6,7 @@
 #    By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/06 19:51:48 by lquehec           #+#    #+#              #
-#    Updated: 2024/02/15 10:05:08 by lquehec          ###   ########.fr        #
+#    Updated: 2024/02/15 19:04:06 by lquehec          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -131,7 +131,8 @@ SRCS 			+=	$(addprefix srcs/utils/t_token/, $(addsuffix .c, \
 					ft_lstlast_token \
 					ft_lstnew_token \
 					ft_lstcount_type_token \
-					ft_lstnext_tokentype_token))
+					ft_lstnext_tokentype_token \
+					ft_lstprev_cmd_token))
 # UTILS/T_PIPELINE
 SRCS 			+=	$(addprefix srcs/utils/t_pipeline/, $(addsuffix .c, \
 					ft_lstadd_back_pipeline \
@@ -140,7 +141,8 @@ SRCS 			+=	$(addprefix srcs/utils/t_pipeline/, $(addsuffix .c, \
 					ft_lstnew_pipeline \
 					ft_lstsize_pipeline \
 					ft_lstcount_tokentype_pipeline \
-					ft_lstnext_tokentype_pipeline))
+					ft_lstnext_tokentype_pipeline \
+					ft_lstfind_type_pipeline))
 # DEBUG
 SRCS 			+=	$(addprefix srcs/debug/, $(addsuffix .c, \
 					tools))

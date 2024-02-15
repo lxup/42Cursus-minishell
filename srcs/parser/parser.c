@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 10:44:39 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/15 11:53:12 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/15 19:10:51 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,15 @@
 
 int	parser_checker_token_type(t_mini *mini)
 {
-	t_pipeline	*tmp_pipeline;
 	t_token		*tmp_token;
 
-	tmp_pipeline = mini->pipeline;
-	while (tmp_pipeline)
+	tmp_token = mini->tokens;
+	while (tmp_token)
 	{
-		tmp_token = tmp_pipeline->tokens;
-		while (tmp_token)
-		{
-			if (tmp_token->type == TOKEN_NOT_SET \
-				|| tmp_token->type == TOKEN_UNKNOWN)
-				return (mini->exec_status = EXEC_SYNTAX_ERROR, 0);
-			tmp_token = tmp_token->next;
-		}
-		tmp_pipeline = tmp_pipeline->next;
+		if (tmp_token->type == TOKEN_NOT_SET \
+			|| tmp_token->type == TOKEN_UNKNOWN)
+			return (mini->exec_status = EXEC_SYNTAX_ERROR, 0);
+		tmp_token = tmp_token->next;
 	}
 	return (1);
 }
@@ -38,7 +32,8 @@ int	parser_checker_order_if(t_token *token)
 	if (token == token->next || token == token->prev)
 		return (0);
 	if (token->type == TOKEN_ARGS && (!token->prev || (token->prev \
-		&& token->prev->type != TOKEN_CMD && token->prev->type != TOKEN_ARGS)))
+		&& token->prev->type != TOKEN_CMD && token->prev->type != TOKEN_ARGS \
+		&& token->prev->type != TOKEN_FILE)))
 		return (0);
 	if (token->type == TOKEN_FILE && (!token->prev || (token->prev \
 		&& (token->prev->type != TOKEN_LESSER \
@@ -55,20 +50,14 @@ int	parser_checker_order_if(t_token *token)
 
 int	parser_checker_order(t_mini *mini)
 {
-	t_pipeline	*tmp_pipeline;
 	t_token		*tmp_token;
 
-	tmp_pipeline = mini->pipeline;
-	while (tmp_pipeline)
+	tmp_token = mini->tokens;
+	while (tmp_token)
 	{
-		tmp_token = tmp_pipeline->tokens;
-		while (tmp_token)
-		{
-			if (!parser_checker_order_if(tmp_token))
-				return (mini->exec_status = EXEC_SYNTAX_ERROR, 0);
-			tmp_token = tmp_token->next;
-		}
-		tmp_pipeline = tmp_pipeline->next;
+		if (!parser_checker_order_if(tmp_token))
+			return (mini->exec_status = EXEC_SYNTAX_ERROR, 0);
+		tmp_token = tmp_token->next;
 	}
 	return (1);
 }

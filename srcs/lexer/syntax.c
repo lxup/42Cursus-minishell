@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 14:40:29 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/14 17:44:34 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/15 18:47:48 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	is_valid_pipe(char *str, int i)
 
 	if (!str)
 		return (0);
-	if (str[0] == '|' || str[ft_strlen(str) - 1] == '|')
+	if ((i == 0 && str[0] == '|') || str[ft_strlen(str) - 1] == '|')
 		return (0);
 	count = i - 1;
 	while (--i > 0 && str[i] && str[i] != '|')
@@ -83,9 +83,10 @@ int	is_valid_syntax(char *str)
 	int	i;
 
 	i = -1;
-	if ((count_chars(str, '(') != count_chars(str, ')')) \
-		|| count_chars(str, ';') > 0 || count_chars(str, '\\') > 0)
+	if ((count_chars(str, '(') != count_chars(str, ')'))
+		|| str[0] == '|' || str[ft_strlen(str) - 1] == '|')
 		return (0);
+		// || count_chars(str, ';') > 0 || count_chars(str, '\\') > 0)
 	while (str && str[++i])
 	{
 		if (str[i] == '\'')
@@ -100,9 +101,9 @@ int	is_valid_syntax(char *str)
 		if (str[i] == ')')
 			if (!is_bracket_open(str, i))
 				return (0);
-		if (str[i] == '|')
-			if (!is_valid_pipe(str, i))
-				return (0);
+		// if (str[i] == '|')
+		// 	if (!is_valid_pipe(str, i))
+		// 		return (0);
 	}
 	return (1);
 }

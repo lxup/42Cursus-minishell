@@ -1,32 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sig.c                                              :+:      :+:    :+:   */
+/*   ft_lstprev_cmd_token.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/09 12:18:31 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/15 15:08:11 by lquehec          ###   ########.fr       */
+/*   Created: 2024/02/15 18:52:12 by lquehec           #+#    #+#             */
+/*   Updated: 2024/02/15 19:07:24 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	sig_handler(int sig)
+t_token	*ft_lstprev_cmd_token(t_token *current)
 {
-	if (g_pid)
-		return ;
-	if (sig == SIGINT)
+	if (!current || !current->prev)
+		return (NULL);
+	current = current->prev;
+	while (current && current->type != TOKEN_PIPE)
 	{
-		printf("\n");
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
+		if (current->type == TOKEN_CMD)
+			return (current);
+		current = current->prev;
 	}
-	else if (sig == SIGQUIT)
-	{
-		rl_on_new_line();
-		rl_redisplay();
-		ft_putstr_nl(MSG_EXIT);
-	}	
+	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 11:52:43 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/15 10:50:32 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/15 17:50:26 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,7 @@ typedef struct s_token
 typedef struct s_pipeline
 {
 	t_token				*tokens;
-	char				*prompt;
-	pid_t					pid;
+	pid_t				pid;
 	int					fd_in;
 	int					fd_out;
 	int					pipe[2];
@@ -93,6 +92,7 @@ typedef struct s_shell_prompt
 typedef struct s_mini
 {
 	t_env			*env;
+	t_token			*tokens;
 	t_pipeline		*pipeline;
 	char			**cmd_path;
 	char			*prompt;

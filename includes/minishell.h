@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 17:31:59 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/15 11:42:48 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/15 19:04:51 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,12 @@ void		adjust_token_type(t_token *tokens);
 ** ./lexer/is_valid_syntax.c
 */
 int			is_valid_syntax(char *str);
+
+/*
+** Check if the token is a greater '|'
+** ./lexer/create_tokens.c
+*/
+int			is_pipeline(char *prompt);
 
 /*
 ** Check if the token is a greater '>'
@@ -183,11 +189,14 @@ t_token		*ft_lstnext_tokentype_token(t_token *lst, t_token_type type, \
 void		ft_lstadd_back_pipeline(t_pipeline **lst, t_pipeline *new);
 void		ft_lstclear_pipeline(t_pipeline **lst);
 t_pipeline	*ft_lstlast_pipeline(t_pipeline *lst);
-t_pipeline	*ft_lstnew_pipeline(char *prompt);
+t_pipeline	*ft_lstnew_pipeline(void);
+// t_pipeline	*ft_lstnew_pipeline(char *prompt);
 int			ft_lstsize_pipeline(t_pipeline *lst);
 int			ft_lstcount_tokentype_pipeline(t_pipeline *lst, t_token_type type);
 t_token		*ft_lstnext_tokentype_pipeline(t_pipeline *lst, \
 			t_token_type type, t_token *current);
+t_token		*ft_lstprev_cmd_token(t_token *current);
+char		*ft_lstfind_type_pipeline(t_pipeline *pipeline, t_token_type type);
 /* t_env */
 void		ft_lstadd_back_env(t_env **lst, t_env *new);
 void		ft_lstclear_env(t_env **lst);

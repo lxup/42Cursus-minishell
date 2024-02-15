@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 18:43:41 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/15 11:36:57 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/15 17:21:29 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ int	heredoc(t_token *token, char *delim, int index)
 
 int	handle_heredoc(t_mini *mini)
 {
+	(void)mini;
 	t_token	*token;
 	int		heredoc_count;
 	int		heredoc_index;
@@ -83,6 +84,7 @@ int	handle_heredoc(t_mini *mini)
 	{
 		if (!heredoc(token, token->next->value, heredoc_index))
 			return (0);
+		printf("HERE\n");
 		token = ft_lstnext_tokentype_pipeline(mini->pipeline, \
 			TOKEN_DLESSER, token);
 		heredoc_index++;

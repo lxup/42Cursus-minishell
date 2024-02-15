@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 16:12:34 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/14 17:13:50 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/15 16:53:19 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,6 @@ void	ft_lstclear_pipeline(t_pipeline **lst)
 			tmp = NULL;
 		if (current->tokens)
 			ft_lstclear_token(&current->tokens);
-		if (current->prompt)
-			free(current->prompt);
 		free(current);
 		current = tmp;
 	}

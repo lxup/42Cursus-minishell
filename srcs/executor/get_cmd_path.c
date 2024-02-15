@@ -1,32 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sig.c                                              :+:      :+:    :+:   */
+/*   get_cmd_path.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/09 12:18:31 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/15 15:08:11 by lquehec          ###   ########.fr       */
+/*   Created: 2024/02/15 17:53:18 by lquehec           #+#    #+#             */
+/*   Updated: 2024/02/15 18:09:33 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	sig_handler(int sig)
+char	*get_cmd_path(t_mini *mini, char *cmd)
 {
-	if (g_pid)
-		return ;
-	if (sig == SIGINT)
+	int		i;
+	char	**path;
+	char	*tmp;
+
+	i = 0;
+	if (ft_strchr(cmd, '/'))
+		return (cmd);
+	while (mini->cmd_path[i])
 	{
-		printf("\n");
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
+		tmp = ft_strjoin(path[i], cmd);
+		if (access(tmp, F_OK | X_OK) == 0)
+			return (tmp);
+		free(tmp);
+		i++;
 	}
-	else if (sig == SIGQUIT)
-	{
-		rl_on_new_line();
-		rl_redisplay();
-		ft_putstr_nl(MSG_EXIT);
-	}	
+	return (cmd);
 }

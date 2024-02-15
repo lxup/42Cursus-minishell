@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 14:37:42 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/14 16:40:21 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/15 16:55:08 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ void	print_tokens(t_token *token)
 			printf("type: TOKEN_LESSER\n");
 		else if (tmp->type == TOKEN_DLESSER)
 			printf("type: TOKEN_DLESSER\n");
+		else if (tmp->type == TOKEN_PIPE)
+			printf("type: TOKEN_PIPE\n");
 		else if (tmp->type == TOKEN_ARGS)
 			printf("type: TOKEN_ARGS\n");
 		else if (tmp->type == TOKEN_CMD)
@@ -65,14 +67,17 @@ void	print_tokens(t_token *token)
 
 void	print_pipeline(t_mini *mini)
 {
+	int			i;
 	t_pipeline	*tmp;
 	
 	tmp = mini->pipeline;
+	i = 0;
 	while (tmp)
 	{
-		printf("Pipeline: %s\n", tmp->prompt);
+		printf("Pipeline: %i\n", i);
 		print_tokens(tmp->tokens);
 		tmp = tmp->next;
+		i++;
 	}
 }
 

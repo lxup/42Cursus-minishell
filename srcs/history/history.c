@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 16:31:56 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/14 15:09:24 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/15 15:00:16 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,7 @@ int	get_history_fd_write(t_mini *mini)
 		return (ft_exit(mini, EXIT_FAILURE, ERR_MALLOC), -1);
 	fd = open(file_path, O_CREAT | O_RDWR | O_APPEND, 0644);
 	if (fd < 0)
-		return (free(file_path), \
-			ft_exit(mini, EXIT_FAILURE, ERR_OPEN_FILE), -1);
+		return (free(file_path), -1);
 	free(file_path);
 	return (fd);
 }
@@ -88,7 +87,8 @@ void	*add_to_history(t_mini *mini)
 		close(fd);
 	}
 	add_history(mini->prompt);
-	free(mini->prev_prompt);
+	if (mini->prev_prompt)
+		free(mini->prev_prompt);
 	mini->prev_prompt = mini->prompt;
 	mini->prompt = NULL;
 	return (NULL);

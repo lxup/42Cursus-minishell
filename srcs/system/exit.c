@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 16:19:54 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/15 11:43:05 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/15 17:14:17 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int	ft_exit(t_mini *mini, int status, char *error)
 		ft_putstr_err(error);
 	if (mini->env)
 		ft_lstclear_env(&mini->env);
+	if (mini->tokens)
+		ft_lstclear_token(&mini->tokens);
 	if (mini->pipeline)
 		ft_lstclear_pipeline(&mini->pipeline);
 	if (mini->cmd_path)

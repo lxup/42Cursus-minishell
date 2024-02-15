@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 20:49:58 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/15 13:03:36 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/15 16:37:02 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ static char	*get_env_var_name(char *str)
 	char	*env_var;
 
 	i = 0;
-	while (str[i] && !ft_iswhitespace(str[i]) && str[i] != '\'' && str[i] != '\"')
+	while (str[i] && !ft_iswhitespace(str[i]) && str[i] != '\'' && str[i] != '\"' && str[i] != '$')
 		i++;
 	env_var = ft_calloc(i + 1, sizeof(char));
 	if (!env_var)
 		return (NULL);
 	i = 0;
-	while (str[i] && !ft_iswhitespace(str[i]) && str[i] != '\'' && str[i] != '\"')
+	while (str[i] && !ft_iswhitespace(str[i]) && str[i] != '\'' && str[i] != '\"' && str[i] != '$')
 	{
 		env_var[i] = str[i];
 		i++;
@@ -159,23 +159,17 @@ static int	fix_env_var(t_mini *mini, t_token *token)
 
 int	expander_env_var(t_mini *mini)
 {
-	t_pipeline	*tmp_pipeline;
 	t_token		*tmp_token;
 
-	tmp_pipeline = mini->pipeline;
-	while (tmp_pipeline)
+	tmp_token = mini->tokens;
+	while (tmp_token)
 	{
-		tmp_token = tmp_pipeline->tokens;
-		while (tmp_token)
+		if (ft_contains_char(tmp_token->value, '$'))
 		{
-			if (ft_contains_char(tmp_token->value, '$'))
-			{
-				if (!fix_env_var(mini, tmp_token))
-					return (0);
-			}
-			tmp_token = tmp_token->next;
+			if (!fix_env_var(mini, tmp_token))
+				return (0);
 		}
-		tmp_pipeline = tmp_pipeline->next;
+		tmp_token = tmp_token->next;
 	}
 	return (1);
 }
