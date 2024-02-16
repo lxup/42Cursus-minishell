@@ -6,7 +6,7 @@
 #    By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/06 19:51:48 by lquehec           #+#    #+#              #
-#    Updated: 2024/02/16 10:18:28 by lquehec          ###   ########.fr        #
+#    Updated: 2024/02/16 11:03:58 by lquehec          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -117,6 +117,7 @@ SRCS 			+=	$(addprefix srcs/executor/, \
 						executor \
 						exec_open_file \
 						exec_multi_pipeline \
+						exec_single_pipeline \
 						exec_child))
 # EXECUTOR/HEREDOC
 SRCS 			+=	$(addprefix srcs/executor/heredoc/, $(addsuffix .c, \

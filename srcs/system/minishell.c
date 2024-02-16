@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 19:35:42 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/16 10:49:40 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/16 11:16:08 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,13 +80,14 @@ int	*start_reading(t_mini *mini)
 	return ((void *)1);
 }
 
-void	print_exec_msg(t_mini *mini)
+int	reset_mini(t_mini *mini)
 {
-	if (mini->exec_status != EXEC_SUCCESS)
-	{
-		if (mini->exec_status == EXEC_SYNTAX_ERROR)
-			printf("Syntax error\n");
-	}
+	if (mini->pipeline)
+		ft_lstclear_pipeline(&mini->pipeline);
+	if (mini->tokens)
+		ft_lstclear_token(&mini->tokens);
+	mini->last_exec_status = mini->exec_status;
+	return (1);
 }
 
 void	minishell(t_mini *mini)
@@ -103,6 +104,6 @@ void	minishell(t_mini *mini)
 			executor(mini);
 		add_to_history(mini);
 		env_update(mini);
-		mini->last_exec_status = mini->exec_status;
+		reset_mini(mini);
 	}
 }

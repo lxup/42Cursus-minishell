@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 11:52:43 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/16 09:49:16 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/16 10:59:40 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ typedef struct s_pipeline
 	int					redir_in;
 	int					redir_out;
 	int					redir_append;
-	int					pipe[2];
 	struct s_pipeline	*next;
 	struct s_pipeline	*prev;
 }	t_pipeline;

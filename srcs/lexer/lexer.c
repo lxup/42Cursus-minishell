@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 10:28:00 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/16 10:29:09 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/16 11:14:05 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ int	create_token_for_pipeline(t_mini *mini)
 		type = TOKEN_NOT_SET;
 		while (mini->prompt[i] && ft_iswhitespace(mini->prompt[i]))
 			i++;
+		if (!mini->prompt[i])
+			break ;
 		start = i;
 		if (!define_token_type(mini->prompt, &type, &i))
 			return (p_err_syntax(mini, mini->prompt[i]), 0);
@@ -111,6 +113,7 @@ int	lexer(t_mini *mini)
 		return (0);
 	if (!is_valid_syntax(mini, mini->prompt))
 		return (0);
+		print_tokens(mini->tokens);
 	ft_lstclear_token(&mini->tokens);
 	if (!create_tokens(mini))
 		return (0);

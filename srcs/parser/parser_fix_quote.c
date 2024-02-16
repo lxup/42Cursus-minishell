@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 15:17:34 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/16 06:49:33 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/16 11:19:14 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,22 +41,22 @@ static int	set_new_value(char **str, t_token *token)
 	return (1);
 }
 
-static int	get_new_len(char *str)
+static int	get_new_len(char *str, char *quote_type)
 {
 	int		i;
 	int		len;
-	char	quote_type;
+	// char	quote_type;
 
 	i = -1;
 	len = 0;
-	quote_type = 0;
+	*quote_type = 0;
 	while (str[++i])
 	{
 		if (str[i] == '\'' || str[i] == '\"')
 		{
-			quote_type = str[i];
+			*quote_type = str[i];
 			i++;
-			while (str[i] && str[i] != quote_type)
+			while (str[i] && str[i] != *quote_type)
 			{
 				len++;
 				i++;
@@ -72,13 +72,14 @@ static int	get_new_len(char *str)
 
 static int	fix_quote(t_mini *mini, t_token *token)
 {
+	char	quote_type;
 	char	*new_value;
 	char	*tmp;
 	int		new_len;
 
-	new_len = get_new_len(token->value);
+	new_len = get_new_len(token->value, &quote_type);
 	if (new_len == -1)
-		return (mini->exec_status = EXEC_SYNTAX_ERROR, 0);
+		return (p_err_syntax(mini, quote_type), 0);
 	if (new_len == (int)ft_strlen(token->value) || new_len == 0)
 		return (1);
 	new_value = ft_calloc(new_len + 1, sizeof(char));

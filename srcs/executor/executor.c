@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 10:56:17 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/16 10:41:29 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/16 11:15:44 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,22 +78,6 @@ int	create_pipeline(t_mini *mini)
 // 		return (ft_exit(*cmd->cmd, EXEC_ERR, info, NULL));
 // 	return (NULL);
 // }
-
-int	reset_mini(t_mini *mini)
-{
-	if (mini->pipeline)
-		ft_lstclear_pipeline(&mini->pipeline);
-	if (mini->tokens)
-		ft_lstclear_token(&mini->tokens);
-	mini->last_exec_status = mini->exec_status;
-	return (1);
-}
-
-void	exec_pipeline(t_mini *mini, t_pipeline *pipeline)
-{
-	redirections(mini, pipeline);
-	// MAKE AFTER
-}
 	
 int	executor(t_mini *mini)
 {
@@ -113,14 +97,10 @@ int	executor(t_mini *mini)
 	if (mini->exec_only_heredoc == -1)
 	{
 		printf("EXEC \n");
-		/*EXECUTE EACH PIPELINE */
-		while (cur_pipeline)
-		{
-			exec_pipeline(mini, cur_pipeline);
-			cur_pipeline = cur_pipeline->next;
-		}
-		/**/
+		if (ft_lstsize_pipeline(mini->pipeline) == 1)
+			exec_single_pipeline(mini);
+		else
+			exec_multi_pipeline(mini);
 	}
-	reset_mini(mini);
 	return (0);
 }
