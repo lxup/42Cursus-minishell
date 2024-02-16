@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
+/*   By: emehdaou <emehdaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 14:37:42 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/16 07:02:16 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/16 21:42:33 by emehdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,13 @@
 void	print_2d_array(char **str)
 {
 	int	i;
-	int	j;
 
 	i = -1;
 	printf("Print array:\n");
 	while (str && str[++i])
 	{
 		printf("i = %d : ", i);
-		j = -1;
-		while (str[i][++j])
-			printf("%c",str[i][j]);
-		printf("\n");
+		printf("%s\n", str[i]);
 	}
 }
 

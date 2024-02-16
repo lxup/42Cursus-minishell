@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   typedef.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
+/*   By: emehdaou <emehdaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 11:52:43 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/16 11:52:57 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/16 22:56:24 by emehdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,10 @@ typedef struct s_pipeline
 	int					redir_in;
 	int					redir_out;
 	int					redir_append;
+	int					pipefd[2];
+	int					prevpipe;
+	char *				infile;
+	char *				outfile;
 	struct s_pipeline	*next;
 	struct s_pipeline	*prev;
 }	t_pipeline;
@@ -107,6 +111,8 @@ typedef struct s_mini
 	int				last_exec_status;
 	int				exec_status;
 	int				exit_code;
+	int				pipefd[2];
+	int				prevpipe;
 }	t_mini;
 
 #endif

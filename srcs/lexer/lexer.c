@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
+/*   By: emehdaou <emehdaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 10:28:00 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/16 11:14:05 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/16 15:53:20 by emehdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ int	lexer(t_mini *mini)
 		return (0);
 	if (!is_valid_syntax(mini, mini->prompt))
 		return (0);
-		print_tokens(mini->tokens);
+	print_tokens(mini->tokens);
 	ft_lstclear_token(&mini->tokens);
 	if (!create_tokens(mini))
 		return (0);

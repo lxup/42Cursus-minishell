@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
+/*   By: emehdaou <emehdaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 10:56:17 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/16 12:18:42 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/16 15:56:00 by emehdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,11 @@ int	executor(t_mini *mini)
 	handle_heredoc(mini);
 	if (mini->exec_only_heredoc == -1)
 	{
-		if (ft_lstsize_pipeline(mini->pipeline) == 1)
-			exec_single_pipeline(mini);
-		else
-			exec_multi_pipeline(mini);
+		// if (ft_lstsize_pipeline(mini->pipeline) == 1)
+		// 	exec_single_pipeline(mini);
+		// else
+		// 	exec_multi_pipeline(mini);
+		pipex(mini);
 	}
 	return (0);
 }

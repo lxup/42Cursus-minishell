@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+         #
+#    By: emehdaou <emehdaou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/06 19:51:48 by lquehec           #+#    #+#              #
-#    Updated: 2024/02/16 12:07:47 by lquehec          ###   ########.fr        #
+#    Updated: 2024/02/16 16:02:10 by emehdaou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -123,6 +123,11 @@ SRCS 			+=	$(addprefix srcs/executor/, \
 SRCS 			+=	$(addprefix srcs/executor/heredoc/, $(addsuffix .c, \
 					heredoc \
 					heredoc_filename))
+# EXECUTOR PIPEX
+SRCS += $(addprefix srcs/executor/pipex/, $(addsuffix .c, \
+					pipex \
+					pipex_utils))
+					
 # EXECUTOR/REDIRECTION
 SRCS 			+=	$(addprefix srcs/executor/redirections/, $(addsuffix .c, \
 					redirections))

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   history.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
+/*   By: emehdaou <emehdaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 16:31:56 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/16 06:45:56 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/16 18:40:41 by emehdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	get_history_fd_write(t_mini *mini)
 	if (!ft_lstfind_env(&mini->env, "HOME"))
 		return (-1);
 	file_path = ft_strjoin(ft_lstfind_env(&mini->env, "HOME"), \
-		"/.minishell_history");
+		"/.minishell_history", 0);
 	if (!file_path)
 		return (ft_exit(mini, EXIT_FAILURE, ERR_MALLOC), -1);
 	fd = open(file_path, O_CREAT | O_RDWR | O_APPEND, 0644);
@@ -38,7 +38,7 @@ int	get_history_fd_read(t_mini *mini)
 	if (!ft_lstfind_env(&mini->env, "HOME"))
 		return (-1);
 	file_path = ft_strjoin(ft_lstfind_env(&mini->env, "HOME"), \
-		"/.minishell_history");
+		"/.minishell_history", 0);
 	if (!file_path)
 		return (ft_exit(mini, EXIT_FAILURE, ERR_MALLOC), -1);
 	fd = open(file_path, O_RDONLY, 0600);

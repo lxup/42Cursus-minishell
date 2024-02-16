@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
+/*   By: emehdaou <emehdaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 00:30:40 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/15 17:11:52 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/16 18:39:48 by emehdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	*get_path(t_mini *mini)
 		path = ft_strdup(mini->pwd + ft_strlen(home_path));
 		if (!path)
 			ft_exit(mini, EXIT_FAILURE, ERR_MALLOC);
-		tmp = ft_strjoin("~", path);
+		tmp = ft_strjoin("~", path, 0);
 		free(path);
 		if (!tmp)
 			ft_exit(mini, EXIT_FAILURE, ERR_MALLOC);
@@ -97,18 +97,18 @@ void	build_left_side(t_mini *mini, char *os, char *path)
 	if (!os || !path || !*os || !*path)
 		return ;
 	mini->shell_prompt.prompt = ft_strjoin(BG_TRANSPARENT C_GRAY "╭─" \
-		BG_WHITE C_BLACK " ", os);
-	tmp = ft_strjoin(mini->shell_prompt.prompt, " " BG_BLUE C_WHITE "  ");
+		BG_WHITE C_BLACK " ", os, 0);
+	tmp = ft_strjoin(mini->shell_prompt.prompt, " " BG_BLUE C_WHITE "  ", 0);
 	free(mini->shell_prompt.prompt);
-	mini->shell_prompt.prompt = ft_strjoin(tmp, path);
+	mini->shell_prompt.prompt = ft_strjoin(tmp, path, 0);
 	free(tmp);
 	free(path);
-	tmp = ft_strjoin(mini->shell_prompt.prompt, " " BG_BLACK C_BLUE "");
+	tmp = ft_strjoin(mini->shell_prompt.prompt, " " BG_BLACK C_BLUE "", 0);
 	free(mini->shell_prompt.prompt);
 	if (mini->last_exec_status == EXIT_SUCCESS)
-		mini->shell_prompt.prompt = ft_strjoin(tmp, PROMPTE_SUCCESS_TEMPLATE);
+		mini->shell_prompt.prompt = ft_strjoin(tmp, PROMPTE_SUCCESS_TEMPLATE, 0);
 	else
-		mini->shell_prompt.prompt = ft_strjoin(tmp, PROMPTE_ERROR_TEMPLATE);
+		mini->shell_prompt.prompt = ft_strjoin(tmp, PROMPTE_ERROR_TEMPLATE, 0);
 	free(tmp);
 	// mini->shell_prompt.prompt_size = ft_strlen("╭─     ") \
 	// 	+ ft_strlen(os) + ft_strlen(path);

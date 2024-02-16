@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
+/*   By: emehdaou <emehdaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 12:14:28 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/16 11:41:21 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/16 22:54:46 by emehdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,12 @@ void	init_mini(t_mini *mini, char **env)
 	mini->exit_code = -1;
 	
 	// print_env(mini); // -> DEBUG
-	mini->std_in = dup(STDIN_FILENO);
-	if (mini->std_in == -1)
-		ft_exit(mini, EXIT_FAILURE, ERR_DUP);
-	mini->std_out = dup(STDOUT_FILENO);
-	if (mini->std_out == -1)
-		ft_exit(mini, EXIT_FAILURE, ERR_DUP);
+	// mini->std_in = dup(STDIN_FILENO);
+	// if (mini->std_in == -1)
+	// 	ft_exit(mini, EXIT_FAILURE, ERR_DUP);
+	// mini->std_out = dup(STDOUT_FILENO);
+	// if (mini->std_out == -1)
+	// 	ft_exit(mini, EXIT_FAILURE, ERR_DUP);
 	env_init(mini, env);
 	// reset_fds(mini);
 	// signal(SIGINT, sig_handler);
