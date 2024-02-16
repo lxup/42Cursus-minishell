@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 11:52:43 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/15 22:39:07 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/16 09:49:16 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ typedef struct s_token
 typedef struct s_pipeline
 {
 	t_token				*tokens;
-	char				*file;
+	char				*heredoc;
 	pid_t				pid;
 	int					redir_in;
 	int					redir_out;
@@ -103,6 +103,7 @@ typedef struct s_mini
 	int				std_out;
 	char			*pwd;
 	struct termios	term;
+	int				exec_only_heredoc;
 	int				last_exec_status;
 	int				exec_status;
 	int				exit_code;

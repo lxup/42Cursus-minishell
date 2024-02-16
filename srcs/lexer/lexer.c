@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 10:28:00 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/15 19:28:16 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/16 10:29:09 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	create_token_for_pipeline(t_mini *mini)
 			i++;
 		start = i;
 		if (!define_token_type(mini->prompt, &type, &i))
-			return (0);
+			return (p_err_syntax(mini, mini->prompt[i]), 0);
 		ft_lstadd_back_token(&mini->tokens, \
 			ft_lstnew_token(ft_strndup(mini->prompt + start, \
 				i - start, 0), type));
@@ -108,14 +108,11 @@ int	create_tokens(t_mini *mini)
 int	lexer(t_mini *mini)
 {
 	if (ft_strwhitespace(mini->prompt))
-		return (mini->exec_status = EXEC_SUCCESS, 0);
-	if (!is_valid_syntax(mini->prompt))
-		return (mini->exec_status = EXEC_SYNTAX_ERROR, 0);
-	// ft_lstclear_pipeline(&mini->pipeline);
-	// if (!create_pipeline(mini))
-	// 	return (0);
+		return (0);
+	if (!is_valid_syntax(mini, mini->prompt))
+		return (0);
 	ft_lstclear_token(&mini->tokens);
 	if (!create_tokens(mini))
-		return (mini->exec_status = EXEC_SYNTAX_ERROR, 0);
+		return (0);
 	return (1);
 }

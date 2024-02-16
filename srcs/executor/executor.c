@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 10:56:17 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/16 05:56:43 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/16 10:41:29 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,22 @@ int	create_pipeline(t_mini *mini)
 // 		return (ft_exit(*cmd->cmd, EXEC_ERR, info, NULL));
 // 	return (NULL);
 // }
+
+int	reset_mini(t_mini *mini)
+{
+	if (mini->pipeline)
+		ft_lstclear_pipeline(&mini->pipeline);
+	if (mini->tokens)
+		ft_lstclear_token(&mini->tokens);
+	mini->last_exec_status = mini->exec_status;
+	return (1);
+}
+
+void	exec_pipeline(t_mini *mini, t_pipeline *pipeline)
+{
+	redirections(mini, pipeline);
+	// MAKE AFTER
+}
 	
 int	executor(t_mini *mini)
 {
@@ -92,43 +108,19 @@ int	executor(t_mini *mini)
 	if (mini->tokens)
 		ft_lstclear_token(&mini->tokens);
 	print_pipeline(mini);
-	// TODO: Check file ?
-	// TODO: Check if command is built-in
 	cur_pipeline = mini->pipeline;
 	handle_heredoc(mini);
-	// if (ft_lstsize_pipeline(mini->pipeline) == 1)
-	// 	exec_single_pipeline(mini);
-	// else
-	// exec_multi_pipeline(mini);
-	// while (cur_pipeline)
-	// {
-	// 	// printf("pipeline cmd: %s\n", ft_lstfind_type_pipeline(cur_pipeline, TOKEN_CMD));
-	// 	if (mini->exec_status != EXEC_SUCCESS)
-	// 		break ;
-	// 	if (pipe(cur_pipeline->pipe) == -1)
-	// 	{
-	// 		mini->exec_status = EXEC_PIPE_ERROR;
-	// 		continue ;
-	// 	}
-	// 	cur_pipeline->pid = fork();
-	// 	if (cur_pipeline->pid == 0)
-	// 	{
-	// 		free(cur_pipeline->pid);
-	// 		redirections(cur_pipeline);
-	// 		if ((i == 0 || i == data->nbcmd - 1))
-	// 			open_files(i, data);
-	// 		ft_exec(data->cmd[i], data);
-	// 		exit(127);
-	// 	}
-	// 	else
-	// 	{
-	// 		// if (i)
-	// 		// 	close(cur_pipeline->prev->pipe);
-	// 		// cur_pipeline->prev-> = data->pipefd[0];
-	// 		// close(data->pipefd[1]);
-	// 	}
-	// 	cur_pipeline = cur_pipeline->next;
-	// }
-	
+	if (mini->exec_only_heredoc == -1)
+	{
+		printf("EXEC \n");
+		/*EXECUTE EACH PIPELINE */
+		while (cur_pipeline)
+		{
+			exec_pipeline(mini, cur_pipeline);
+			cur_pipeline = cur_pipeline->next;
+		}
+		/**/
+	}
+	reset_mini(mini);
 	return (0);
 }

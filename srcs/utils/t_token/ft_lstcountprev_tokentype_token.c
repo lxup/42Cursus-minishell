@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_check_token_type.c                          :+:      :+:    :+:   */
+/*   ft_lstcountprev_tokentype_token.c                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/16 06:48:39 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/16 10:30:14 by lquehec          ###   ########.fr       */
+/*   Created: 2024/02/15 18:52:12 by lquehec           #+#    #+#             */
+/*   Updated: 2024/02/16 10:05:34 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	parser_check_token_type(t_mini *mini)
+int	ft_lstcountprev_tokentype_token(t_token *current, t_token_type type)
 {
-	t_token		*tmp_token;
+	int	count;
 
-	tmp_token = mini->tokens;
-	while (tmp_token)
+	count = 0;
+	if (!current || !current->prev)
+		return (count);
+	current = current->prev;
+	while (current)
 	{
-		if (tmp_token->type == TOKEN_NOT_SET \
-			|| tmp_token->type == TOKEN_UNKNOWN)
-			return (p_err_syntax(mini, '\0'));
-		tmp_token = tmp_token->next;
+		if (current->type == type)
+			count++;
+		current = current->prev;
 	}
-	return (1);
+	return (count);
 }

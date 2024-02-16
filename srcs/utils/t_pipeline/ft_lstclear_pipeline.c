@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 16:12:34 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/15 22:01:49 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/16 07:01:57 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ void	ft_lstclear_pipeline(t_pipeline **lst)
 			tmp = NULL;
 		if (current->tokens)
 			ft_lstclear_token(&current->tokens);
-		if (current->file)
+		if (current->heredoc)
 		{
-			unlink(current->file);
-			free(current->file);
+			unlink(current->heredoc);
+			free(current->heredoc);
 		}
 		free(current);
 		current = tmp;

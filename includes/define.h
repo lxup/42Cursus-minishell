@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 12:03:17 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/15 22:52:20 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/16 10:37:38 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # elif __linux__
 #  define OS "linux"
 # endif
+
+# define SHELL "\033[41m" " minishell " "\033[31m" "\033[49m" " "
 
 /* **************************************************************************** */
 /*                            FILE DESCRIPTORS (FD)                             */
@@ -55,6 +57,12 @@
 # define MSG_EXIT "Bye"
 
 /* **************************************************************************** */
+/*                                 PERMISSIONS                                  */
+/* **************************************************************************** */
+
+# define PERM_RW 0644
+
+/* **************************************************************************** */
 /*                                   ERRORS                                     */
 /* **************************************************************************** */
 
@@ -66,6 +74,8 @@
 # define ERR_OPEN_FILE "Error->Failed to open file\n"
 // Environment errors
 # define ERR_ENV_HOME "Error->HOME not found in env\n"
+
+# define ERR_SYNTAX "syntax error near unexpected token"
 
 /* **************************************************************************** */
 /*                                   PROMPT                                     */
@@ -92,6 +102,7 @@
 # define C_WHITE "\033[37m" /* - White color */
 # define C_GRAY "\033[90m" /* - Gray color */
 # define C_LIGHT_GRAY "\033[37m" /* - Light gray color */
+# define C_END "\033[0m"
 
 /* Backgrounds */
 # define BG_BLACK "\033[40m" /* - Black background */

@@ -6,7 +6,7 @@
 #    By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/06 19:51:48 by lquehec           #+#    #+#              #
-#    Updated: 2024/02/16 06:52:18 by lquehec          ###   ########.fr        #
+#    Updated: 2024/02/16 10:18:28 by lquehec          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -87,6 +87,9 @@ SRCS 			=	$(addprefix srcs/system/, $(addsuffix .c, \
 SRCS			+=	$(addprefix srcs/env/, $(addsuffix .c, \
 					env_init \
 					env_update))
+# ERROR
+SRCS			+=	$(addprefix srcs/error/, $(addsuffix .c, \
+					p_err_syntax))
 # HISTORY
 SRCS 			+=	$(addprefix srcs/history/, $(addsuffix .c, \
 					history \
@@ -109,14 +112,30 @@ SRCS 			+=	$(addprefix srcs/expander/, $(addsuffix .c, \
 					expander_env_var \
 					expander_heredoc))
 # EXECUTOR
-SRCS 			+=	$(addprefix srcs/executor/, $(addsuffix .c, \
-					executor \
-					exec_multi_pipeline \
-					exec_child))
+SRCS 			+=	$(addprefix srcs/executor/, \
+						$(addsuffix .c, \
+						executor \
+						exec_open_file \
+						exec_multi_pipeline \
+						exec_child))
 # EXECUTOR/HEREDOC
 SRCS 			+=	$(addprefix srcs/executor/heredoc/, $(addsuffix .c, \
 					heredoc \
-					heredoc_utils))
+					heredoc_filename))
+# EXECUTOR/REDIRECTION
+SRCS 			+=	$(addprefix srcs/executor/redirections/, $(addsuffix .c, \
+					redirections))
+
+# BUILTINS
+SRCS 			+=	$(addprefix srcs/builtins/, $(addsuffix .c, \
+					is_builtin \
+					cd/cd \
+					echo/echo \
+					env/env \
+					exit/exit \
+					export/export \
+					pwd/pwd \
+					unset/unset))
 # TOOLS
 SRCS 			+=	$(addprefix srcs/tools/, $(addsuffix .c, \
 					fd \
@@ -134,7 +153,8 @@ SRCS 			+=	$(addprefix srcs/utils/t_env/, $(addsuffix .c, \
 					ft_lstnew_env \
 					ft_lstreplace_env \
 					ft_lstupsert_env \
-					ft_lstinsert_env))
+					ft_lstinsert_env \
+					ft_lstsize_env))
 # UTILS/T_TOKEN
 SRCS 			+=	$(addprefix srcs/utils/t_token/, $(addsuffix .c, \
 					ft_lstadd_back_token \
@@ -144,7 +164,9 @@ SRCS 			+=	$(addprefix srcs/utils/t_token/, $(addsuffix .c, \
 					ft_lstcount_type_token \
 					ft_lstnext_tokentype_token \
 					ft_lstprev_cmd_token \
-					ft_lstnext_cmd_token))
+					ft_lstnext_cmd_token \
+					ft_lstprev_tokentype_token \
+					ft_lstcountprev_tokentype_token))
 # UTILS/T_PIPELINE
 SRCS 			+=	$(addprefix srcs/utils/t_pipeline/, $(addsuffix .c, \
 					ft_lstadd_back_pipeline \

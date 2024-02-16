@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 12:14:28 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/16 06:41:53 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/16 09:52:51 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	init_mini(t_mini *mini, char **env)
 	mini->std_out = -1;
 	mini->pwd = NULL;
 	// mini->history = NULL;
+	mini->exec_only_heredoc = -1;
 	mini->last_exec_status = EXEC_SUCCESS;
 	mini->exec_status = EXEC_SUCCESS;
 	mini->exit_code = -1;

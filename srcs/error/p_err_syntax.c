@@ -1,28 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_check_token_type.c                          :+:      :+:    :+:   */
+/*   p_err_syntax.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/16 06:48:39 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/16 10:30:14 by lquehec          ###   ########.fr       */
+/*   Created: 2024/02/16 10:14:31 by lquehec           #+#    #+#             */
+/*   Updated: 2024/02/16 10:35:28 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	parser_check_token_type(t_mini *mini)
+int	p_err_syntax(t_mini *mini, char c)
 {
-	t_token		*tmp_token;
-
-	tmp_token = mini->tokens;
-	while (tmp_token)
-	{
-		if (tmp_token->type == TOKEN_NOT_SET \
-			|| tmp_token->type == TOKEN_UNKNOWN)
-			return (p_err_syntax(mini, '\0'));
-		tmp_token = tmp_token->next;
-	}
-	return (1);
+	mini->exec_status = EXEC_SYNTAX_ERROR;
+	return (ft_dprintf("%s"C_RED"%s `%c'\n"C_END, SHELL, ERR_SYNTAX, c), TRUE);
 }

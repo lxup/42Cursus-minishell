@@ -1,25 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_redir.c                                       :+:      :+:    :+:   */
+/*   ft_lstsize_env.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/15 23:33:17 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/15 23:35:53 by lquehec          ###   ########.fr       */
+/*   Created: 2024/02/13 15:03:17 by lquehec           #+#    #+#             */
+/*   Updated: 2024/02/16 08:31:17 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	handle_redir(t_mini *mini, t_pipeline *cur_pipeline)
+int	ft_lstsize_env(t_env *lst)
 {
-	(void)mini;
-	(void)cur_pipeline;
-}
+	int			i;
+	t_env	*tmp;
 
-void	exec_redir_builtins(t_mini *mini, t_pipeline *cur_pipeline)
-{
-	(void)mini;
-	(void)cur_pipeline;
+	i = 0;
+	tmp = lst;
+	while (tmp)
+	{
+		i++;
+		tmp = tmp->next;
+		if (tmp == lst)
+			break ;
+	}
+	return (i);
 }

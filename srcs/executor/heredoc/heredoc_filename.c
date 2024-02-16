@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 22:06:20 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/15 22:15:11 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/16 07:39:09 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ static char	*find_name_heredoc(char *str)
 	i = ft_strlen(str) - 1;
 	if (i < 0)
 		return (NULL);
-	str[i] = 'a';
-	while (str[i] <= 'z' && access(str, F_OK) == 0)
+	str[i] = '1';
+	while (str[i] <= '9' && access(str, F_OK) == 0)
 		str[i]++;
 	return (str);
 }
@@ -30,14 +30,14 @@ char	*heredoc_filename(t_pipeline *pipeline)
 	char	*filename;
 	char	*new_filename;
 
-	if (pipeline->file)
-		return (unlink(pipeline->file),pipeline->file);
+	if (pipeline->heredoc)
+		return (unlink(pipeline->heredoc), pipeline->heredoc);
 	filename = ft_strdup(HEREDOC_TEMPLATE_PATH_PREFIX);
 	if (!filename)
 		return (NULL);
 	while (access(filename, F_OK) == 0)
 	{
-		new_filename = ft_strjoin(filename, "a");
+		new_filename = ft_strjoin(filename, "1");
 		free(filename);
 		if (!new_filename)
 			return (NULL);

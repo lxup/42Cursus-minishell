@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 20:01:53 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/15 21:59:37 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/16 07:23:19 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,14 @@ t_token	*ft_lstnext_tokentype_pipeline(t_pipeline *lst, \
 {
 	t_token	*tmp;
 
-	while (lst)
-	{
+	if (*current_pipeline == NULL)
 		*current_pipeline = lst;
-		tmp = ft_lstnext_tokentype_token(lst->tokens, type, current);
+	while (*current_pipeline)
+	{
+		tmp = ft_lstnext_tokentype_token((*current_pipeline)->tokens, type, current);
 		if (tmp)
 			return (tmp);
-		lst = lst->next;
+		*current_pipeline = (*current_pipeline)->next;
 	}
 	return (NULL);
 }

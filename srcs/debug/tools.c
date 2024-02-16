@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 14:37:42 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/15 22:31:11 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/16 07:02:16 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	print_pipeline(t_mini *mini)
 	while (tmp)
 	{
 		printf("Pipeline: %i\n", i);
-		printf("file: %s\n", tmp->file);
+		printf("heredoc: %s\n", tmp->heredoc);
 		print_tokens(tmp->tokens);
 		tmp = tmp->next;
 		i++;

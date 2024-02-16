@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 20:49:58 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/15 19:46:03 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/16 10:34:11 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,7 +144,7 @@ static int	fix_env_var(t_mini *mini, t_token *token)
 
 	new_len = get_new_len(mini, token->value);
 	if (new_len == -1)
-		return (mini->exec_status = EXEC_SYNTAX_ERROR, 0);
+		return (p_err_syntax(mini, '\0'), 0);
 	if (new_len == (int)ft_strlen(token->value) || new_len == 0)
 		return (1);
 	new_value = ft_calloc(new_len + 1, sizeof(char));

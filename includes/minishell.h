@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 17:31:59 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/16 06:59:44 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/16 10:28:24 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ void		adjust_token_type(t_token *tokens);
 ** Check if the syntax is valid
 ** ./lexer/is_valid_syntax.c
 */
-int			is_valid_syntax(char *str);
+int			is_valid_syntax(t_mini *mini, char *str);
 
 /*
 ** Check if the token is a greater '|'
@@ -196,10 +196,73 @@ char		*expander_heredoc(t_mini *mini, char *str);
 
 int			executor(t_mini *mini);
 
+// REDIRECTIONS
+void		redirections(t_mini *mini, t_pipeline *pipeline);
+
+int			exec_open_file(t_mini *mini, t_token_type type, char *filename);
+
 void		exec_multi_pipeline(t_mini *mini);
 
 int			handle_heredoc(t_mini *mini);
 char		*heredoc_filename(t_pipeline *pipeline);
+
+/* **************************************************************************** */
+/*                                   BUILTINS                                   */
+/* **************************************************************************** */
+
+/*
+** Check if the command is a builtin
+** ./builtins/is_builtins.c
+*/
+int			is_builtin(t_mini *mini, char *cmd, char **args);
+
+/*
+** Cd builtin
+** ./builtins/cd/cd.c
+*/
+void		cd_builtin(t_mini *mini, char *cmd, char **args);
+
+/*
+** Echo builtin
+** ./builtins/echo/echo.c
+*/
+void		echo_builtin(t_mini *mini, char *cmd, char **args);
+
+/*
+** Env builtin
+** ./builtins/env/env.c
+*/
+void		env_builtin(t_mini *mini, char *cmd, char **args);
+
+/*
+** Exit builtin
+** ./builtins/exit/exit.c
+*/
+void		exit_builtin(t_mini *mini, char *cmd, char **args);
+
+/*
+** Export builtin
+** ./builtins/export/export.c
+*/
+void		export_builtin(t_mini *mini, char *cmd, char **args);
+
+/*
+** Pwd builtin
+** ./builtins/pwd/pwd.c
+*/
+void		pwd_builtin(t_mini *mini, char *cmd, char **args);
+
+/*
+** Unset builtin
+** ./builtins/unset/unset.c
+*/
+void		unset_builtin(t_mini *mini, char *cmd, char **args);
+
+/* **************************************************************************** */
+/*                                   ERRORS                                     */
+/* **************************************************************************** */
+
+int			p_err_syntax(t_mini *mini, char c);
 
 /* ================================= TOOLS ================================= */
 
@@ -250,6 +313,8 @@ t_token		*ft_lstnext_tokentype_token(t_token *lst, t_token_type type, \
 			t_token *current);
 t_token		*ft_lstprev_cmd_token(t_token *current);
 t_token		*ft_lstnext_cmd_token(t_token *current);
+t_token		*ft_lstprev_tokentype_token(t_token *current, t_token_type type);
+int			ft_lstcountprev_tokentype_token(t_token *current, t_token_type type);
 
 /* t_pipeline */
 void		ft_lstadd_back_pipeline(t_pipeline **lst, t_pipeline *new);
@@ -268,6 +333,7 @@ char		*ft_lstfind_env(t_env **env, char *name);
 t_env		*ft_lstlast_env(t_env *lst);
 t_env		*ft_lstnew_env(char *name, char *value);
 int			ft_lstreplace_env(t_env **env, char *name, char *value);
+int			ft_lstsize_env(t_env *lst);
 
 /*
 ** Update env variable or add it if it doesn't exist
