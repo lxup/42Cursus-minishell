@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 22:48:44 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/16 12:15:37 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/16 14:31:13 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	exec_multi_pipeline(t_mini *mini)
 	cur_pipeline = mini->pipeline;
 	while (cur_pipeline)
 	{
+		
 		// print_2d_array(cur_pipeline->args);
 		// printf("pid: %d\n", cur_pipeline->pid);
 		// if (cur_pipeline->next)

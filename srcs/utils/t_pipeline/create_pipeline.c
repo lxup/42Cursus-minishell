@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 12:06:53 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/16 12:11:02 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/16 23:35:35 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int	create_pipeline(t_mini *mini)
 			cur_token = cur_token->next;
 		}
 		ft_lstadd_back_token(&cur_pipeline->tokens, \
-			ft_lstnew_token(ft_strdup(cur_token->value), cur_token->type));
+			ft_lstnew_token(ft_strdup(cur_token->value), cur_token->type, cur_token->index));
 		cur_pipeline->args = create_args(cur_pipeline->tokens);
 		cur_token = cur_token->next;
 	}

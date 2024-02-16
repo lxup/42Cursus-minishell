@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   typedef.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emehdaou <emehdaou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 11:52:43 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/16 22:56:24 by emehdaou         ###   ########.fr       */
+/*   Updated: 2024/02/17 00:07:15 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,9 @@ typedef enum e_token_type
 	TOKEN_DGREATER,
 	TOKEN_PIPE,
 	TOKEN_FILE,
+	TOKEN_ENV_VAR,
+	TOKEN_QUOTE,
+	TOKEN_DQUOTE,
 	TOKEN_CMD,
 	TOKEN_ARGS,
 	TOKEN_WORD,
@@ -56,6 +59,7 @@ typedef struct s_token
 {
 	char				*value;
 	t_token_type		type;
+	int					index;
 	struct s_token		*next;
 	struct s_token		*prev;
 }	t_token;

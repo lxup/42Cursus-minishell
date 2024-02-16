@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emehdaou <emehdaou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 18:11:58 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/16 18:39:06 by emehdaou         ###   ########.fr       */
+/*   Updated: 2024/02/16 10:49:26 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	get_shell_prompt(t_mini *mini)
 	mini->shell_prompt.prompt_size = 0;
 	build_left_side(mini, get_os(), get_path(mini));
 	tmp = mini->shell_prompt.prompt;
-	mini->shell_prompt.prompt = ft_strjoin(mini->shell_prompt.prompt, C_GRAY "\n╰─ " C_WHITE, 0);
+	mini->shell_prompt.prompt = ft_strjoin(mini->shell_prompt.prompt, C_GRAY "\n╰─ " C_WHITE);
 	free(tmp);
 	mini->shell_prompt.prompt_size += ft_strlen("\n╰─ ");
 }

@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer_is_2.c                                       :+:      :+:    :+:   */
+/*   is_word.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/13 22:38:23 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/15 18:44:04 by lquehec          ###   ########.fr       */
+/*   Created: 2024/02/16 17:58:24 by lquehec           #+#    #+#             */
+/*   Updated: 2024/02/16 22:26:04 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	is_word(char *prompt, int *i)
+int	is_word(char *prompt, int i)
 {
 	char	quote;
 	int		inside_quote;
 	int		cursor;
 
-	cursor = *i - 1;
+	cursor = i - 1;
 	quote = 0;
 	inside_quote = 0;
 	while (++cursor >= 0 && prompt[cursor]
@@ -36,7 +36,7 @@ int	is_word(char *prompt, int *i)
 			}
 		}
 	}
-	if (cursor == *i)
+	if (cursor == i)
 		return (0);
-	return (*i = cursor, 1);
+	return (1);
 }

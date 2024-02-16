@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emehdaou <emehdaou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 17:31:59 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/16 18:32:15 by emehdaou         ###   ########.fr       */
+/*   Updated: 2024/02/17 00:22:21 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,17 +91,19 @@ int			is_only_space(char *str);
 */
 int			lexer(t_mini *mini);
 
+int			create_tokens(t_mini *mini);
+
 /*
 ** Define the token type
 ** ./lexer/lexer_token_type.c
 */
-int			define_token_type(char *prompt, t_token_type *type, int *i);
+// int			define_token_type(char *prompt, t_token_type *type, int *i);
 
 /*
 ** Complete the token type for each token
 ** ./lexer/lexer_token_type.c
 */
-void		adjust_token_type(t_token *tokens);
+int			adjust_token_type(t_token *tokens);
 
 /*
 ** Check if the syntax is valid
@@ -111,39 +113,63 @@ int			is_valid_syntax(t_mini *mini, char *str);
 
 /*
 ** Check if the token is a greater '|'
-** ./lexer/create_tokens.c
+** ./lexer/is/is_pipe.c
 */
-int			is_pipeline(char *prompt);
+int			is_pipe(char *prompt);
 
 /*
 ** Check if the token is a greater '>'
-** ./lexer/lexer_is_1.c
+** ./lexer/is/is_greater.c
 */
 int			is_greater(char *prompt);
 
 /*
 ** Check if the token is a double greater '>>'
-** ./lexer/lexer_is_1.c
+** ./lexer/is/is_dgreater.c
 */
 int			is_dgreater(char *prompt);
 
 /*
 ** Check if the token is a lesser '<'
-** ./lexer/lexer_is_1.c
+** ./lexer/is/is_lesser.c
 */
 int			is_lesser(char *prompt);
 
 /*
 ** Check if the token is a double lesser '<<'
-** ./lexer/lexer_is_1.c
+** ./lexer/is/is_dlesser.c
 */
 int			is_dlesser(char *prompt);
+
+/*
+** Check if the token is a quote
+** ./lexer/is/is_quote.c
+*/
+int			is_quote(char *prompt, char *quote, t_token_type *type);
+
+/*
+** Check if the token is a double quote
+** ./lexer/is/is_dquote.c
+*/
+int			is_dquote(char *prompt, char *quote, t_token_type *type);
+
+/*
+** Check if the token is env variable
+** ./lexer/is/is_env_var.c
+*/
+int			is_env_var(char *prompt, int *i);
+
+/*
+** Check if the token is a word in quote
+** ./lexer/lexer_is_2.c
+*/
+int	is_word_in_quote(char *prompt, int *i, char quote);
 
 /*
 ** Check if the token is a word
 ** ./lexer/lexer_is_2.c
 */
-int			is_word(char *prompt, int *i);
+int			is_word(char *prompt, int i);
 
 /* **************************************************************************** */
 /*                                    PARSER                                    */
@@ -207,7 +233,16 @@ void		exec_multi_pipeline(t_mini *mini);
 
 int			handle_heredoc(t_mini *mini);
 char		*heredoc_filename(t_pipeline *pipeline);
-int	pipex(t_mini *mini);
+
+/* **************************************************************************** */
+/*                                    PIPEX                                     */
+/* **************************************************************************** */
+
+int			pipex(t_mini *mini);
+char		*get_path_pipex(t_mini *mini, char *cmd);
+void		ft_waitpid(t_pipeline *pipeline);
+// void		heredoc(char *delim);
+void		ft_process(t_pipeline *pipeline, t_mini *mini);
 
 /* **************************************************************************** */
 /*                                   BUILTINS                                   */
@@ -271,6 +306,8 @@ int			p_err_syntax(t_mini *mini, char c);
 
 /* Shell */
 
+char    	*ft_strjoin_bs(char const *s1, char const *s2);
+char 		**env_to_str(t_env *env);
 /*
 ** Get the OS
 ** ./tools/shell/get_os.c
@@ -310,7 +347,7 @@ void		close_dup_fds(t_mini *mini);
 void		ft_lstadd_back_token(t_token **lst, t_token *new);
 void		ft_lstclear_token(t_token **lst);
 t_token		*ft_lstlast_token(t_token *lst);
-t_token		*ft_lstnew_token(char *value, t_token_type type);
+t_token		*ft_lstnew_token(char *value, t_token_type type, int index);
 int			ft_lstcount_type_token(t_token *lst, t_token_type type);
 t_token		*ft_lstnext_tokentype_token(t_token *lst, t_token_type type, \
 			t_token *current);
@@ -318,7 +355,7 @@ t_token		*ft_lstprev_cmd_token(t_token *current);
 t_token		*ft_lstnext_cmd_token(t_token *current);
 t_token		*ft_lstprev_tokentype_token(t_token *current, t_token_type type);
 int			ft_lstcountprev_tokentype_token(t_token *current, t_token_type type);
-
+int			ft_lstremove_token(t_token **lst, t_token *token);
 /* t_pipeline */
 int			create_pipeline(t_mini *mini);
 void		ft_lstadd_back_pipeline(t_pipeline **lst, t_pipeline *new);
@@ -353,8 +390,6 @@ int			ft_lstinsert_env(t_env **env, char *name, char *value);
 
 /* free */
 void		ft_free_array(void **array);
-
-char **env_to_str(t_env *env);
 
 /* ================================= DEBUG ================================= */
 void		print_env(t_mini *mini);

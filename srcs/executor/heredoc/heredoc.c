@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 18:43:41 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/16 09:53:03 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/16 23:14:20 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ static int	heredoc(t_mini *mini, char *delim, t_pipeline *pipeline)
 		if (!str)
 			return (ft_putstr("\n"), close(fd), 1);
 		str[ft_strlen(str) - 1] = '\0';
-		str = expander_heredoc(mini, str);
 		if (!ft_strcmp(delim, str))
 			break ;
+		str = expander_heredoc(mini, str);
 		ft_putstr_fdnl(fd, str);
 		free(str);
 	}

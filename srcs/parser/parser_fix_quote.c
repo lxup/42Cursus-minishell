@@ -6,91 +6,98 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 15:17:34 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/16 11:19:14 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/16 23:15:40 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	set_new_value(char **str, t_token *token)
+static int	get_new_len(t_token *token, char *quote_type)
 {
-	int		i;
-	int		j;
-	char	quote_type;
+	t_token	*current;
+	int		inside_quote;
+	int	len;
 
-	i = 0;
-	j = 0;
-	quote_type = 0;
-	while (token->value[i])
+	len = 0;
+	current = token;
+	inside_quote = 0;
+	while (current && current->index == token->index)
 	{
-		if (token->value[i] == '\'' || token->value[i] == '\"')
+		if (current->type != TOKEN_QUOTE && current->type != TOKEN_DQUOTE)
+			len += ft_strlen(current->value);
+		else if (current->type == TOKEN_QUOTE || current->type == TOKEN_DQUOTE)
 		{
-			quote_type = token->value[i];
-			i++;
-			while (token->value[i] && token->value[i] != quote_type)
-				(*str)[j++] = token->value[i++];
-			quote_type = 0;
+			*quote_type = current->value[0];
+			if (inside_quote)
+				inside_quote = 0;
+			else
+				inside_quote = 1;
 		}
-		else
+		current = current->next;
+	}
+	if (inside_quote)
+		return (-1);
+	return (len);
+}
+
+static char	*get_new_value(t_mini *mini, t_token *token, int *is_word)
+{
+	t_token	*current;
+	int		new_len;
+	char	*new_value;
+	char	quote_type;
+	
+	new_len = get_new_len(token, &quote_type);
+	if (new_len == -1)
+		return (p_err_syntax(mini, quote_type), NULL); // TODO: handle syntax error
+	new_value = ft_calloc(new_len + 1, sizeof(char));
+	if (!new_value)
+		return (ft_exit(mini, EXIT_FAILURE, NULL), NULL); // TODO: handle malloc error FT_EXIT !!!!!
+	current = token;
+	while (current && current->index == token->index)
+	{
+		if (current->type != TOKEN_QUOTE && current->type != TOKEN_DQUOTE)
 		{
-			(*str)[j] = token->value[i];
-			j++;
+			ft_strlcat(new_value, current->value, new_len + 1);
+			if (current->type == TOKEN_WORD || current->type == TOKEN_ENV_VAR)
+				*is_word = 1;
 		}
-		i++;
+		current = current->next;
+	}
+	return (new_value);
+}
+
+static int	set_new_value(t_mini *mini, t_token *token, char *new_value, int is_word)
+{
+	t_token	*current;
+	t_token	*tmp_token;
+	char	*tmp;
+
+	tmp = token->value;
+	token->value = new_value;
+	if (is_word)
+		token->type = TOKEN_WORD;
+	free(tmp);
+	current = token->next;
+	while (current && current->index == token->index)
+	{
+		tmp_token = current->next;
+		ft_lstremove_token(&mini->tokens, current);
+		current = tmp_token;
 	}
 	return (1);
 }
 
-static int	get_new_len(char *str, char *quote_type)
-{
-	int		i;
-	int		len;
-	// char	quote_type;
-
-	i = -1;
-	len = 0;
-	*quote_type = 0;
-	while (str[++i])
-	{
-		if (str[i] == '\'' || str[i] == '\"')
-		{
-			*quote_type = str[i];
-			i++;
-			while (str[i] && str[i] != *quote_type)
-			{
-				len++;
-				i++;
-			}
-			if (str[i] == '\0')
-				return (-1);
-		}
-		else
-			len++;
-	}
-	return (len);
-}
-
 static int	fix_quote(t_mini *mini, t_token *token)
 {
-	char	quote_type;
 	char	*new_value;
-	char	*tmp;
-	int		new_len;
+	int		is_word;
 
-	new_len = get_new_len(token->value, &quote_type);
-	if (new_len == -1)
-		return (p_err_syntax(mini, quote_type), 0);
-	if (new_len == (int)ft_strlen(token->value) || new_len == 0)
-		return (1);
-	new_value = ft_calloc(new_len + 1, sizeof(char));
+	is_word = 0;
+	new_value = get_new_value(mini, token, &is_word);
 	if (!new_value)
 		return (0);
-	set_new_value(&new_value, token);
-	if (ft_strlen(new_value) != (size_t)new_len)
-		return (free(new_value), 0);
-	tmp = token->value;
-	token->value = new_value;
-	free(tmp);
+	set_new_value(mini, token, new_value, is_word);
 	return (1);
 }
 
@@ -101,12 +108,8 @@ int	parser_fix_quote(t_mini *mini)
 	tmp_token = mini->tokens;
 	while (tmp_token)
 	{
-		if (ft_contains_char(tmp_token->value, '\'') \
-			|| ft_contains_char(tmp_token->value, '\"'))
-		{
-			if (!fix_quote(mini, tmp_token))
+		if (!fix_quote(mini, tmp_token))
 				return (0);
-		}
 		tmp_token = tmp_token->next;
 	}
 	return (1);

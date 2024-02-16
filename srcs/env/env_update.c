@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 06:15:39 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/16 06:43:41 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/16 17:15:58 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,6 @@ int	env_update(t_mini *mini)
 		return (0);
 	ft_lstinsert_env(&mini->env, "_", "/usr/bin/env");
 	ft_lstinsert_env(&mini->env, "TERM", "xterm-256color");
+	ft_lstinsert_env(&mini->env, "LOUP", "ok\"");
 	return (1);
 }

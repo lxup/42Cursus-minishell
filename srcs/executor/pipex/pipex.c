@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emehdaou <emehdaou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 15:58:46 by emehdaou          #+#    #+#             */
-/*   Updated: 2024/02/16 23:02:26 by emehdaou         ###   ########.fr       */
+/*   Updated: 2024/02/17 00:15:23 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "pipex.h"
 
 void init_redir(t_pipeline *pipeline)
 {

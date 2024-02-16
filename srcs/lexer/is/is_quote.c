@@ -1,13 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   is_quote.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/09 13:39:06 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/15 10:34:55 by lquehec          ###   ########.fr       */
+/*   Created: 2024/02/16 17:59:37 by lquehec           #+#    #+#             */
+/*   Updated: 2024/02/16 22:16:09 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	is_quote(char *prompt, char *quote, t_token_type *type)
+{
+if (!prompt)
+		return (0);
+	if (prompt[0] == '\'' &&  (*quote == '\'' || !*quote))
+	{
+		if (*quote == '\'')
+			*quote = 0;
+		else
+			*quote = prompt[0];
+		*type = TOKEN_DQUOTE;
+		return (1);
+	}
+	return (0);
+}

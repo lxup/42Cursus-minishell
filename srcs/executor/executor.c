@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emehdaou <emehdaou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 10:56:17 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/16 15:56:00 by emehdaou         ###   ########.fr       */
+/*   Updated: 2024/02/17 00:21:17 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,6 @@
 	
 int	executor(t_mini *mini)
 {
-	t_pipeline	*cur_pipeline;
-	
-	(void)mini, (void)cur_pipeline;
 	printf("Executor\n");
 	if (mini->pipeline)
 		ft_lstclear_pipeline(&mini->pipeline);
@@ -68,15 +65,26 @@ int	executor(t_mini *mini)
 	if (mini->tokens)
 		ft_lstclear_token(&mini->tokens);
 	print_pipeline(mini);
-	cur_pipeline = mini->pipeline;
 	handle_heredoc(mini);
-	if (mini->exec_only_heredoc == -1)
+	printf("exec_only_heredoc: %d\n", mini->exec_only_heredoc);
+	if (mini->exec_only_heredoc <= -1)
 	{
-		// if (ft_lstsize_pipeline(mini->pipeline) == 1)
-		// 	exec_single_pipeline(mini);
-		// else
-		// 	exec_multi_pipeline(mini);
+		printf("Pipex\n");
 		pipex(mini);
 	}
-	return (0);
+	// while (cur_pipeline)
+	// {
+	// 	while ((waitpid(cur_pipeline->pid, &status, 0)) > 0)
+	// 		if (WIFEXITED(status))
+	// 			mini->exec_status = WEXITSTATUS(status);
+	// 	cur_pipeline = cur_pipeline->next;
+	// }
+	// if (mini->exec_only_heredoc == -1)
+	// {
+	// 	if (ft_lstsize_pipeline(mini->pipeline) == 1)
+	// 		exec_single_pipeline(mini);
+	// 	else
+	// 		exec_multi_pipeline(mini);
+	// }
+	return (1);
 }

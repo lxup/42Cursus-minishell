@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   heredoc_filename.c                                 :+:      :+:    :+:   */
+/*   heredoc_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emehdaou <emehdaou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 22:06:20 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/16 18:38:50 by emehdaou         ###   ########.fr       */
+/*   Updated: 2024/02/16 07:39:09 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	*heredoc_filename(t_pipeline *pipeline)
 		return (NULL);
 	while (access(filename, F_OK) == 0)
 	{
-		new_filename = ft_strjoin(filename, "1", 0);
+		new_filename = ft_strjoin(filename, "1");
 		free(filename);
 		if (!new_filename)
 			return (NULL);

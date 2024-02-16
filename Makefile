@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: emehdaou <emehdaou@student.42.fr>          +#+  +:+       +#+         #
+#    By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/06 19:51:48 by lquehec           #+#    #+#              #
-#    Updated: 2024/02/16 16:02:10 by emehdaou         ###   ########.fr        #
+#    Updated: 2024/02/17 00:09:39 by lquehec          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -98,9 +98,19 @@ SRCS 			+=	$(addprefix srcs/history/, $(addsuffix .c, \
 SRCS 			+=	$(addprefix srcs/lexer/, $(addsuffix .c, \
 					lexer \
 					syntax \
-					lexer_is_1 \
-					lexer_is_2 \
 					lexer_token_type))
+# LEXER/IS
+SRCS 			+=	$(addprefix srcs/lexer/is/, $(addsuffix .c, \
+					is_env_var \
+					is_greater \
+					is_dgreater \
+					is_lesser \
+					is_dlesser \
+					is_pipe \
+					is_word \
+					is_word_in_quote \
+					is_quote \
+					is_dquote))
 # PARSER
 SRCS 			+=	$(addprefix srcs/parser/, $(addsuffix .c, \
 					parser \
@@ -124,13 +134,12 @@ SRCS 			+=	$(addprefix srcs/executor/heredoc/, $(addsuffix .c, \
 					heredoc \
 					heredoc_filename))
 # EXECUTOR PIPEX
-SRCS += $(addprefix srcs/executor/pipex/, $(addsuffix .c, \
+SRCS 			+=	$(addprefix srcs/executor/pipex/, $(addsuffix .c, \
 					pipex \
 					pipex_utils))
-					
 # EXECUTOR/REDIRECTION
-SRCS 			+=	$(addprefix srcs/executor/redirections/, $(addsuffix .c, \
-					redirections))
+# SRCS 			+=	$(addprefix srcs/executor/redirections/, $(addsuffix .c, \
+# 					redirections))
 
 # BUILTINS
 SRCS 			+=	$(addprefix srcs/builtins/, $(addsuffix .c, \
@@ -145,7 +154,9 @@ SRCS 			+=	$(addprefix srcs/builtins/, $(addsuffix .c, \
 # TOOLS
 SRCS 			+=	$(addprefix srcs/tools/, $(addsuffix .c, \
 					fd \
-					shell))
+					shell \
+					ft_strjoin_bs \
+					env_to_str))
 # UTILS
 SRCS 			+=	$(addprefix srcs/utils/, $(addsuffix .c, \
 					utils \
@@ -172,7 +183,8 @@ SRCS 			+=	$(addprefix srcs/utils/t_token/, $(addsuffix .c, \
 					ft_lstprev_cmd_token \
 					ft_lstnext_cmd_token \
 					ft_lstprev_tokentype_token \
-					ft_lstcountprev_tokentype_token))
+					ft_lstcountprev_tokentype_token \
+					ft_lstremove_token))
 # UTILS/T_PIPELINE
 SRCS 			+=	$(addprefix srcs/utils/t_pipeline/, $(addsuffix .c, \
 					create_pipeline \

@@ -1,32 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew_pipeline.c                               :+:      :+:    :+:   */
+/*   ft_lstremove_token.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/09 13:42:05 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/16 16:39:35 by lquehec          ###   ########.fr       */
+/*   Created: 2024/02/16 19:49:03 by lquehec           #+#    #+#             */
+/*   Updated: 2024/02/16 19:52:59 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_pipeline	*ft_lstnew_pipeline(void)
+int	ft_lstremove_token(t_token **lst, t_token *token)
 {
-	t_pipeline	*new_lst;
+	t_token	*current;
+	t_token	*next;
+	t_token	*prev;
 
-	new_lst = (t_pipeline *)malloc(sizeof(t_pipeline));
-	if (!new_lst)
-		return (NULL);
-	new_lst->tokens = NULL;
-	new_lst->pid = 0;
-	// new_lst->redir_in = 0;
-	// new_lst->redir_out = 0;
-	// new_lst->redir_append = 0;
-	new_lst->heredoc = NULL;
-	new_lst->args = NULL;
-	new_lst->next = NULL;
-	new_lst->prev = NULL;
-	return (new_lst);
+	current = *lst;
+	next = NULL;
+	while (current)
+	{
+		if (current == token)
+		{
+			next = current->next;
+			prev = current->prev;
+			if (prev)
+				prev->next = next;
+			if (next)
+				next->prev = prev;
+			if (current->value)
+				free(current->value);
+			free(current);
+			return (1);
+		}
+		current = current->next;
+	}
+	return (0);
 }
