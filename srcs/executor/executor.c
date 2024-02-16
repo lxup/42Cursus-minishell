@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 10:56:17 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/16 11:15:44 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/16 12:18:42 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,30 +35,6 @@
 // 	close(data->pipefd[1]);
 // 	close(data->pipefd[0]);
 // }
-
-
-int	create_pipeline(t_mini *mini)
-{
-	t_token		*cur_token;
-	t_pipeline	*cur_pipeline;
-
-	cur_token = mini->tokens;
-	ft_lstadd_back_pipeline(&mini->pipeline, ft_lstnew_pipeline());
-	cur_pipeline = mini->pipeline;
-	while (cur_token)
-	{
-		if (cur_token->type == TOKEN_PIPE)
-		{
-			ft_lstadd_back_pipeline(&mini->pipeline, ft_lstnew_pipeline());
-			cur_pipeline = cur_pipeline->next;
-			cur_token = cur_token->next;
-		}
-		ft_lstadd_back_token(&cur_pipeline->tokens, ft_lstnew_token(ft_strdup(cur_token->value), cur_token->type));
-		cur_token = cur_token->next;
-	}
-
-	return (1);
-}
 
 
 // void	*ft_child_proc(t_mini *mini, t_pipeline *pipeline)
@@ -96,7 +72,6 @@ int	executor(t_mini *mini)
 	handle_heredoc(mini);
 	if (mini->exec_only_heredoc == -1)
 	{
-		printf("EXEC \n");
 		if (ft_lstsize_pipeline(mini->pipeline) == 1)
 			exec_single_pipeline(mini);
 		else

@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 13:42:05 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/16 07:02:02 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/16 11:53:36 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ t_pipeline	*ft_lstnew_pipeline(void)
 	new_lst->redir_out = 0;
 	new_lst->redir_append = 0;
 	new_lst->heredoc = NULL;
+	new_lst->args = NULL;
 	new_lst->next = NULL;
 	new_lst->prev = NULL;
 	return (new_lst);

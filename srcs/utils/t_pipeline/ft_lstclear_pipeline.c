@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 16:12:34 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/16 07:01:57 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/16 11:55:30 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,8 @@ void	ft_lstclear_pipeline(t_pipeline **lst)
 	t_pipeline	*current;
 	t_pipeline	*tmp;
 
-	if (!lst || !*lst)
-		return ;
 	start = *lst;
 	current = start;
-	tmp = NULL;
 	while (current)
 	{
 		if (current->next)
@@ -36,6 +33,8 @@ void	ft_lstclear_pipeline(t_pipeline **lst)
 			unlink(current->heredoc);
 			free(current->heredoc);
 		}
+		if (current->args)
+			ft_free_array((void **)current->args);
 		free(current);
 		current = tmp;
 	}

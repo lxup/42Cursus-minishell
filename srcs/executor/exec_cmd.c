@@ -1,31 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnext_tokentype_pipeline.c                    :+:      :+:    :+:   */
+/*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/14 20:01:53 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/16 12:11:09 by lquehec          ###   ########.fr       */
+/*   Created: 2024/02/16 11:51:13 by lquehec           #+#    #+#             */
+/*   Updated: 2024/02/16 12:17:51 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_token	*ft_lstnext_tokentype_pipeline(t_pipeline *lst, \
-	t_token_type type, t_token *current, t_pipeline **current_pipeline)
+void	exec_cmd(t_mini *mini, t_pipeline *pipeline)
 {
-	t_token	*tmp;
-
-	if (*current_pipeline == NULL)
-		*current_pipeline = lst;
-	while (*current_pipeline)
-	{
-		tmp = ft_lstnext_tokentype_token((*current_pipeline)->tokens, \
-			type, current);
-		if (tmp)
-			return (tmp);
-		*current_pipeline = (*current_pipeline)->next;
-	}
-	return (NULL);
+	if (is_builtin(mini,
+		ft_lstfind_type_pipeline(pipeline, TOKEN_CMD), pipeline->args))
+		return ;
+	cmd_binaries(mini, pipeline);
 }

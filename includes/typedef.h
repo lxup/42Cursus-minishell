@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 11:52:43 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/16 10:59:40 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/16 11:52:57 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ typedef struct s_pipeline
 {
 	t_token				*tokens;
 	char				*heredoc;
+	char				**args;
 	pid_t				pid;
 	int					redir_in;
 	int					redir_out;
