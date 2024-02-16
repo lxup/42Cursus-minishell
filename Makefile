@@ -6,7 +6,7 @@
 #    By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/06 19:51:48 by lquehec           #+#    #+#              #
-#    Updated: 2024/02/17 00:09:39 by lquehec          ###   ########.fr        #
+#    Updated: 2024/02/17 00:44:07 by lquehec          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -122,13 +122,8 @@ SRCS 			+=	$(addprefix srcs/expander/, $(addsuffix .c, \
 					expander_env_var \
 					expander_heredoc))
 # EXECUTOR
-SRCS 			+=	$(addprefix srcs/executor/, \
-						$(addsuffix .c, \
-						executor \
-						exec_open_file \
-						exec_multi_pipeline \
-						exec_single_pipeline \
-						exec_child))
+SRCS 			+=	$(addprefix srcs/executor/, $(addsuffix .c, \
+					executor))
 # EXECUTOR/HEREDOC
 SRCS 			+=	$(addprefix srcs/executor/heredoc/, $(addsuffix .c, \
 					heredoc \
@@ -137,10 +132,6 @@ SRCS 			+=	$(addprefix srcs/executor/heredoc/, $(addsuffix .c, \
 SRCS 			+=	$(addprefix srcs/executor/pipex/, $(addsuffix .c, \
 					pipex \
 					pipex_utils))
-# EXECUTOR/REDIRECTION
-# SRCS 			+=	$(addprefix srcs/executor/redirections/, $(addsuffix .c, \
-# 					redirections))
-
 # BUILTINS
 SRCS 			+=	$(addprefix srcs/builtins/, $(addsuffix .c, \
 					is_builtin \

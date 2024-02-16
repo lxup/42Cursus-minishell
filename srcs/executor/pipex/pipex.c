@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 15:58:46 by emehdaou          #+#    #+#             */
-/*   Updated: 2024/02/17 00:15:23 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/17 00:57:53 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,23 @@
 void init_redir(t_pipeline *pipeline)
 {
     t_token *tmp;
+
     tmp = pipeline->tokens;
     while (tmp)
     {
-        if (tmp->type == TOKEN_LESSER)
+        if (tmp->type == TOKEN_LESSER || tmp->type == TOKEN_DLESSER)
         {
             pipeline->redir_in = 1;
-            pipeline->infile = tmp->next->value;
+            if (tmp->type == TOKEN_DLESSER)
+                pipeline->infile = pipeline->heredoc;
+            else
+                pipeline->infile = tmp->next->value;
         }
         if (tmp->type == TOKEN_GREATER)
         {
             pipeline->redir_out = 1;
             pipeline->outfile = tmp->next->value;
+            pipeline->redir_append = 0;
         }
         if (tmp->type == TOKEN_DGREATER)
         {

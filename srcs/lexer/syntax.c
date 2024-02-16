@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 14:40:29 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/16 10:29:05 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/17 00:48:48 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int	is_valid_syntax(t_mini *mini, char *str)
 
 	i = -1;
 	if (count_chars(str, '(') != count_chars(str, ')'))
-		return (0);
+		return (p_err_syntax(mini, '('), 0);
 	while (str && str[++i])
 	{
 		if (str[i] == '\'')

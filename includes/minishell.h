@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 17:31:59 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/17 00:22:21 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/17 00:36:41 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -222,14 +222,6 @@ char		*expander_heredoc(t_mini *mini, char *str);
 
 int			executor(t_mini *mini);
 
-void		exec_single_pipeline(t_mini *mini);
-
-// REDIRECTIONS
-// void		redirections(t_mini *mini, t_pipeline *pipeline);
-
-int			exec_open_file(t_mini *mini, t_token_type type, char *filename);
-
-void		exec_multi_pipeline(t_mini *mini);
 
 int			handle_heredoc(t_mini *mini);
 char		*heredoc_filename(t_pipeline *pipeline);
