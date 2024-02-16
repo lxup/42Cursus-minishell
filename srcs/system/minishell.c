@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 19:35:42 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/15 18:49:39 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/16 06:44:27 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ void	minishell(t_mini *mini)
 			break ;
 		if (lexer(mini) && parser(mini))
 			executor(mini);
+		env_update(mini);
 		add_to_history(mini);
 		print_exec_msg(mini);
 		mini->last_exec_status = mini->exec_status;

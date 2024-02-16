@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 16:19:54 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/15 17:14:17 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/16 06:37:46 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,14 @@ int	ft_exit(t_mini *mini, int status, char *error)
 {
 	// if (mini->exit_status != -1)
 	// 	status = mini->exit_status;
-	if (error)
-		ft_putstr_err(error);
+	(void)error;
+	if (errno != EXIT_SUCCESS)
+	{
+		ft_dprintf("minishell: %s: %s\n", error, strerror(errno));	
+		status = errno;
+	}
+	// if (error)
+	// 	ft_putstr_err(error);
 	if (mini->env)
 		ft_lstclear_env(&mini->env);
 	if (mini->tokens)

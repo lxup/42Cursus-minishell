@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_quote_fix.c                                 :+:      :+:    :+:   */
+/*   parser_fix_quote.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 15:17:34 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/15 16:36:40 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/16 06:49:33 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ static int	fix_quote(t_mini *mini, t_token *token)
 	return (1);
 }
 
-int	parser_quote_fix(t_mini *mini)
+int	parser_fix_quote(t_mini *mini)
 {
 	t_token		*tmp_token;
 

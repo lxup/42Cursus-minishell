@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 14:40:29 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/15 18:47:48 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/16 05:56:23 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,7 @@ int	is_valid_syntax(char *str)
 	int	i;
 
 	i = -1;
-	if ((count_chars(str, '(') != count_chars(str, ')'))
-		|| str[0] == '|' || str[ft_strlen(str) - 1] == '|')
+	if (count_chars(str, '(') != count_chars(str, ')'))
 		return (0);
 		// || count_chars(str, ';') > 0 || count_chars(str, '\\') > 0)
 	while (str && str[++i])

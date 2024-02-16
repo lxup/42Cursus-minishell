@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 17:31:59 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/15 23:02:44 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/16 06:59:44 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@
 /* Global variables */
 extern pid_t	g_pid;
 
-/* ================================= SYSTEM ================================= */
+/* **************************************************************************** */
+/*                                   SYSTEM                                     */
+/* **************************************************************************** */
 
 int			test(t_mini *mini);
 
@@ -40,16 +42,47 @@ void		get_shell_prompt(t_mini *mini);
 /* Exit */
 int			ft_exit(t_mini *mini, int status, char *error);
 
-/* ================================ HISTORY ================================ */
-/* History */
+/* **************************************************************************** */
+/*                                     ENV                                      */
+/* **************************************************************************** */
+
+/*
+** Init env variable
+** ./env/env_init.c
+*/
+void	env_init(t_mini *mini, char **env);
+
+/*
+** Update env variable (at initialization and after each command)
+** ./env/env_update.c
+*/
+int		env_update(t_mini *mini);
+
+/* **************************************************************************** */
+/*                                   HISTORY                                    */
+/* **************************************************************************** */
+
+/*
+** Initialize the history
+** If ./.minishell_history doesn't exit, this step is skipped
+** ./history/history.c
+*/
 void		*init_history(t_mini *mini);
+
+/*
+** Add the command to the history
+** Try to create ./.minishell_history to save history for next session (optional)
+** ./history/history.c
+*/
 void		*add_to_history(t_mini *mini);
 
 /* History Utils */
 int			is_new_prompt(t_mini *mini);
 int			is_only_space(char *str);
 
-/* ================================= LEXER ================================= */
+/* **************************************************************************** */
+/*                                    LEXER                                     */
+/* **************************************************************************** */
 
 /*
 ** Lexer
@@ -112,7 +145,9 @@ int			is_dlesser(char *prompt);
 */
 int			is_word(char *prompt, int *i);
 
-/* ================================= PARSER ================================= */
+/* **************************************************************************** */
+/*                                    PARSER                                    */
+/* **************************************************************************** */
 
 /*
 ** Parser
@@ -122,20 +157,42 @@ int			is_word(char *prompt, int *i);
 int			parser(t_mini *mini);
 
 /*
-** Fix the quote for tokens
-** ./parser/parser_quote_fix.c
+** Check the token type
+** ./parser/parser_checker_token_type.c
 */
-int			parser_quote_fix(t_mini *mini);
+int			parser_check_token_type(t_mini *mini);
 
-/* =============================== EXPANDER ================================ */
+/*
+** Check the order of the tokens
+** ./parser/parser_check_order.c
+*/
+int			parser_check_order(t_mini *mini);
 
-int			expander(t_mini *mini);
+/*
+** Fix the quote for tokens
+** ./parser/parser_fix_quote.c
+*/
+int			parser_fix_quote(t_mini *mini);
 
+/* **************************************************************************** */
+/*                                   EXPANDER                                   */
+/* **************************************************************************** */
+
+/*
+** Expand the env variable by replacing the $ by the value
+** ./expander/expander_env_var.c
+*/
 int			expander_env_var(t_mini *mini);
 
+/*
+** Expand the env variable inside heredoc by replacing the $ by the value
+** ./expander/expander_env_var_heredoc.c
+*/
 char		*expander_heredoc(t_mini *mini, char *str);
 
-/* =============================== EXECUTOR ================================ */
+/* **************************************************************************** */
+/*                                   EXECUTOR                                   */
+/* **************************************************************************** */
 
 int			executor(t_mini *mini);
 
@@ -179,7 +236,9 @@ int			get_terminal_width(void);
 void		reset_stds(t_mini *mini);
 void		close_dup_fds(t_mini *mini);
 
-/* ================================= UTILS ================================= */
+/* **************************************************************************** */
+/*                                    UTILS                                     */
+/* **************************************************************************** */
 
 /* t_token */
 void		ft_lstadd_back_token(t_token **lst, t_token *new);
@@ -189,18 +248,18 @@ t_token		*ft_lstnew_token(char *value, t_token_type type);
 int			ft_lstcount_type_token(t_token *lst, t_token_type type);
 t_token		*ft_lstnext_tokentype_token(t_token *lst, t_token_type type, \
 			t_token *current);
+t_token		*ft_lstprev_cmd_token(t_token *current);
+t_token		*ft_lstnext_cmd_token(t_token *current);
 
 /* t_pipeline */
 void		ft_lstadd_back_pipeline(t_pipeline **lst, t_pipeline *new);
 void		ft_lstclear_pipeline(t_pipeline **lst);
 t_pipeline	*ft_lstlast_pipeline(t_pipeline *lst);
 t_pipeline	*ft_lstnew_pipeline(void);
-// t_pipeline	*ft_lstnew_pipeline(char *prompt);
 int			ft_lstsize_pipeline(t_pipeline *lst);
 int			ft_lstcount_tokentype_pipeline(t_pipeline *lst, t_token_type type);
 t_token		*ft_lstnext_tokentype_pipeline(t_pipeline *lst, \
 			t_token_type type, t_token *current, t_pipeline **pipeline);
-t_token		*ft_lstprev_cmd_token(t_token *current);
 char		*ft_lstfind_type_pipeline(t_pipeline *pipeline, t_token_type type);
 /* t_env */
 void		ft_lstadd_back_env(t_env **lst, t_env *new);
@@ -209,6 +268,18 @@ char		*ft_lstfind_env(t_env **env, char *name);
 t_env		*ft_lstlast_env(t_env *lst);
 t_env		*ft_lstnew_env(char *name, char *value);
 int			ft_lstreplace_env(t_env **env, char *name, char *value);
+
+/*
+** Update env variable or add it if it doesn't exist
+** ./utils/t_env/ft_lstupsert_env.c
+*/
+int			ft_lstupsert_env(t_env **env, char *name, char *value);
+
+/*
+** Insert env variable and if it already exists, do nothing
+** ./utils/t_env/ft_lstinsert_env.c
+*/
+int			ft_lstinsert_env(t_env **env, char *name, char *value);
 
 /* free */
 void		ft_free_array(void **array);

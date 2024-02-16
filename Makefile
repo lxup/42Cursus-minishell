@@ -6,7 +6,7 @@
 #    By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/06 19:51:48 by lquehec           #+#    #+#              #
-#    Updated: 2024/02/15 23:03:56 by lquehec          ###   ########.fr        #
+#    Updated: 2024/02/16 06:52:18 by lquehec          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -83,6 +83,10 @@ SRCS 			=	$(addprefix srcs/system/, $(addsuffix .c, \
 					init \
 					sig \
 					exit))
+# ENV
+SRCS			+=	$(addprefix srcs/env/, $(addsuffix .c, \
+					env_init \
+					env_update))
 # HISTORY
 SRCS 			+=	$(addprefix srcs/history/, $(addsuffix .c, \
 					history \
@@ -97,10 +101,11 @@ SRCS 			+=	$(addprefix srcs/lexer/, $(addsuffix .c, \
 # PARSER
 SRCS 			+=	$(addprefix srcs/parser/, $(addsuffix .c, \
 					parser \
-					parser_quote_fix))
+					parser_check_token_type \
+					parser_check_order \
+					parser_fix_quote))
 # EXPANDER
 SRCS 			+=	$(addprefix srcs/expander/, $(addsuffix .c, \
-					expander \
 					expander_env_var \
 					expander_heredoc))
 # EXECUTOR
@@ -127,7 +132,9 @@ SRCS 			+=	$(addprefix srcs/utils/t_env/, $(addsuffix .c, \
 					ft_lstfind_env \
 					ft_lstlast_env \
 					ft_lstnew_env \
-					ft_lstreplace_env))
+					ft_lstreplace_env \
+					ft_lstupsert_env \
+					ft_lstinsert_env))
 # UTILS/T_TOKEN
 SRCS 			+=	$(addprefix srcs/utils/t_token/, $(addsuffix .c, \
 					ft_lstadd_back_token \
@@ -136,7 +143,8 @@ SRCS 			+=	$(addprefix srcs/utils/t_token/, $(addsuffix .c, \
 					ft_lstnew_token \
 					ft_lstcount_type_token \
 					ft_lstnext_tokentype_token \
-					ft_lstprev_cmd_token))
+					ft_lstprev_cmd_token \
+					ft_lstnext_cmd_token))
 # UTILS/T_PIPELINE
 SRCS 			+=	$(addprefix srcs/utils/t_pipeline/, $(addsuffix .c, \
 					ft_lstadd_back_pipeline \

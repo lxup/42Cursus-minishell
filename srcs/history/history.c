@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 16:31:56 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/15 19:29:30 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/16 06:45:56 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	get_history_fd_write(t_mini *mini)
 	int		fd;
 
 	if (!ft_lstfind_env(&mini->env, "HOME"))
-		return (ft_exit(mini, EXIT_FAILURE, ERR_ENV_HOME), -1);
+		return (-1);
 	file_path = ft_strjoin(ft_lstfind_env(&mini->env, "HOME"), \
 		"/.minishell_history");
 	if (!file_path)
@@ -36,7 +36,7 @@ int	get_history_fd_read(t_mini *mini)
 	int		fd;
 
 	if (!ft_lstfind_env(&mini->env, "HOME"))
-		return (ft_exit(mini, EXIT_FAILURE, ERR_ENV_HOME), -1);
+		return (-1);
 	file_path = ft_strjoin(ft_lstfind_env(&mini->env, "HOME"), \
 		"/.minishell_history");
 	if (!file_path)

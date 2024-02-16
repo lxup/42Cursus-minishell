@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 10:56:17 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/15 22:48:31 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/16 05:56:43 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ int	executor(t_mini *mini)
 	// if (ft_lstsize_pipeline(mini->pipeline) == 1)
 	// 	exec_single_pipeline(mini);
 	// else
-	exec_multi_pipeline(mini);
+	// exec_multi_pipeline(mini);
 	// while (cur_pipeline)
 	// {
 	// 	// printf("pipeline cmd: %s\n", ft_lstfind_type_pipeline(cur_pipeline, TOKEN_CMD));
