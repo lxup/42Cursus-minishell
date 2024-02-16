@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 12:14:28 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/16 09:52:51 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/16 11:41:21 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ void	init_mini(t_mini *mini, char **env)
 	if (mini->std_out == -1)
 		ft_exit(mini, EXIT_FAILURE, ERR_DUP);
 	env_init(mini, env);
-	print_env(mini); // -> DEBUG
 	// reset_fds(mini);
 	// signal(SIGINT, sig_handler);
 	// signal(SIGQUIT, sig_handler);
