@@ -6,38 +6,40 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 10:28:00 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/16 23:22:48 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/17 11:27:44 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*token_clear_quote(char *prompt, int end, int start)
+static int	edges_cases(t_mini *mini)
 {
-	char	*token;
-	int		start_word;
-	int		end_word;
-	char	quote;
+	char	*trimmed_prompt;
+	int		ret;
 
-	start_word = start;
-	end_word = end;
-	if (prompt[start_word] == '\'' || prompt[start_word] == '\"')
-		quote = prompt[start_word];
-	while (start_word < end_word \
-		&& (prompt[start_word] == quote && prompt[end_word - 1] == quote))
+	ret = 1;
+	trimmed_prompt = ft_strtrim(mini->prompt, " \n\t\v\f\r");
+	if (!trimmed_prompt)
+		return (ft_exit(mini, EXIT_FAILURE, "malloc error"), 0);
+	if (ft_strwhitespace(trimmed_prompt))
+		ret = 0;
+	else if (!ft_strcmp(trimmed_prompt, ":"))
+		ret = 0;
+	else if (!ft_strcmp(trimmed_prompt, "!!"))
 	{
-		start_word++;
-		end_word--;
+		free(mini->prompt);
+		mini->prompt = ft_strdup(mini->prev_prompt);
+		if (!mini->prompt)
+			return (free(trimmed_prompt), \
+				ft_exit(mini, EXIT_FAILURE, "malloc error"), 0);
 	}
-	token = ft_strndup(prompt + start_word, end_word - start_word, 0);
-	if (!token)
-		return (NULL);
-	return (token);
+	free(trimmed_prompt);
+	return (ret);
 }
 
 int	lexer(t_mini *mini)
 {
-	if (ft_strwhitespace(mini->prompt) || !ft_strcmp(mini->prompt, ":"))
+	if (!edges_cases(mini))
 		return (0);
 	if (!is_valid_syntax(mini, mini->prompt))
 		return (0);

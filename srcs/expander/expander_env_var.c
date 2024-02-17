@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 20:49:58 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/16 23:10:39 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/17 11:11:26 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,16 +171,15 @@ static int	expand_env_var(t_mini *mini, t_token *token)
 		env_var = ft_itoa(mini->last_exec_status);
 	else
 		env_var = ft_lstfind_env(&mini->env, token->value + 1);
+	tmp = token->value;
 	if (env_var)
-	{
-		tmp = token->value;
 		token->value = ft_strdup(env_var);
-		free(tmp);
-		if (!token->value)
-			return (ft_exit(mini, EXIT_FAILURE, 0)); // TODO: EXIT MALLOC FAILED
-		return (1);
-	}
-	return (0);
+	else
+		token->value = ft_strdup("");
+	free(tmp);
+	if (!token->value)
+		return (ft_exit(mini, EXIT_FAILURE, 0)); // TODO: EXIT MALLOC FAILED
+	return (1);
 }
 
 int	expander_env_var(t_mini *mini)

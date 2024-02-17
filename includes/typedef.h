@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 11:52:43 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/17 00:07:15 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/17 11:38:28 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,13 +71,11 @@ typedef struct s_pipeline
 	char				*heredoc;
 	char				**args;
 	pid_t				pid;
-	int					redir_in;
-	int					redir_out;
-	int					redir_append;
 	int					pipefd[2];
 	int					prevpipe;
-	char *				infile;
-	char *				outfile;
+	char				*infile;
+	char				*outfile;
+	int					redir_append;
 	struct s_pipeline	*next;
 	struct s_pipeline	*prev;
 }	t_pipeline;

@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 15:58:46 by emehdaou          #+#    #+#             */
-/*   Updated: 2024/02/17 00:57:53 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/17 12:16:37 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void init_redir(t_pipeline *pipeline)
     {
         if (tmp->type == TOKEN_LESSER || tmp->type == TOKEN_DLESSER)
         {
-            pipeline->redir_in = 1;
             if (tmp->type == TOKEN_DLESSER)
                 pipeline->infile = pipeline->heredoc;
             else
@@ -29,13 +28,11 @@ void init_redir(t_pipeline *pipeline)
         }
         if (tmp->type == TOKEN_GREATER)
         {
-            pipeline->redir_out = 1;
             pipeline->outfile = tmp->next->value;
             pipeline->redir_append = 0;
         }
         if (tmp->type == TOKEN_DGREATER)
         {
-            pipeline->redir_out = 1;
             pipeline->outfile = tmp->next->value;
             pipeline->redir_append = 1;
         }
@@ -70,13 +67,13 @@ void	open_files(t_pipeline *pipeline)
 	int	fd;
     
     ft_dprintf("open_files\n"); 
-	if (pipeline->redir_in)
+	if (pipeline->infile)
 		fd = open(pipeline->infile, O_RDONLY);
-	if (pipeline->redir_out)
+	if (pipeline->outfile)
 		fd = open(pipeline->outfile, O_RDWR | O_CREAT | (O_TRUNC + pipeline->redir_append * 512), 0644);
 	if (fd < 0)
 	{
-        if (pipeline->redir_in)
+        if (pipeline->infile)
 		    perror(pipeline->infile);
         else
             perror(pipeline->outfile);
@@ -118,18 +115,18 @@ char **get_args(t_pipeline *pipeline)
 
 void	ft_exec(t_pipeline *pipeline, t_mini *mini)
 {
-	char	**args;
+	// char	**args;
     char *cmd;
     
-    args = get_args(pipeline);
-	if (!args)
+    // args = get_args(pipeline);
+	if (!pipeline->args)
 		return ;
-	cmd = get_path_pipex(mini, args[0]);
+	cmd = get_path_pipex(mini, pipeline->args[0]);
 	if (cmd)
-		execve(cmd, args, env_to_str(mini->env));
+		execve(cmd, pipeline->args, env_to_str(mini->env));
 	ft_dprintf("%s: command not found\n", cmd);
 	free(cmd);
-	ft_free_array((void **)args);
+	// ft_free_array((void **)pipeline->args);
 }
 
 void	ft_process(t_pipeline *pipeline, t_mini *mini)
@@ -144,7 +141,7 @@ void	ft_process(t_pipeline *pipeline, t_mini *mini)
 		{
             init_redir(curr);
 			redirections(curr, mini);
-			if (curr->redir_out || curr->redir_in)
+			if (curr->outfile || curr->infile)
 				open_files(curr);
 			ft_exec(curr, mini);
 			exit(127);

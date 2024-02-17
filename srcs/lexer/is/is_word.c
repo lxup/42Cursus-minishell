@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:58:24 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/16 22:26:04 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/17 11:30:14 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	is_word(char *prompt, int i)
 		{
 			if (inside_quote && quote == prompt[cursor])
 				inside_quote = 0;
-			else if (!inside_quote )
+			else if (!inside_quote)
 			{
 				quote = prompt[cursor];
 				inside_quote = 1;

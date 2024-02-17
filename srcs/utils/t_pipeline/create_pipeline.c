@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 12:06:53 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/16 23:35:35 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/17 12:15:18 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static char	**create_args(t_token *tokens)
 		return (NULL);
 	args = ft_calloc(i + 1, sizeof(char *));
 	if (!args)
-		return (NULL);
+		return (NULL); // TODO handle error EXIT !!!!!
 	i = 0;
 	cur_token = tokens;
 	while (cur_token)
@@ -50,12 +50,27 @@ static char	**create_args(t_token *tokens)
 		{
 			args[i] = ft_strdup(cur_token->value);
 			if (args[i] == NULL)
-				return (ft_free_array((void **)args), NULL);
+				return (ft_free_array((void **)args), NULL); // TODO handle error EXIT !!!!!
 			i++;
 		}
 		cur_token = cur_token->next;
 	}
 	return (args);
+}
+
+static int	set_pipeline_args(t_mini *mini)
+{
+	t_pipeline	*cur_pipeline;
+
+	cur_pipeline = mini->pipeline;
+	while (cur_pipeline)
+	{
+		cur_pipeline->args = create_args(cur_pipeline->tokens);
+		if (cur_pipeline->args == NULL)
+			return (0);
+		cur_pipeline = cur_pipeline->next;
+	}
+	return (1);
 }
 
 int	create_pipeline(t_mini *mini)
@@ -76,8 +91,7 @@ int	create_pipeline(t_mini *mini)
 		}
 		ft_lstadd_back_token(&cur_pipeline->tokens, \
 			ft_lstnew_token(ft_strdup(cur_token->value), cur_token->type, cur_token->index));
-		cur_pipeline->args = create_args(cur_pipeline->tokens);
 		cur_token = cur_token->next;
 	}
-	return (1);
+	return (set_pipeline_args(mini));
 }
