@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 11:02:35 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/16 23:23:06 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/17 15:07:47 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,10 +104,12 @@ int	adjust_token_type(t_token *tokens)
 				|| tmp->prev->type == TOKEN_LESSER \
 				|| tmp->prev->type == TOKEN_DLESSER))
 				tmp->type = TOKEN_FILE;
-			else if (!ft_lstprev_cmd_token(tmp) && (tmp == tokens || tmp->prev->type == TOKEN_FILE))
+			else if (!ft_lstprev_cmd_token(tmp) \
+				&& (tmp == tokens || tmp->prev->type == TOKEN_FILE))
 				tmp->type = TOKEN_CMD;
 			else if (tmp->prev && (tmp->prev->type == TOKEN_CMD \
-				|| tmp->prev->type == TOKEN_ARGS || tmp->prev->type == TOKEN_FILE))
+				|| tmp->prev->type == TOKEN_ARGS \
+				|| tmp->prev->type == TOKEN_FILE))
 				tmp->type = TOKEN_ARGS;
 			else if (tmp->prev && tmp->prev->type == TOKEN_PIPE)
 				tmp->type = TOKEN_CMD;
