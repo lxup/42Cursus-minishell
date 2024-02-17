@@ -6,28 +6,28 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 08:25:49 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/16 10:50:36 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/17 22:55:53 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	is_builtin(t_mini *mini, char *cmd, char **args)
+int	is_builtin(t_mini *mini, t_pipeline *pipeline)
 {
-	if (ft_strcmp(cmd, "echo") == 0)
-		return (echo_builtin(mini, cmd, args), 1);
-	else if (ft_strcmp(cmd, "cd") == 0)
-		return (cd_builtin(mini, cmd, args), 1);
-	else if (ft_strcmp(cmd, "pwd") == 0)
-		return (pwd_builtin(mini, cmd, args), 1);
-	else if (ft_strcmp(cmd, "export") == 0)
-		return (export_builtin(mini, cmd, args), 1);
-	else if (ft_strcmp(cmd, "unset") == 0)
-		return (unset_builtin(mini, cmd, args), 1);
-	else if (ft_strcmp(cmd, "env") == 0)
-		return (env_builtin(mini, cmd, args), 1);
-	else if (ft_strcmp(cmd, "exit") == 0)
-		return (exit_builtin(mini, cmd, args), 1);
+	if (ft_strcmp(pipeline->args[0], "echo") == 0)
+		return (echo_builtin(mini, pipeline), 1);
+	else if (ft_strcmp(pipeline->args[0], "cd") == 0)
+		return (cd_builtin(mini, pipeline), 1);
+	else if (ft_strcmp(pipeline->args[0], "pwd") == 0)
+		return (pwd_builtin(mini, pipeline), 1);
+	else if (ft_strcmp(pipeline->args[0], "export") == 0)
+		return (export_builtin(mini, pipeline), 1);
+	else if (ft_strcmp(pipeline->args[0], "unset") == 0)
+		return (unset_builtin(mini, pipeline), 1);
+	else if (ft_strcmp(pipeline->args[0], "env") == 0)
+		return (env_builtin(mini, pipeline), 1);
+	else if (ft_strcmp(pipeline->args[0], "exit") == 0)
+		return (exit_builtin(mini, pipeline), 1);
 	if (ft_lstsize_env(mini->env) == 0)
 		mini->exec_status = 127;
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 17:31:59 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/17 00:36:41 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/17 23:35:07 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -230,11 +230,30 @@ char		*heredoc_filename(t_pipeline *pipeline);
 /*                                    PIPEX                                     */
 /* **************************************************************************** */
 
+/*
+** Execute pipelines
+** ./executor/pipex/pipex.c
+*/
 int			pipex(t_mini *mini);
-char		*get_path_pipex(t_mini *mini, char *cmd);
-void		ft_waitpid(t_pipeline *pipeline);
-// void		heredoc(char *delim);
+
+/*
+** Process the pipeline
+** ./executor/pipex/pipex.c
+
+*/
 void		ft_process(t_pipeline *pipeline, t_mini *mini);
+
+/*
+** Wait for the process to finish
+** ./executor/pipex/pipex_utils.c
+*/
+void		ft_waitpid(t_mini *mini, t_pipeline *pipeline);
+
+/*
+** Get the path of the command
+** ./executor/pipex/pipex_utils.c
+*/
+char		*get_path_pipex(t_mini *mini, char *cmd);
 
 /* **************************************************************************** */
 /*                                   BUILTINS                                   */
@@ -244,49 +263,49 @@ void		ft_process(t_pipeline *pipeline, t_mini *mini);
 ** Check if the command is a builtin
 ** ./builtins/is_builtins.c
 */
-int			is_builtin(t_mini *mini, char *cmd, char **args);
+int			is_builtin(t_mini *mini, t_pipeline *pipeline);
 
 /*
 ** Cd builtin
 ** ./builtins/cd/cd.c
 */
-void		cd_builtin(t_mini *mini, char *cmd, char **args);
+void		cd_builtin(t_mini *mini, t_pipeline *pipeline);
 
 /*
 ** Echo builtin
 ** ./builtins/echo/echo.c
 */
-void		echo_builtin(t_mini *mini, char *cmd, char **args);
+void		echo_builtin(t_mini *mini, t_pipeline *pipeline);
 
 /*
 ** Env builtin
 ** ./builtins/env/env.c
 */
-void		env_builtin(t_mini *mini, char *cmd, char **args);
+void		env_builtin(t_mini *mini, t_pipeline *pipeline);
 
 /*
 ** Exit builtin
 ** ./builtins/exit/exit.c
 */
-void		exit_builtin(t_mini *mini, char *cmd, char **args);
+void		exit_builtin(t_mini *mini, t_pipeline *pipeline);
 
 /*
 ** Export builtin
 ** ./builtins/export/export.c
 */
-void		export_builtin(t_mini *mini, char *cmd, char **args);
+void		export_builtin(t_mini *mini, t_pipeline *pipeline);
 
 /*
 ** Pwd builtin
 ** ./builtins/pwd/pwd.c
 */
-void		pwd_builtin(t_mini *mini, char *cmd, char **args);
+void		pwd_builtin(t_mini *mini, t_pipeline *pipeline);
 
 /*
 ** Unset builtin
 ** ./builtins/unset/unset.c
 */
-void		unset_builtin(t_mini *mini, char *cmd, char **args);
+void		unset_builtin(t_mini *mini, t_pipeline *pipeline);
 
 /* **************************************************************************** */
 /*                                   ERRORS                                     */

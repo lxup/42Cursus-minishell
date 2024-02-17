@@ -1,9 +1,9 @@
 
 #include "minishell.h"
 
-void	env_builtin(t_mini *mini, char *cmd, char **args)
+void	env_builtin(t_mini *mini, t_pipeline *pipeline)
 {
+	ft_printf("env_builtin\n");
 	(void)mini;
-	(void)cmd;
-	(void)args;
+	(void)pipeline;
 }

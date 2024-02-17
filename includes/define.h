@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 12:03:17 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/16 11:31:37 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/18 00:49:54 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@
 #  define OS "linux"
 # endif
 
-# define SHELL "\033[31m" "➜ minishell: "
+// # define SHELL "\033[31m" "➜ minishell: "
+# define SHELL "minishell: "
 
 /* **************************************************************************** */
 /*                            FILE DESCRIPTORS (FD)                             */
@@ -49,6 +50,8 @@
 # define EXEC_FAILURE 1
 # define EXEC_CTRL_D 130
 # define EXEC_SYNTAX_ERROR 258
+# define EXEC_CMD_NOT_FOUND 127
+
 
 /* **************************************************************************** */
 /*                                     MSG                                      */
@@ -76,6 +79,7 @@
 # define ERR_ENV_HOME "Error->HOME not found in env\n"
 
 # define ERR_SYNTAX "syntax error near unexpected token"
+# define ERR_PWD_NOT_SET "Environment variable PWD not set"
 
 /* **************************************************************************** */
 /*                                   PROMPT                                     */

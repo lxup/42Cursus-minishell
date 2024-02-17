@@ -6,26 +6,11 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 15:59:21 by emehdaou          #+#    #+#             */
-/*   Updated: 2024/02/17 00:09:52 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/17 23:54:01 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-// char	*ft_findpath(char **envp)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	if (!envp)
-// 		return (NULL);
-// 	while (envp[i])
-// 	{
-// 		if (!ft_strncmp(envp[i], "PATH=", 5))
-// 			return (envp[i]);
-// 		i++;
-// 	}
-// 	return (NULL);
-// }
 
 char	*get_path_pipex(t_mini *mini, char *cmd)
 {
@@ -35,6 +20,8 @@ char	*get_path_pipex(t_mini *mini, char *cmd)
 	i = 0;
 	if (!cmd)
 		return (NULL);
+    if (!*cmd)
+        return (ft_strdup(cmd));
 	if (ft_strchr(cmd, '/'))
 		return (ft_strdup(cmd));
 	while (mini->cmd_path[i])
@@ -48,14 +35,16 @@ char	*get_path_pipex(t_mini *mini, char *cmd)
 	return (ft_strdup(cmd));
 }
 
-void	ft_waitpid(t_pipeline *pipeline)
+void	ft_waitpid(t_mini *mini, t_pipeline *pipeline)
 {
     t_pipeline	*curr_pipeline;
 
     curr_pipeline = pipeline;
     while (curr_pipeline)
     {
-        waitpid(curr_pipeline->pid, NULL, 0);
+        waitpid(curr_pipeline->pid, &curr_pipeline->exec_status, 0);
+        if (WIFEXITED(curr_pipeline->exec_status))
+				mini->exec_status = WEXITSTATUS(curr_pipeline->exec_status);
         curr_pipeline = curr_pipeline->next;
     }
 }
