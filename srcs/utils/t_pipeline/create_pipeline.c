@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 12:06:53 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/17 12:15:18 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/17 14:57:23 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,6 @@ static int	set_pipeline_args(t_mini *mini)
 	while (cur_pipeline)
 	{
 		cur_pipeline->args = create_args(cur_pipeline->tokens);
-		if (cur_pipeline->args == NULL)
-			return (0);
 		cur_pipeline = cur_pipeline->next;
 	}
 	return (1);

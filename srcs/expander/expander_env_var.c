@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 20:49:58 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/17 11:11:26 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/17 14:46:00 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,13 +159,25 @@
 // 	return (1);
 // }
 
+static t_token_type	prev_token_type(t_token *token)
+{
+	t_token	*tmp;
+
+	tmp = token;
+	while (tmp && tmp->index == token->index)
+		tmp = tmp->prev;
+	if (tmp)
+		return (tmp->type);
+	return (TOKEN_NOT_SET);
+}
+
 
 static int	expand_env_var(t_mini *mini, t_token *token)
 {
 	char	*env_var;
 	char	*tmp;
 
-	if (token->prev && token->prev->type == TOKEN_DLESSER)
+	if (prev_token_type(token) == TOKEN_DLESSER)
 		return (1);
 	if (ft_strcmp(token->value + 1, "?") == 0)
 		env_var = ft_itoa(mini->last_exec_status);
