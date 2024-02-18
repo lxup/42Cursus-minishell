@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 10:28:00 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/17 14:33:51 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/18 12:49:39 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	edges_cases(t_mini *mini)
 	ret = 1;
 	trimmed_prompt = ft_strtrim(mini->prompt, " \n\t\v\f\r");
 	if (!trimmed_prompt)
-		return (ft_exit(mini, EXIT_FAILURE, "malloc error"), 0);
+		return (ft_exit(mini), 0);
 	if (ft_strwhitespace(trimmed_prompt))
 		ret = 0;
 	else if (!ft_strcmp(trimmed_prompt, ":"))
@@ -31,7 +31,7 @@ static int	edges_cases(t_mini *mini)
 		mini->prompt = ft_strdup(mini->prev_prompt);
 		if (!mini->prompt)
 			return (free(trimmed_prompt), \
-				ft_exit(mini, EXIT_FAILURE, "malloc error"), 0);
+				ft_exit(mini), 0);
 	}
 	free(trimmed_prompt);
 	return (ret);

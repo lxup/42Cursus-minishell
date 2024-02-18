@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 17:38:04 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/14 11:35:24 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/18 12:42:16 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,5 @@ int		main(int ac, char **av, char **env)
 	minishell(&mini);
 
 	// test(&mini)
-	return (ft_exit(&mini, EXIT_SUCCESS, NULL));
+	return (ft_exit(&mini));
 }

@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 12:14:28 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/17 00:11:11 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/18 12:43:33 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,11 @@ void	init_mini(t_mini *mini, char **env)
 	mini->cmd_path = NULL;
 	mini->prompt = NULL;
 	mini->prev_prompt = NULL;
-	// mini->prompt_size = 0;
 	mini->shell_prompt.prompt = NULL;
 	mini->shell_prompt.prompt_size = 0;
 	mini->std_in = -1;
 	mini->std_out = -1;
 	mini->pwd = NULL;
-	// mini->history = NULL;
 	mini->exec_only_heredoc = -1;
 	mini->last_exec_status = EXEC_SUCCESS;
 	mini->exec_status = EXEC_SUCCESS;
@@ -41,9 +39,6 @@ void	init_mini(t_mini *mini, char **env)
 	// if (mini->std_out == -1)
 	// 	ft_exit(mini, EXIT_FAILURE, ERR_DUP);
 	env_init(mini, env);
-	// reset_fds(mini);
-	// signal(SIGINT, sig_handler);
-	// signal(SIGQUIT, sig_handler);
 }
 
 void	init(t_mini *mini, char **env)

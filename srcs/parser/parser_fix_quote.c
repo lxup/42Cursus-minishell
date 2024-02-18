@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 15:17:34 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/17 23:51:52 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/18 13:00:11 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int	get_new_len(t_token *token, char *quote_type)
 {
 	t_token	*current;
 	int		inside_quote;
-	int	len;
+	int		len;
 
 	len = 0;
 	current = token;
@@ -46,13 +46,13 @@ static char	*get_new_value(t_mini *mini, t_token *token, int *is_word)
 	int		new_len;
 	char	*new_value;
 	char	quote_type;
-	
+
 	new_len = get_new_len(token, &quote_type);
 	if (new_len == -1)
-		return (p_err_syntax(mini, quote_type), NULL); // TODO: handle syntax error
+		return (p_err_syntax(mini, quote_type), NULL);
 	new_value = ft_calloc(new_len + 1, sizeof(char));
 	if (!new_value)
-		return (ft_exit(mini, EXIT_FAILURE, NULL), NULL); // TODO: handle malloc error FT_EXIT !!!!!
+		return (ft_exit(mini), NULL);
 	current = token;
 	while (current && current->index == token->index)
 	{
@@ -67,7 +67,8 @@ static char	*get_new_value(t_mini *mini, t_token *token, int *is_word)
 	return (new_value);
 }
 
-static int	set_new_value(t_mini *mini, t_token *token, char *new_value, int is_word)
+static int	set_new_value(t_mini *mini, t_token *token, \
+	char *new_value, int is_word)
 {
 	t_token	*current;
 	t_token	*tmp_token;
@@ -109,7 +110,7 @@ int	parser_fix_quote(t_mini *mini)
 	while (tmp_token)
 	{
 		if (!fix_quote(mini, tmp_token))
-				return (0);
+			return (0);
 		tmp_token = tmp_token->next;
 	}
 	return (1);

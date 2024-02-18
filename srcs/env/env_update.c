@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 06:15:39 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/17 15:19:27 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/18 12:47:01 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	create_shell_lvl(t_mini *mini)
 	{
 		level = ft_itoa(ft_atoi(env) + 1);
 		if (!level)
-			return (0);
+			return (ft_exit(mini), 0);
 		ft_lstupsert_env(&mini->env, "SHLVL", level);
 		free(level);
 	}
@@ -37,7 +37,7 @@ static int	create_pwd(t_mini *mini)
 
 	pwd = getcwd(NULL, 0);
 	if (!pwd)
-		return (0);
+		return (ft_exit(mini), 0);
 	ft_lstupsert_env(&mini->env, "PWD", pwd);
 	free(pwd);
 	return (1);

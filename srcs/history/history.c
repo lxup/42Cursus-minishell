@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 16:31:56 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/16 06:45:56 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/18 12:49:13 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	get_history_fd_write(t_mini *mini)
 	file_path = ft_strjoin(ft_lstfind_env(&mini->env, "HOME"), \
 		"/.minishell_history");
 	if (!file_path)
-		return (ft_exit(mini, EXIT_FAILURE, ERR_MALLOC), -1);
+		return (ft_exit(mini), -1);
 	fd = open(file_path, O_CREAT | O_RDWR | O_APPEND, 0644);
 	if (fd < 0)
 		return (free(file_path), -1);
@@ -40,7 +40,7 @@ int	get_history_fd_read(t_mini *mini)
 	file_path = ft_strjoin(ft_lstfind_env(&mini->env, "HOME"), \
 		"/.minishell_history");
 	if (!file_path)
-		return (ft_exit(mini, EXIT_FAILURE, ERR_MALLOC), -1);
+		return (ft_exit(mini), -1);
 	fd = open(file_path, O_RDONLY, 0600);
 	if (fd < 0)
 		return (free(file_path), -1);
@@ -64,7 +64,7 @@ void	*init_history(t_mini *mini)
 			break ;
 		tmp = ft_strtrim(line, " \n");
 		if (!tmp)
-			return (free(line), close(fd), NULL);
+			return (free(line), close(fd), ft_exit(mini), NULL);
 		add_history(tmp);
 		free(line);
 		free(tmp);

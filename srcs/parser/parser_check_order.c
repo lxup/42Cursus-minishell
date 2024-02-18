@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 06:46:56 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/18 12:34:38 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/18 12:35:53 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,12 @@ static int	parser_checker_order_if_2(t_mini *mini, t_token *token)
 		&& (token->type == TOKEN_LESSER || token->type == TOKEN_GREATER \
 		|| token->type == TOKEN_DLESSER || token->type == TOKEN_DGREATER) \
 		&& (!token->next || (token->next && token->next->type != TOKEN_FILE)))
-		{
-			if (!token->next)
-				return (p_err_syntax(mini, '\n'), 0);
-			else if (token->next->type != TOKEN_FILE)
-				return (p_err_syntax(mini, token->value[0]), 0);
-		}
+	{
+		if (!token->next)
+			return (p_err_syntax(mini, '\n'), 0);
+		else if (token->next->type != TOKEN_FILE)
+			return (p_err_syntax(mini, token->value[0]), 0);
+	}
 	else if (token->type == TOKEN_PIPE && token->next \
 		&& token->next->type == TOKEN_PIPE)
 		return (p_err_syntax(mini, token->value[0]), 0);

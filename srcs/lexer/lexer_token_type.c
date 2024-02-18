@@ -6,13 +6,26 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 11:02:35 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/17 15:07:47 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/18 12:55:34 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	define_word_token(t_mini *mini, int *i, int arg_index)
+static int	add_token(t_mini *mini, int start, int *i, int arg_index, \
+	t_token_type type)
+{
+	char	*tmp;
+
+	tmp = ft_strndup(mini->prompt + start, *i - start, 0);
+	if (!tmp)
+		return (ft_exit(mini), 0);
+	ft_lstadd_back_token(&mini->tokens, \
+		ft_lstnew_token(tmp, type, arg_index));
+	return (1);
+}
+
+static int	define_word_token(t_mini *mini, int *i, int arg_index)
 {
 	t_token_type	type;
 	int				start;
@@ -35,14 +48,13 @@ int	define_word_token(t_mini *mini, int *i, int arg_index)
 			type = TOKEN_WORD;
 		if (type == TOKEN_NOT_SET)
 			return (0);
-		ft_lstadd_back_token(&mini->tokens, \
-			ft_lstnew_token(ft_strndup(mini->prompt + start, \
-				*i - start, 0), type, arg_index));
+		if (!add_token(mini, start, i, arg_index, type))
+			return (0);
 	}
 	return (1);	
 }
 
-int	define_token_type(t_mini *mini, int *i, int arg_index)
+static int	define_token_type(t_mini *mini, int *i, int arg_index)
 {
 	t_token_type	type;
 	int				start;
@@ -64,9 +76,8 @@ int	define_token_type(t_mini *mini, int *i, int arg_index)
 		return (define_word_token(mini, i, arg_index));
 	if (type == TOKEN_NOT_SET)
 		return (0);
-	ft_lstadd_back_token(&mini->tokens, \
-		ft_lstnew_token(ft_strndup(mini->prompt + start, \
-			*i - start, 0), type, arg_index));
+	if (!add_token(mini, start, i, arg_index, type))
+		return (0);
 	return (1);
 }
 

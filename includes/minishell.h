@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 17:31:59 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/18 11:43:20 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/18 12:46:14 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ void		minishell(t_mini *mini);
 void		get_shell_prompt(t_mini *mini);
 
 /* Exit */
-int			ft_exit(t_mini *mini, int status, char *error);
+int			ft_exit(t_mini *mini);
+// int			ft_exit(t_mini *mini, int status, char *error);
 
 /* **************************************************************************** */
 /*                                   SIGNALS                                    */
@@ -69,7 +70,7 @@ void		signals_child(t_mini *mini);
 ** Init env variable
 ** ./env/env_init.c
 */
-void	env_init(t_mini *mini, char **env);
+void	*env_init(t_mini *mini, char **env);
 
 /*
 ** Update env variable (at initialization and after each command)
