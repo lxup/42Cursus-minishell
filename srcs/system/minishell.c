@@ -6,33 +6,11 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 19:35:42 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/17 23:40:20 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/18 01:08:50 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-pid_t	g_pid;
-
-void	sig_ctrl_c(void)
-{
-	struct sigaction	ctrl_c;
-
-	ctrl_c.sa_handler = sig_handler;
-	ctrl_c.sa_flags = SA_RESTART;
-	sigemptyset(&ctrl_c.sa_mask);
-	sigaction(SIGINT, &ctrl_c, NULL);
-}
-
-void	sig_ctrl_backslash(void)
-{
-	struct sigaction	ctrl_backslash;
-
-	ctrl_backslash.sa_handler = SIG_IGN;
-	ctrl_backslash.sa_flags = SA_RESTART;
-	sigemptyset(&ctrl_backslash.sa_mask);
-	sigaction(SIGQUIT, &ctrl_backslash, NULL);
-}
 
 // void	init_term(struct termios *term_mini)
 // {
@@ -43,17 +21,6 @@ void	sig_ctrl_backslash(void)
 // 	term.c_lflag &= ~(ICANON | ECHO);
 // 	tcsetattr(1, TCSANOW, &term);
 // }
-
-void	sig_init(t_mini *mini)
-{
-	(void)mini;
-	g_pid = 0;
-	// init_term(&mini->term);
-	// signal(SIGINT, sig_handler);
-	// signal(SIGQUIT, sig_handler);
-	sig_ctrl_c();
-	sig_ctrl_backslash();
-}
 
 int	*start_reading(t_mini *mini)
 {

@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 17:31:59 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/17 23:35:07 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/18 01:00:04 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ void		init(t_mini *mini, char **env);
 void		minishell(t_mini *mini);
 
 /* Sig */
+void		sig_init(t_mini *mini);
+
 void		sig_handler(int sig);
 
 /* Prompt */
