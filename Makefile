@@ -6,7 +6,7 @@
 #    By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/06 19:51:48 by lquehec           #+#    #+#              #
-#    Updated: 2024/02/18 11:31:31 by lquehec          ###   ########.fr        #
+#    Updated: 2024/02/18 15:20:23 by lquehec          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -166,7 +166,8 @@ SRCS 			+=	$(addprefix srcs/utils/t_env/, $(addsuffix .c, \
 					ft_lstreplace_env \
 					ft_lstupsert_env \
 					ft_lstinsert_env \
-					ft_lstsize_env))
+					ft_lstsize_env \
+					ft_lstremove_env))
 # UTILS/T_TOKEN
 SRCS 			+=	$(addprefix srcs/utils/t_token/, $(addsuffix .c, \
 					ft_lstadd_back_token \

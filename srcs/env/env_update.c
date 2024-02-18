@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 06:15:39 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/18 12:47:01 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/18 15:29:31 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 static int	create_shell_lvl(t_mini *mini)
 {
-	char	*env;
+	t_env	*env;
 	char	*level;
 
 	env = ft_lstfind_env(&mini->env, "SHLVL");
 	if (env)
 	{
-		level = ft_itoa(ft_atoi(env) + 1);
+		level = ft_itoa(ft_atoi(env->value) + 1);
 		if (!level)
 			return (ft_exit(mini), 0);
 		ft_lstupsert_env(&mini->env, "SHLVL", level);

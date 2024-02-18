@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 17:31:59 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/18 12:46:14 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/18 15:24:09 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -402,11 +402,12 @@ char		*ft_lstfind_type_pipeline(t_pipeline *pipeline, t_token_type type);
 /* t_env */
 void		ft_lstadd_back_env(t_env **lst, t_env *new);
 void		ft_lstclear_env(t_env **lst);
-char		*ft_lstfind_env(t_env **env, char *name);
+t_env		*ft_lstfind_env(t_env **env, char *name);
 t_env		*ft_lstlast_env(t_env *lst);
 t_env		*ft_lstnew_env(char *name, char *value);
 int			ft_lstreplace_env(t_env **env, char *name, char *value);
 int			ft_lstsize_env(t_env *lst);
+int			ft_lstremove_env(t_env **lst, t_env *env);
 
 /*
 ** Update env variable or add it if it doesn't exist

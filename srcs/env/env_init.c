@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 06:12:43 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/18 12:50:48 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/18 15:32:37 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	*env_init(t_mini *mini, char **env)
 	int		i;
 	char	**tmp;
 	t_env	*new;
+	t_env	*cmd_path;
 
 	i = -1;
 	while (env && env[++i])
@@ -30,9 +31,12 @@ void	*env_init(t_mini *mini, char **env)
 		ft_lstadd_back_env(&mini->env, new);
 		ft_free_array((void **)tmp);
 	}
-	mini->cmd_path = ft_split(ft_lstfind_env(&mini->env, "PATH"), ":");
+	cmd_path = ft_lstfind_env(&mini->env, "PATH");
+	if (!cmd_path)
+		return (ft_exit(mini), NULL);
+	mini->cmd_path = ft_split(cmd_path->value, ":");
 	if (!mini->cmd_path)
-		ft_exit(mini);
+		return (ft_exit(mini), NULL);
 	env_update(mini);
 	return (NULL);
 }

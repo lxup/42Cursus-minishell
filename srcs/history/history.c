@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 16:31:56 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/18 12:49:13 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/18 15:26:27 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,14 @@
 
 int	get_history_fd_write(t_mini *mini)
 {
+	t_env	*home_path;
 	char	*file_path;
 	int		fd;
 
-	if (!ft_lstfind_env(&mini->env, "HOME"))
+	home_path = ft_lstfind_env(&mini->env, "HOME");
+	if (!home_path)
 		return (-1);
-	file_path = ft_strjoin(ft_lstfind_env(&mini->env, "HOME"), \
+	file_path = ft_strjoin(home_path->value, \
 		"/.minishell_history");
 	if (!file_path)
 		return (ft_exit(mini), -1);
@@ -32,12 +34,14 @@ int	get_history_fd_write(t_mini *mini)
 
 int	get_history_fd_read(t_mini *mini)
 {
+	t_env	*home_path;
 	char	*file_path;
 	int		fd;
 
-	if (!ft_lstfind_env(&mini->env, "HOME"))
+	home_path = ft_lstfind_env(&mini->env, "HOME");
+	if (!home_path)
 		return (-1);
-	file_path = ft_strjoin(ft_lstfind_env(&mini->env, "HOME"), \
+	file_path = ft_strjoin(home_path->value, \
 		"/.minishell_history");
 	if (!file_path)
 		return (ft_exit(mini), -1);

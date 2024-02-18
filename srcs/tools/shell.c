@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 00:30:40 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/18 13:08:00 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/18 15:25:04 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,15 @@ char	*get_path(t_mini *mini)
 {
 	char	*path;
 	char	*tmp;
-	char	*home_path;
+	t_env	*home_path;
 
 	if (mini->pwd)
 		free(mini->pwd);
 	mini->pwd = getcwd(NULL, 0);
 	home_path = ft_lstfind_env(&mini->env, "HOME");
-	if (mini->pwd && !ft_strncmp(mini->pwd, home_path, ft_strlen(home_path)))
+	if (mini->pwd && home_path && !ft_strncmp(mini->pwd, home_path->value, ft_strlen(home_path->value)))
 	{
-		path = ft_strdup(mini->pwd + ft_strlen(home_path));
+		path = ft_strdup(mini->pwd + ft_strlen(home_path->value));
 		if (!path)
 			ft_exit(mini);
 		tmp = ft_strjoin("~", path);

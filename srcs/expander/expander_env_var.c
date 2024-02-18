@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 20:49:58 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/18 12:58:59 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/18 15:43:00 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,35 +24,31 @@ static t_token_type	prev_token_type(t_token *token)
 	return (TOKEN_NOT_SET);
 }
 
-
 static int	expand_env_var(t_mini *mini, t_token *token)
 {
-	char	*env_var;
+	t_env	*env_var;
+	char	*env_var_value;
 	char	*tmp;
-	int		malloc;
 
-	malloc = 0;
+	env_var = NULL;
+	env_var_value = NULL;
 	if (prev_token_type(token) == TOKEN_DLESSER)
 		return (1);
 	if (ft_strcmp(token->value + 1, "?") == 0)
+		env_var_value = ft_itoa(mini->last_exec_status);
+	else
 	{
-		env_var = ft_itoa(mini->last_exec_status);
-		if (!env_var)
-			return (ft_exit(mini), 0);
-		malloc = 1;
-	}
-	else
 		env_var = ft_lstfind_env(&mini->env, token->value + 1);
-	tmp = token->value;
-	if (env_var)
-		token->value = ft_strdup(env_var);
-	else
-		token->value = ft_strdup("");
-	if (malloc)
-		free(env_var);
-	free(tmp);
-	if (!token->value)
+		if (env_var)
+			env_var_value = ft_strdup(env_var->value);
+		else
+			env_var_value = ft_strdup("");
+	}
+	if (!env_var_value)
 		return (ft_exit(mini), 0);
+	tmp = token->value;
+	token->value = env_var_value;
+	free(tmp);
 	return (1);
 }
 

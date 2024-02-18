@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 15:58:46 by emehdaou          #+#    #+#             */
-/*   Updated: 2024/02/18 11:42:20 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/18 16:04:59 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,9 @@ void	ft_exec(t_pipeline *pipeline, t_mini *mini)
 	char	*cmd;
 
 	if (is_builtin(mini, pipeline))
+	{
 		exit(mini->exec_status);
+	}
 	cmd = get_path_pipex(mini, pipeline->args[0]);
 	if (cmd)
 		execve(cmd, pipeline->args, env_to_str(mini->env));
@@ -77,7 +79,8 @@ void	ft_process(t_pipeline *pipeline, t_mini *mini)
 	curr = pipeline;
 	while (curr)
 	{
-		pipe(mini->pipefd);
+		if (pipe(mini->pipefd) == -1)
+			exit(EXIT_FAILURE);
 		curr->pid = fork();
 		if (curr->pid == 0)
 		{
