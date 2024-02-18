@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 17:31:59 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/18 15:24:09 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/18 17:48:26 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -421,7 +421,8 @@ int			ft_lstupsert_env(t_env **env, char *name, char *value);
 */
 int			ft_lstinsert_env(t_env **env, char *name, char *value);
 
-/* free */
+/* utils */
+int			ft_2d_strlen(char **array);
 void		ft_free_array(void **array);
 
 /* ================================= DEBUG ================================= */

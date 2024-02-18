@@ -37,7 +37,6 @@ int	unset_env(t_mini *mini, t_pipeline *pipeline)
 		}
 		i++;
 	}
-	print_env(mini);
 	return (1);
 }
 

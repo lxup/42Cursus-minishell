@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 23:05:50 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/18 15:32:23 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/18 17:03:38 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 void	pwd_builtin(t_mini *mini, t_pipeline *pipeline)
 {
-	t_env	*pwd;
+	char	*pwd;
 
 	ft_printf("pwd_builtin\n");
 	(void)pipeline;
-	pwd = ft_lstfind_env(&mini->env, "PWD");
+	pwd = getcwd(NULL, 0);
 	if (pwd)
 	{
-		ft_printf("%s\n", pwd->value);
+		ft_printf("%s\n", pwd);
 		mini->exec_status = 0;
 	}
 	else
