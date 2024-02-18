@@ -6,7 +6,7 @@
 #    By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/06 19:51:48 by lquehec           #+#    #+#              #
-#    Updated: 2024/02/18 00:59:27 by lquehec          ###   ########.fr        #
+#    Updated: 2024/02/18 11:31:31 by lquehec          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -81,8 +81,12 @@ SRCS 			=	$(addprefix srcs/system/, $(addsuffix .c, \
 					minishell \
 					prompt \
 					init \
-					signals \
 					exit))
+# SIGNALS
+SRCS			+=	$(addprefix srcs/signals/, $(addsuffix .c, \
+					signals \
+					signals_parent \
+					signals_child))
 # ENV
 SRCS			+=	$(addprefix srcs/env/, $(addsuffix .c, \
 					env_init \

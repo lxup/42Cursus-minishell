@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 19:35:42 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/18 01:08:50 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/18 11:27:17 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	minishell(t_mini *mini)
 
 	while (1)
 	{
-		sig_init(mini);
+		signals(mini);
 		get_shell_prompt(mini);
 		if (!start_reading(mini))
 			break ;

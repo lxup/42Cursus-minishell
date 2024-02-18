@@ -1,25 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signals.c                                          :+:      :+:    :+:   */
+/*   signals_parent.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/09 12:18:31 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/18 01:23:34 by lquehec          ###   ########.fr       */
+/*   Created: 2024/02/18 11:28:00 by lquehec           #+#    #+#             */
+/*   Updated: 2024/02/18 11:43:59 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-pid_t	g_pid;
-
-void	sig_handler(int sig)
+static void	sig_handler(int sig)
 {
 	if (sig == SIGINT)
 	{
-		g_pid = 1;
-		write(1, "\n", 2);
+		write(1, "\n", 1);
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
@@ -29,10 +26,10 @@ void	sig_handler(int sig)
 		rl_on_new_line();
 		rl_redisplay();
 		ft_putstr_nl(MSG_EXIT);
-	}	
+	}
 }
 
-void	sig_ctrl_c(void)
+static void	signal_ctrl_c_parent(void)
 {
 	struct sigaction	ctrl_c;
 
@@ -42,7 +39,7 @@ void	sig_ctrl_c(void)
 	sigaction(SIGINT, &ctrl_c, NULL);
 }
 
-void	sig_ctrl_backslash(void)
+static void	signal_ctrl_backslash(void)
 {
 	struct sigaction	ctrl_backslash;
 
@@ -52,22 +49,8 @@ void	sig_ctrl_backslash(void)
 	sigaction(SIGQUIT, &ctrl_backslash, NULL);
 }
 
-void	terms(t_mini *mini)
+void	signals_parent(void)
 {
-	struct termios	term;
-
-	tcgetattr(1, &mini->term);
-	tcgetattr(1, &term);
-	term.c_lflag &= ~ECHOCTL;
-	tcsetattr(1, TCSAFLUSH, &term);
+	signal_ctrl_c_parent();
+	signal_ctrl_backslash();
 }
-
-void	sig_init(t_mini *mini)
-{
-	(void)mini;
-	g_pid = 0;
-	terms(mini);
-	sig_ctrl_c();
-	sig_ctrl_backslash();
-}
-

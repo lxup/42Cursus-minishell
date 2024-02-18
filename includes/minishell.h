@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 17:31:59 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/18 01:00:04 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/18 11:43:20 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,33 @@ void		init(t_mini *mini, char **env);
 /* Minishell */
 void		minishell(t_mini *mini);
 
-/* Sig */
-void		sig_init(t_mini *mini);
-
-void		sig_handler(int sig);
-
 /* Prompt */
 void		get_shell_prompt(t_mini *mini);
 
 /* Exit */
 int			ft_exit(t_mini *mini, int status, char *error);
+
+/* **************************************************************************** */
+/*                                   SIGNALS                                    */
+/* **************************************************************************** */
+
+/*
+** Signals
+** ./signals/signals.c
+*/
+void		signals(t_mini *mini);
+
+/*
+** Signals for the parent
+** ./signals/signals_parent.c
+*/
+void		signals_parent(void);
+
+/*
+** Signals for the child
+** ./signals/signals_child.c
+*/
+void		signals_child(t_mini *mini);
 
 /* **************************************************************************** */
 /*                                     ENV                                      */
@@ -238,24 +255,25 @@ char		*heredoc_filename(t_pipeline *pipeline);
 */
 int			pipex(t_mini *mini);
 
-/*
-** Process the pipeline
-** ./executor/pipex/pipex.c
-
-*/
-void		ft_process(t_pipeline *pipeline, t_mini *mini);
+/* PIPEX UTILS */
 
 /*
-** Wait for the process to finish
+** Open files
 ** ./executor/pipex/pipex_utils.c
 */
-void		ft_waitpid(t_mini *mini, t_pipeline *pipeline);
+void		*open_files(t_pipeline *pipeline);
 
 /*
 ** Get the path of the command
 ** ./executor/pipex/pipex_utils.c
 */
 char		*get_path_pipex(t_mini *mini, char *cmd);
+
+/*
+** Wait for the child process
+** ./executor/pipex/pipex_utils.c
+*/
+void		ft_waitpid(t_mini *mini, t_pipeline *pipeline);
 
 /* **************************************************************************** */
 /*                                   BUILTINS                                   */
