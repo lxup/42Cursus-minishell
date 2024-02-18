@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 00:30:40 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/15 17:11:52 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/18 13:08:00 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,18 +36,18 @@ char	*get_path(t_mini *mini)
 	{
 		path = ft_strdup(mini->pwd + ft_strlen(home_path));
 		if (!path)
-			ft_exit(mini, EXIT_FAILURE, ERR_MALLOC);
+			ft_exit(mini);
 		tmp = ft_strjoin("~", path);
 		free(path);
 		if (!tmp)
-			ft_exit(mini, EXIT_FAILURE, ERR_MALLOC);
+			ft_exit(mini);
 		return (tmp);
 	}
 	else
 	{
 		path = ft_strdup(mini->pwd);
 		if (!path)
-			ft_exit(mini, EXIT_FAILURE, ERR_MALLOC);
+			ft_exit(mini);
 		return (path);
 	}
 }
