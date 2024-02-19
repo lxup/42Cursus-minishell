@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 06:46:56 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/18 12:35:53 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/19 22:32:05 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ static int	parser_checker_order_if_3(t_mini *mini, t_token *token)
 	if (ft_lstprev_tokentype_token(token, TOKEN_DLESSER) \
 		&& mini->exec_only_heredoc == -1 \
 		&& (token->type == TOKEN_LESSER || token->type == TOKEN_GREATER \
-		|| token->type == TOKEN_DLESSER || token->type == TOKEN_DGREATER \
-		|| token->type == TOKEN_PIPE)
+		|| token->type == TOKEN_DLESSER || token->type == TOKEN_DGREATER)
 		&& (!token->next || (token->next && token->next->type != TOKEN_FILE)))
 	{
+		ft_dprintf("ok\n");
 		mini->exec_only_heredoc = ft_lstcountprev_tokentype_token(token, \
 			TOKEN_DLESSER);
 		if (!token->next)
@@ -43,8 +43,8 @@ static int	parser_checker_order_if_2(t_mini *mini, t_token *token)
 		else if (token->next->type != TOKEN_FILE)
 			return (p_err_syntax(mini, token->value[0]), 0);
 	}
-	else if (token->type == TOKEN_PIPE && token->next \
-		&& token->next->type == TOKEN_PIPE)
+	else if (token->type == TOKEN_PIPE && (!token->next || (token->next \
+		&& token->next->type == TOKEN_PIPE)))
 		return (p_err_syntax(mini, token->value[0]), 0);
 	return (parser_checker_order_if_3(mini, token));
 }

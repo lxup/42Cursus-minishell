@@ -6,46 +6,11 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 19:35:42 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/19 19:16:03 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/19 22:15:21 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-// void	init_term(struct termios *term_mini)
-// {
-// 	struct termios	term;
-
-// 	tcgetattr(1, &term_mini);
-// 	tcgetattr(1, &term);
-// 	term.c_lflag &= ~(ICANON | ECHO);
-// 	tcsetattr(1, TCSANOW, &term);
-// }
-
-int	*start_reading(t_mini *mini)
-{
-	(void)mini;
-	// char	*line;
-
-	if (isatty(fileno(stdin)))
-		mini->prompt = readline(mini->shell_prompt.prompt);
-	// else
-	// {
-	// 	printf("test\n");
-	// 	line = get_next_line(fileno(stdin));
-	// 	if (!line)
-	// 		return (NULL);
-	// 	mini->prompt = ft_strtrim(line, "\n");
-	// 	free(line);
-	// }
-	if (mini->prompt == NULL) // ctrl + D
-	{
-		printf("salam\n");
-		mini->exit_code = EXIT_CTRL_D;
-		return (NULL);
-	}
-	return ((void *)1);
-}
 
 int	reset_mini(t_mini *mini)
 {
@@ -68,14 +33,31 @@ int	reset_mini(t_mini *mini)
 	return (1);
 }
 
+int	is_empty(char *str)
+{
+	while (str && *str)
+	{
+		if (!ft_iswhitespace(*str))
+			return (0);
+		str++;
+	}
+	return (1);
+}
+
 void	minishell(t_mini *mini)
 {
 	while (1)
 	{
 		signals(mini);
 		get_shell_prompt(mini);
-		if (!start_reading(mini))
+		mini->prompt = readline(mini->shell_prompt.prompt);
+		if (!mini->prompt)
+		{
+			printf("salam\n");
 			break ;
+		}
+		if (!*mini->prompt || is_empty(mini->prompt))
+			continue ;
 		add_to_history(mini);
 		if (lexer(mini) && parser(mini))
 			executor(mini);

@@ -6,68 +6,30 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 15:58:46 by emehdaou          #+#    #+#             */
-/*   Updated: 2024/02/19 19:15:39 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/19 22:14:27 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	redirections(t_pipeline *pipeline, t_mini *mini)
-{
-	if (pipeline->prev)
-	{
-		dup2(mini->prevpipe, STDIN_FILENO);
-		close(mini->prevpipe);
-	}
-	if (pipeline->next)
-		dup2(mini->pipefd[1], STDOUT_FILENO);
-	close(mini->pipefd[1]);
-	close(mini->pipefd[0]);
-	if (pipeline->outfile || pipeline->infile)
-		open_files(pipeline);
-}
-
-void	init_redir(t_mini *mini, t_pipeline *pipeline)
-{
-	t_token	*tmp;
-
-	tmp = pipeline->tokens;
-	while (tmp)
-	{
-		if (tmp->type == TOKEN_LESSER || tmp->type == TOKEN_DLESSER)
-		{
-			if (tmp->type == TOKEN_DLESSER)
-				pipeline->infile = pipeline->heredoc;
-			else
-				pipeline->infile = tmp->next->value;
-		}
-		if (tmp->type == TOKEN_GREATER)
-		{
-			pipeline->outfile = tmp->next->value;
-			pipeline->redir_append = 0;
-		}
-		if (tmp->type == TOKEN_DGREATER)
-		{
-			pipeline->outfile = tmp->next->value;
-			pipeline->redir_append = 1;
-		}
-		tmp = tmp->next;
-	}
-	redirections(pipeline, mini);
-}
-
 void	ft_exec(t_pipeline *pipeline, t_mini *mini)
 {
 	char	*cmd;
 
+	if (!pipeline->args)
+	{
+		ft_free_mini(mini);
+		exit(0);
+	}
 	if (is_builtin(mini, pipeline))
+	{
+		ft_free_mini(mini);
 		exit(mini->exec_status);
+	}
 	cmd = get_path_pipex(mini, pipeline->args[0]);
 	if (cmd)
-	{
 		execve(cmd, pipeline->args, mini->env_array);
-		free(cmd);
-	}
+	free(cmd);
 	ft_dprintf("%s%s: command not found\n", SHELL, pipeline->args[0]);
 	ft_free_mini(mini);
 	exit(127);

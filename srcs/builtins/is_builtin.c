@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 08:25:49 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/19 17:55:36 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/19 21:36:29 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int	is_builtin(t_mini *mini, t_pipeline *pipeline)
 {
+	if (!pipeline->args)
+		return (0);
 	if (ft_strcmp(pipeline->args[0], "echo") == 0)
 		return (echo_builtin(mini, pipeline), 1);
 	else if (ft_strcmp(pipeline->args[0], "cd") == 0)

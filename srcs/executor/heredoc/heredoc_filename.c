@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   heredoc_utils.c                                    :+:      :+:    :+:   */
+/*   heredoc_filename.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 22:06:20 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/16 07:39:09 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/19 20:50:34 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,14 @@ char	*heredoc_filename(t_pipeline *pipeline)
 	{
 		new_filename = ft_strjoin(filename, "1");
 		free(filename);
+		filename = NULL;
 		if (!new_filename)
 			return (NULL);
 		filename = find_name_heredoc(new_filename);
 		if (!filename)
 		{
 			free(new_filename);
+			new_filename = NULL;
 			return (NULL);
 		}
 	}

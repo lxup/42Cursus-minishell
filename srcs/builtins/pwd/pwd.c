@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 23:05:50 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/18 17:03:38 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/19 20:49:38 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void	pwd_builtin(t_mini *mini, t_pipeline *pipeline)
 	{
 		ft_printf("%s\n", pwd);
 		mini->exec_status = 0;
+		free(pwd);
+		pwd = NULL;
 	}
 	else
 	{

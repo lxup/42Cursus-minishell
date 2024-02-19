@@ -6,17 +6,17 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 00:09:01 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/19 19:13:29 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/19 22:22:35 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void *create_env_var(t_env *env)
+static void	*create_env_var(t_env *env)
 {
-	int     var_len;
-	int     value_len;
-	char    *env_var;
+	int		var_len;
+	int		value_len;
+	char	*env_var;
 
 	if (!env)
 		return (NULL);
@@ -31,17 +31,18 @@ static void *create_env_var(t_env *env)
 	return (env_var);
 }
 
-char **env_to_str(t_env *env)
+char	**env_to_str(t_env *env)
 {
-	char **str;
-	int i;
-	int env_size;
+	char	**str;
+	int		i;
+	int		env_size;
+
 	i = 0;
 	env_size = ft_lstsize_env(env);
 	str = malloc(sizeof(char *) * (env_size + 1));
 	if (!str)
 		return (NULL);
-	while (i < env_size )
+	while (i < env_size)
 	{
 		str[i] = create_env_var(env);
 		if (!str[i])

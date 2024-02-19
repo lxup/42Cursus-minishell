@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 13:51:22 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/19 19:16:45 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/19 22:10:02 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	ft_free_mini_2(t_mini *mini)
 	if (mini->shell_prompt.prompt)
 	{
 		free(mini->shell_prompt.prompt);
-		mini->shell_prompt.prompt = NULL;	
+		mini->shell_prompt.prompt = NULL;
 	}
 	if (mini->prompt)
 	{
@@ -31,7 +31,7 @@ static void	ft_free_mini_2(t_mini *mini)
 	}
 	if (mini->prev_prompt)
 	{
-		free(mini->prev_prompt);	
+		free(mini->prev_prompt);
 		mini->prev_prompt = NULL;
 	}
 }

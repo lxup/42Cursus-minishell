@@ -1,21 +1,32 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   unset.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/02/19 21:57:38 by lquehec           #+#    #+#             */
+/*   Updated: 2024/02/19 21:57:58 by lquehec          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
 
-static int is_valid_identifier(const char *str)
+static int	is_valid_identifier(const char *str)
 {
 	int	i;
 
 	i = 0;
-    if (!ft_isalpha(str[i]) && str[i] != '_')
-        return (0);
-    i++;
+	if (!ft_isalpha(str[i]) && str[i] != '_')
+		return (0);
+	i++;
 	while (str[i] != '\0')
 	{
 		if (!ft_isalnum(str[i]) && str[i] != '_')
 			return (0);
 		i++;
 	}
-    return (1);
+	return (1);
 }
 
 int	unset_env(t_mini *mini, t_pipeline *pipeline)
@@ -32,7 +43,8 @@ int	unset_env(t_mini *mini, t_pipeline *pipeline)
 			ft_lstremove_env(&mini->env, env_var);
 		else if (!is_valid_identifier(pipeline->args[i]))
 		{
-			ft_dprintf("%sunset: %s: not a valid identifier\n", SHELL, pipeline->args[i]);
+			ft_dprintf("%sunset: %s: not a valid identifier\n", \
+				SHELL, pipeline->args[i]);
 			mini->exec_status = 1;
 		}
 		i++;
@@ -52,5 +64,4 @@ void	unset_builtin(t_mini *mini, t_pipeline *pipeline)
 	}
 	else
 		unset_env(mini, pipeline);
-
 }

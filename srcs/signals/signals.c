@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 12:18:31 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/19 16:56:39 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/19 22:23:11 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@ static void	sig_handler(int sig)
 		write(1, "\n", 1);
 		rl_on_new_line();
 		rl_replace_line("", 0);
-		// rl_redisplay();
-		rl_forced_update_display();
+		rl_redisplay();
 	}
 	else if (sig == SIGQUIT)
 	{
@@ -65,7 +64,6 @@ static void	signal_terms(t_mini *mini)
 
 void	signals(t_mini *mini)
 {
-	(void)mini;
 	g_pid = 0;
 	signal_terms(mini);
 	signal_ctrl_c();

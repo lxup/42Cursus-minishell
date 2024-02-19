@@ -6,7 +6,7 @@
 #    By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/06 19:51:48 by lquehec           #+#    #+#              #
-#    Updated: 2024/02/18 15:20:23 by lquehec          ###   ########.fr        #
+#    Updated: 2024/02/19 22:10:43 by lquehec          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -132,10 +132,11 @@ SRCS 			+=	$(addprefix srcs/executor/, $(addsuffix .c, \
 SRCS 			+=	$(addprefix srcs/executor/heredoc/, $(addsuffix .c, \
 					heredoc \
 					heredoc_filename))
-# EXECUTOR PIPEX
+# EXECUTOR/PIPEX
 SRCS 			+=	$(addprefix srcs/executor/pipex/, $(addsuffix .c, \
 					pipex \
-					pipex_utils))
+					pipex_utils \
+					pipex_redirections))
 # BUILTINS
 SRCS 			+=	$(addprefix srcs/builtins/, $(addsuffix .c, \
 					is_builtin \
@@ -148,7 +149,6 @@ SRCS 			+=	$(addprefix srcs/builtins/, $(addsuffix .c, \
 					unset/unset))
 # TOOLS
 SRCS 			+=	$(addprefix srcs/tools/, $(addsuffix .c, \
-					fd \
 					shell \
 					ft_strjoin_bs \
 					env_to_str))

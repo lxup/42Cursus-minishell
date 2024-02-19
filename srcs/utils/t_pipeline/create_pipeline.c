@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 12:06:53 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/18 12:13:04 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/19 22:18:42 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	count_args(t_token *tokens)
 	return (i);
 }
 
-static char	**create_args(t_token *tokens)
+static char	**create_args(t_mini *mini, t_token *tokens)
 {
 	char	**args;
 	t_token	*cur_token;
@@ -40,7 +40,7 @@ static char	**create_args(t_token *tokens)
 		return (NULL);
 	args = ft_calloc(i + 1, sizeof(char *));
 	if (!args)
-		return (NULL); // TODO handle error EXIT !!!!!
+		return (ft_exit(mini), NULL);
 	i = 0;
 	cur_token = tokens;
 	while (cur_token)
@@ -50,7 +50,7 @@ static char	**create_args(t_token *tokens)
 		{
 			args[i] = ft_strdup(cur_token->value);
 			if (args[i] == NULL)
-				return (ft_free_array((void **)args), NULL); // TODO handle error EXIT !!!!!
+				return (ft_free_array((void **)args), ft_exit(mini), NULL);
 			i++;
 		}
 		cur_token = cur_token->next;
@@ -65,7 +65,7 @@ static int	set_pipeline_args(t_mini *mini)
 	cur_pipeline = mini->pipeline;
 	while (cur_pipeline)
 	{
-		cur_pipeline->args = create_args(cur_pipeline->tokens);
+		cur_pipeline->args = create_args(mini, cur_pipeline->tokens);
 		cur_pipeline = cur_pipeline->next;
 	}
 	return (1);
@@ -89,7 +89,8 @@ int	create_pipeline(t_mini *mini)
 			continue ;
 		}
 		ft_lstadd_back_token(&cur_pipeline->tokens, \
-			ft_lstnew_token(ft_strdup(cur_token->value), cur_token->type, cur_token->index));
+			ft_lstnew_token(ft_strdup(cur_token->value), \
+				cur_token->type, cur_token->index));
 		cur_token = cur_token->next;
 	}
 	return (set_pipeline_args(mini));

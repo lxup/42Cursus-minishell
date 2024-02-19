@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 06:15:39 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/18 16:59:31 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/19 21:58:28 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ static int	create_shell_lvl(t_mini *mini)
 			return (ft_exit(mini), 0);
 		ft_lstupsert_env(&mini->env, "SHLVL", level);
 		free(level);
+		level = NULL;
 	}
 	else
 		ft_lstupsert_env(&mini->env, "SHLVL", "1");
@@ -40,6 +41,7 @@ static int	create_pwd(t_mini *mini)
 		return (ft_exit(mini), 0);
 	ft_lstupsert_env(&mini->env, "PWD", pwd);
 	free(pwd);
+	pwd = NULL;
 	return (1);
 }
 
@@ -51,6 +53,5 @@ int	env_update(t_mini *mini)
 		return (0);
 	ft_lstinsert_env(&mini->env, "_", "/usr/bin/env");
 	ft_lstinsert_env(&mini->env, "TERM", "xterm-256color");
-	// ft_lstinsert_env(&mini->env, "LOUP", "ok\"");
 	return (1);
 }
