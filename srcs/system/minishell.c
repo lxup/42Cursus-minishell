@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 19:35:42 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/19 12:47:33 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/19 19:16:03 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,11 @@ int	*start_reading(t_mini *mini)
 
 int	reset_mini(t_mini *mini)
 {
+	if (mini->env_array)
+	{
+		ft_free_array((void **)mini->env_array);
+		mini->env_array = NULL;
+	}
 	if (mini->pipeline)
 		ft_lstclear_pipeline(&mini->pipeline);
 	if (mini->tokens)
@@ -65,8 +70,6 @@ int	reset_mini(t_mini *mini)
 
 void	minishell(t_mini *mini)
 {
-	(void)mini;
-
 	while (1)
 	{
 		signals(mini);

@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 11:52:43 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/19 11:33:36 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/19 17:40:29 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ typedef struct s_shell_prompt
 typedef struct s_mini
 {
 	t_env			*env;
+	char			**env_array;
 	t_token			*tokens;
 	t_pipeline		*pipeline;
 	char			**cmd_path;

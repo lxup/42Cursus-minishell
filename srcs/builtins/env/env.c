@@ -5,7 +5,6 @@ void	env_builtin(t_mini *mini, t_pipeline *pipeline)
 {
 	t_env *env;
 
-	ft_printf("env_builtin\n");
 	if (pipeline->args[1] != NULL)
 	{
 		ft_dprintf("%senv: too many arguments\n", SHELL);
