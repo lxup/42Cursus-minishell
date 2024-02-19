@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 11:52:43 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/17 23:31:16 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/19 11:33:36 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,6 @@ typedef struct s_mini
 	t_shell_prompt	shell_prompt;
 	int				std_in;
 	int				std_out;
-	char			*pwd;
 	struct termios	term;
 	int				exec_only_heredoc;
 	int				last_exec_status;

@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 19:35:42 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/18 11:27:17 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/19 12:47:33 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,10 @@ int	reset_mini(t_mini *mini)
 	mini->last_exec_status = mini->exec_status;
 	mini->exec_status = EXEC_SUCCESS;
 	mini->exec_only_heredoc = -1;
+	if (mini->prev_prompt)
+		free(mini->prev_prompt);
+	mini->prev_prompt = mini->prompt;
+	mini->prompt = NULL;
 	return (1);
 }
 
@@ -69,9 +73,9 @@ void	minishell(t_mini *mini)
 		get_shell_prompt(mini);
 		if (!start_reading(mini))
 			break ;
+		add_to_history(mini);
 		if (lexer(mini) && parser(mini))
 			executor(mini);
-		add_to_history(mini);
 		env_update(mini);
 		reset_mini(mini);
 	}

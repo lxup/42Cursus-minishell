@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 12:03:17 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/18 17:13:59 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/19 12:17:14 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,18 @@
 /*                                  BUILTINS                                    */
 /* **************************************************************************** */
 
+/* MSG */
 # ifdef __APPLE__
 #  define EXPORT_BUILTIN_PRINT_ENV "export"
 # elif __linux__
 #  define EXPORT_BUILTIN_PRINT_ENV "declare -x"
+# endif
+
+/* CODE */
+# ifdef __APPLE__
+#  define EXIT_BUILTIN_NONUM 255
+# elif __linux__
+#  define EXIT_BUILTIN_NONUM 2
 # endif
 
 /* **************************************************************************** */

@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 12:14:28 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/18 14:36:32 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/19 12:50:57 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,10 @@ void	init_mini(t_mini *mini, char **env)
 	mini->shell_prompt.prompt_size = 0;
 	mini->std_in = -1;
 	mini->std_out = -1;
-	mini->pwd = NULL;
 	mini->exec_only_heredoc = -1;
 	mini->last_exec_status = EXEC_SUCCESS;
 	mini->exec_status = EXEC_SUCCESS;
-	mini->exit_code = -1;
+	mini->exit_code = EXIT_SUCCESS;
 	mini->std_in = dup(STDIN_FILENO);
 	if (mini->std_in == -1)
 		ft_exit(mini);

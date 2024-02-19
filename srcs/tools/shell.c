@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 00:30:40 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/18 15:25:04 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/19 12:18:42 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,13 @@ char	*get_path(t_mini *mini)
 	char	*path;
 	char	*tmp;
 	t_env	*home_path;
+	t_env	*pwd;
 
-	if (mini->pwd)
-		free(mini->pwd);
-	mini->pwd = getcwd(NULL, 0);
+	pwd = ft_lstfind_env(&mini->env, "PWD");
 	home_path = ft_lstfind_env(&mini->env, "HOME");
-	if (mini->pwd && home_path && !ft_strncmp(mini->pwd, home_path->value, ft_strlen(home_path->value)))
+	if (pwd && home_path && !ft_strncmp(pwd->value, home_path->value, ft_strlen(home_path->value)))
 	{
-		path = ft_strdup(mini->pwd + ft_strlen(home_path->value));
+		path = ft_strdup(pwd->value + ft_strlen(home_path->value));
 		if (!path)
 			ft_exit(mini);
 		tmp = ft_strjoin("~", path);
@@ -43,13 +42,17 @@ char	*get_path(t_mini *mini)
 			ft_exit(mini);
 		return (tmp);
 	}
-	else
+	else if (pwd)
 	{
-		path = ft_strdup(mini->pwd);
+		path = ft_strdup(pwd->value);
 		if (!path)
 			ft_exit(mini);
 		return (path);
 	}
+	path = ft_strdup("?");
+	if (!path)
+		ft_exit(mini);
+	return (path);
 }
 
 int	get_terminal_width(void)

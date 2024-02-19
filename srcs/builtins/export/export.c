@@ -56,7 +56,7 @@ static int	is_valid_env(char **env)
 	return (1);
 }
 
-static void	add_env(t_mini *mini, t_pipeline *pipeline)
+static int	add_env(t_mini *mini, t_pipeline *pipeline)
 {
 	int		i;
 	char	**env;
@@ -66,7 +66,7 @@ static void	add_env(t_mini *mini, t_pipeline *pipeline)
 	{
 		env = ft_split(pipeline->args[i], "=");	
 		if (!env)
-			return ; // TODO handle error EXIT !!!!!
+			return (ft_exit(mini), 0); // TODO handle error EXIT !!!!!
 		if (!is_valid_env(env))
 		{
 			mini->exec_status = 1;
@@ -81,6 +81,7 @@ static void	add_env(t_mini *mini, t_pipeline *pipeline)
 		}
 		i++;
 	}
+	return (1);
 }
 
 void	export_builtin(t_mini *mini, t_pipeline *pipeline)

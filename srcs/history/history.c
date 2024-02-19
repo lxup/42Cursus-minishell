@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 16:31:56 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/18 15:26:27 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/19 12:47:24 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,9 +90,5 @@ void	*add_to_history(t_mini *mini)
 		close(fd);
 	}
 	add_history(mini->prompt);
-	if (mini->prev_prompt)
-		free(mini->prev_prompt);
-	mini->prev_prompt = mini->prompt;
-	mini->prompt = NULL;
 	return (NULL);
 }
