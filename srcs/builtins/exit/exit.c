@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exit.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/02/19 12:55:09 by lquehec           #+#    #+#             */
+/*   Updated: 2024/02/19 12:55:46 by lquehec          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
 
@@ -51,18 +62,20 @@ static int	check_arguments(t_mini *mini, t_pipeline *pipeline)
 	argc = ft_2d_strlen(pipeline->args);
 	if (argc > 1 && !numeric_arg(pipeline->args[1]))
 	{
-		ft_dprintf("%s%s: %s: %s\n", SHELL, pipeline->args[0], pipeline->args[1], "numeric argument required");
+		ft_dprintf("%s%s: %s: %s\n", SHELL, pipeline->args[0], \
+			pipeline->args[1], "numeric argument required");
 		mini->exit_code = EXIT_BUILTIN_NONUM;
 	}
 	else if (argc > 2)
 	{
-		ft_dprintf("%s%s: %s\n", SHELL, pipeline->args[0], "too many arguments");
+		ft_dprintf("%s%s: %s\n", SHELL, pipeline->args[0], \
+			"too many arguments");
 		mini->exit_code = 1;
 		return (0);
 	}
 	else if (argc == 2)
 	{
-		mini->exit_code = ft_atol(pipeline->args[1]) % 256; // CHANGE TO LONG
+		mini->exit_code = ft_atol(pipeline->args[1]) % 256;
 		if (mini->exit_code < 0)
 			mini->exit_code = 256 + mini->exit_code;
 	}
