@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 18:43:41 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/20 23:21:27 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/20 23:55:42 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	heredoc(t_mini *mini, char *delim, t_pipeline *pipeline)
 	if (fd == -1)
 		return (0);
 	signal(SIGINT, &signals_heredoc);
-	while (1 && g_status != 130)
+	while (1)
 	{
 		str = readline("heredoc> ");
 		if (!str)
@@ -51,11 +51,10 @@ static int	heredoc(t_mini *mini, char *delim, t_pipeline *pipeline)
 int	exec_heredoc(t_mini *mini, char *delim, t_pipeline *pipeline)
 {
 	int	pid;
-	
+
 	pipeline->heredoc = heredoc_filename(pipeline);
 	if (!pipeline->heredoc)
 		return (ft_exit(mini), 0);
-	// signal(SIGINT, SIG_IGN);
 	pid = fork();
 	if (pid == 0)
 	{
@@ -114,10 +113,6 @@ int	handle_heredoc(t_mini *mini)
 		TOKEN_DLESSER);
 	if (!heredoc_count)
 		return (-1);
-	// signal(SIGQUIT, &signals_heredoc_parents);
-	// signal(SIGINT, &signals_heredoc_parents);
-	// printf("g_status = %d\n", g_status);
 	ret = process_heredocs(mini, heredoc_count);
-	// printf("g_status = %d\n", g_status);
 	return (ret);
 }

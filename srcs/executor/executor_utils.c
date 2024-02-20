@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 16:14:51 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/20 16:16:55 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/20 23:53:02 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	clear_heredoc_after_exec(t_mini *mini)
 {
 	t_pipeline	*pipeline;
-	
+
 	(void)mini;
 	pipeline = mini->pipeline;
 	while (pipeline)
