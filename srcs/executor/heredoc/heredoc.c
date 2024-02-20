@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 18:43:41 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/20 20:33:07 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/20 23:21:27 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,25 +30,21 @@ static int	heredoc(t_mini *mini, char *delim, t_pipeline *pipeline)
 	if (fd == -1)
 		return (0);
 	signal(SIGINT, &signals_heredoc);
-	// g_status = 150;
-	printf("GSTATUS FDP = %d\n", g_status);
 	while (1 && g_status != 130)
 	{
-		// if (*(ft_nsm(0)) == 130)
-		// {
-		// 	ft_free_mini(mini);
-		// 	exit(1);
-		// }
 		str = readline("heredoc> ");
 		if (!str)
+		{
+			if (g_status == 130)
+				return (close(fd), ft_free_mini(mini), exit(1), 0);
 			return (close(fd), 1);
+		}
 		if (!ft_strcmp(delim, str))
 			return (free(str), close(fd), 1);
 		str = expander_heredoc(mini, str);
 		ft_putstr_fdnl(fd, str);
 		free(str);
 	}
-	printf("gp = %d\n", g_status);
 	return (close(fd), 0);
 }
 
@@ -68,18 +64,12 @@ int	exec_heredoc(t_mini *mini, char *delim, t_pipeline *pipeline)
 			ft_free_mini(mini);
 			exit (1);
 		}
-		// printf("ft_nsm(0) = %d\n", *(ft_nsm(0)));
-		// if (*(ft_nsm(0)) != 0 || !heredoc(mini, delim, pipeline))
-		// {
-		// 	ft_free_mini(mini);
-		// 	exit (1);
-		// }
 		ft_free_mini(mini);
 		exit(0);
 	}
 	else
 	{
-		signal(SIGINT, SIG_IGN);
+		signal(SIGINT, &signals_heredoc_parents);
 		waitpid(pid, &mini->exec_status, 0);
 	}
 	mini->exec_status = WEXITSTATUS(mini->exec_status);

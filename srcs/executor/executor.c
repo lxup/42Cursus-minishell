@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 10:56:17 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/20 16:17:39 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/20 22:40:40 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,10 @@ static int	not_in_fork(t_mini *mini, t_pipeline *pipeline)
 	else if (ft_strcmp(token->value, "cd") == 0)
 		return (1);
 	else if (ft_strcmp(token->value, "exit") == 0)
+		return (1);
+	else if (ft_strcmp(token->value, "export") == 0)
+		return (1);
+	else if (ft_strcmp(token->value, "unset") == 0)
 		return (1);
 	return (0);
 }

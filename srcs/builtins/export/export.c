@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 20:03:07 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/19 21:57:30 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/20 23:03:36 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,20 +52,18 @@ static int	is_valid_env(t_pipeline *pipeline, char **env)
 {
 	int	i;
 
+	(void)pipeline;
 	if (ft_2d_strlen(env) == 0 || ft_2d_strlen(env) > 2)
 		return (0);
 	if (!is_valid_identifier(env[0]))
 		return (0);
 	i = 0;
-	print_2d_array(env);
 	while (env[1] && env[1][i])
 	{
 		if (env[1][i] == '=')
 			return (0);
 		i++;
 	}
-	ft_dprintf("%sexport: `%s': not a valid identifier\n", SHELL, \
-		pipeline->args[i]);
 	return (1);
 }
 
@@ -74,16 +72,31 @@ static void	add_env(t_mini *mini, t_pipeline *pipeline)
 	int		i;
 	char	**env;
 
-	i = -1;
+	i = 0;
 	while (pipeline->args[++i])
 	{
-		if (ft_strchr(pipeline->args[i], '=') == NULL)
+		if (!ft_strchr(pipeline->args[i], '=') || pipeline->args[i][0] == '=')
+			// || count_char(pipeline->args[i], '=') > 1)
+		{
+			mini->exec_status = 1;
+			ft_dprintf("%sexport: `%s': not a valid identifier\n", SHELL, \
+				pipeline->args[i]);		
 			continue ;
+		}
+		if (pipeline->args[i][0] == '-')
+		{
+			mini->exec_status = 2;
+			continue ;
+		}
 		env = ft_split(pipeline->args[i], "=");
 		if (!env)
 			ft_exit(mini);
 		else if (!is_valid_env(pipeline, env))
+		{
 			mini->exec_status = 1;
+			ft_dprintf("%sexport: `%s': not a valid identifier\n", SHELL, \
+				pipeline->args[i]);
+		}
 		else
 		{
 			if (ft_2d_strlen(env) == 1)
@@ -101,6 +114,6 @@ void	export_builtin(t_mini *mini, t_pipeline *pipeline)
 	if (pipeline->args[1] == NULL)
 		print_export(mini);
 	else if (pipeline->args[1] != NULL \
-		&& pipeline == ft_lstlast_pipeline(mini->pipeline))
+		&& ft_lstsize_pipeline(mini->pipeline) == 1)
 		add_env(mini, pipeline);
 }

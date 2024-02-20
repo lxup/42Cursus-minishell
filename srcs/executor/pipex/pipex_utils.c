@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 15:59:21 by emehdaou          #+#    #+#             */
-/*   Updated: 2024/02/20 11:43:03 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/20 22:00:55 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,4 @@ void	ft_waitpid(t_mini *mini, t_pipeline *pipeline)
 		mini->exec_status = WEXITSTATUS(curr_pipeline->exec_status);
 		curr_pipeline = curr_pipeline->next;
 	}
-	signals(mini);
 }
