@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 18:43:41 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/20 20:17:47 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/20 20:33:07 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int	heredoc(t_mini *mini, char *delim, t_pipeline *pipeline)
 	signal(SIGINT, &signals_heredoc);
 	// g_status = 150;
 	printf("GSTATUS FDP = %d\n", g_status);
-	while (1)
+	while (1 && g_status != 130)
 	{
 		// if (*(ft_nsm(0)) == 130)
 		// {
@@ -59,7 +59,7 @@ int	exec_heredoc(t_mini *mini, char *delim, t_pipeline *pipeline)
 	pipeline->heredoc = heredoc_filename(pipeline);
 	if (!pipeline->heredoc)
 		return (ft_exit(mini), 0);
-	signal(SIGINT, SIG_IGN);
+	// signal(SIGINT, SIG_IGN);
 	pid = fork();
 	if (pid == 0)
 	{
@@ -78,7 +78,10 @@ int	exec_heredoc(t_mini *mini, char *delim, t_pipeline *pipeline)
 		exit(0);
 	}
 	else
+	{
+		signal(SIGINT, SIG_IGN);
 		waitpid(pid, &mini->exec_status, 0);
+	}
 	mini->exec_status = WEXITSTATUS(mini->exec_status);
 	return (mini->exec_status);
 }
