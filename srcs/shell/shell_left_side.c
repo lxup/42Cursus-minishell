@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shell.c                                            :+:      :+:    :+:   */
+/*   shell_left_side.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 00:30:40 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/19 22:20:45 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/20 12:57:38 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,42 +63,14 @@ int	get_terminal_width(void)
 	return (w.ws_col);
 }
 
-// char	*build_separator(t_mini *mini)
-// {
-// 	char		*separator;
-// 	char		*tmp;
-// 	char		*tmp2;
-// 	size_t		len;
-// 	int			i;
-// 	len = get_terminal_width() - mini->shell_prompt.prompt_size;
-// 	separator = ft_strdup(C_GRAY "─");
-// 	if (!separator)
-// 		return (NULL);
-// 	i = -1;
-//     while (++i < len)
-//     {
-// 		if (i == len - 1)
-// 			tmp = ft_strdup("╮\n╰─" C_WHITE);
-// 		else
-//         	tmp = ft_strdup("─");
-//         if (!tmp)
-//             return (free(separator), NULL);
-// 		tmp2 = separator;
-//         separator = ft_strjoin(separator, tmp);
-//         free(tmp);
-// 		free(tmp2);
-//         if (!separator)
-//             return (NULL);
-//     }
-//     return (separator);
-// }
-
 void	build_left_side(t_mini *mini, char *os, char *path)
 {
+	int		len_path;
 	char	*tmp;
 
 	if (!os || !path || !*os || !*path)
 		return ;
+	len_path = ft_strlen(path);
 	mini->shell_prompt.prompt = ft_strjoin(BG_TRANSPARENT C_GRAY "╭─" \
 		BG_WHITE C_BLACK " ", os);
 	tmp = ft_strjoin(mini->shell_prompt.prompt, " " BG_BLUE C_WHITE "  ");
@@ -113,10 +85,5 @@ void	build_left_side(t_mini *mini, char *os, char *path)
 	else
 		mini->shell_prompt.prompt = ft_strjoin(tmp, PROMPTE_ERROR_TEMPLATE);
 	free(tmp);
-	// mini->shell_prompt.prompt_size = ft_strlen("╭─     ") \
-	// 	+ ft_strlen(os) + ft_strlen(path);
-	// if (mini->last_exec_status == EXIT_SUCCESS)
-	// 	mini->shell_prompt.prompt_size += ft_strlen(" ✔ ");
-	// else
-	// 	mini->shell_prompt.prompt_size += ft_strlen(" ✘ ");
+	mini->shell_prompt.prompt_size = 3 + 1 + 5 + len_path + 6;
 }

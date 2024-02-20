@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 15:58:46 by emehdaou          #+#    #+#             */
-/*   Updated: 2024/02/20 11:08:43 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/20 11:47:00 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	ft_process(t_pipeline *pipeline, t_mini *mini)
 		curr->pid = fork();
 		if (curr->pid == 0)
 		{
-			signals_child(mini);
+			signals_child();
 			init_redir(mini, curr);
 			ft_exec(curr, mini);
 		}

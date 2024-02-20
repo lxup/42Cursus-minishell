@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 11:31:38 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/18 11:44:20 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/20 11:46:44 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,8 @@ void	signal_ctrl_backslash_child(void)
 	sigaction(SIGQUIT, &ctrl_back_slash, NULL);
 }
 
-void	signals_child(t_mini *mini)
+void	signals_child()
 {
-	tcsetattr(1, TCSAFLUSH, &mini->term);
 	signal_ctrl_backslash_child();
 	signal_ctrl_c_child();
 }

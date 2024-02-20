@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 17:31:59 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/20 11:30:00 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/20 12:59:12 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void			signals_parent(void);
 ** Signals for the child
 ** ./signals/signals_child.c
 */
-void			signals_child(t_mini *mini);
+void			signals_child(void);
 
 /* ************************************************************************** */
 /*                                    ENV                                     */
@@ -372,6 +372,12 @@ char			*get_path(t_mini *mini);
 ** ./tools/shell/build_left_side.c
 */
 void			build_left_side(t_mini *mini, char *os, char *path);
+
+/*
+** Build the separator
+** ./tools/shell/build_separator.c
+*/
+void			*build_separator(t_mini *mini);
 
 /*
 ** Get the terminal width

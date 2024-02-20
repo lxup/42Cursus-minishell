@@ -6,7 +6,7 @@
 #    By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/06 19:51:48 by lquehec           #+#    #+#              #
-#    Updated: 2024/02/19 23:56:48 by lquehec          ###   ########.fr        #
+#    Updated: 2024/02/20 12:19:33 by lquehec          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -79,9 +79,13 @@ CFLAGS			+=	-I$(INC_PATH)
 SRCS 			=	$(addprefix srcs/system/, $(addsuffix .c, \
 					main \
 					minishell \
-					prompt \
 					init \
 					exit))
+# SHELL
+SRCS			+=	$(addprefix srcs/shell/, $(addsuffix .c, \
+					shell \
+					shell_left_side \
+					shell_separator))
 # SIGNALS
 SRCS			+=	$(addprefix srcs/signals/, $(addsuffix .c, \
 					signals \
@@ -150,7 +154,6 @@ SRCS 			+=	$(addprefix srcs/builtins/, $(addsuffix .c, \
 					unset/unset))
 # TOOLS
 SRCS 			+=	$(addprefix srcs/tools/, $(addsuffix .c, \
-					shell \
 					ft_strjoin_bs \
 					env_to_str))
 # UTILS

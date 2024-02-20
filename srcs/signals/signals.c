@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 12:18:31 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/20 11:18:01 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/20 11:50:34 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,10 @@ static void	signal_ctrl_backslash(void)
 	sigaction(SIGQUIT, &ctrl_backslash, NULL);
 }
 
-static void	signal_terms(t_mini *mini)
+static void	signal_terms(void)
 {
 	struct termios	term;
 
-	if (tcgetattr(1, &mini->term))
-		ft_dprintf("%stcgetattr\n", SHELL);
 	if (tcgetattr(1, &term))
 		ft_dprintf("%stcgetattr\n", SHELL);
 	term.c_lflag &= ~ECHOCTL;
@@ -67,8 +65,9 @@ static void	signal_terms(t_mini *mini)
 
 void	signals(t_mini *mini)
 {
+	(void)mini;
 	g_pid = 0;
-	signal_terms(mini);
+	signal_terms();
 	signal_ctrl_c();
 	signal_ctrl_backslash();
 }
