@@ -6,7 +6,7 @@
 #    By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/06 19:51:48 by lquehec           #+#    #+#              #
-#    Updated: 2024/02/19 22:10:43 by lquehec          ###   ########.fr        #
+#    Updated: 2024/02/19 23:56:48 by lquehec          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -86,7 +86,8 @@ SRCS 			=	$(addprefix srcs/system/, $(addsuffix .c, \
 SRCS			+=	$(addprefix srcs/signals/, $(addsuffix .c, \
 					signals \
 					signals_parent \
-					signals_child))
+					signals_child \
+					signals_heredoc))
 # ENV
 SRCS			+=	$(addprefix srcs/env/, $(addsuffix .c, \
 					env_init \

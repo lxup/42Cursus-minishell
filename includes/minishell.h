@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 17:31:59 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/19 22:37:47 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/20 11:30:00 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,18 @@ int				ft_exit(t_mini *mini);
 ** ./signals/signals.c
 */
 void			signals(t_mini *mini);
+
+/*
+** Signals for heredoc
+** ./signals/signals_heredoc.c
+*/
+void			signals_heredoc(int sig);
+
+/*
+** Signals for heredoc process
+** ./signals/signals_heredoc.c
+*/
+void			signals_heredoc_parents(int sig);
 
 /*
 ** Signals for the parent

@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 18:43:41 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/19 20:59:09 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/20 11:30:00 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ static int	heredoc(t_mini *mini, char *delim, t_pipeline *pipeline)
 		return (0);
 	while (1)
 	{
-		ft_putstr_fd(STDOUT_FILENO, "heredoc> ");
-		str = get_next_line(STDIN_FILENO);
+		// signal(SIGQUIT, SIG_IGN);
+		signal(SIGINT, &signals_heredoc);
+		str = readline("heredoc> ");
 		if (!str)
-			return (ft_putstr("\n"), close(fd), 1);
-		str[ft_strlen(str) - 1] = '\0';
+			return (close(fd), 1);
 		if (!ft_strcmp(delim, str))
 			break ;
 		str = expander_heredoc(mini, str);
@@ -39,7 +39,19 @@ static int	heredoc(t_mini *mini, char *delim, t_pipeline *pipeline)
 	return (free(str), close(fd), 1);
 }
 
-static int	process_heredocs(t_mini *mini, int heredoc_count)
+int	exec_heredoc(t_mini *mini, char *delim, t_pipeline *pipeline)
+{
+	int	pid;
+	
+	pid = fork();
+	if (pid == 0)
+		heredoc(mini, delim, pipeline);
+	waitpid(pid, &mini->exec_status, 0);
+	mini->exec_status = WEXITSTATUS(mini->exec_status);
+	return (mini->exec_status);
+}
+
+int	process_heredocs(t_mini *mini, int heredoc_count)
 {
 	t_token		*token;
 	t_pipeline	*pipeline;
@@ -56,7 +68,7 @@ static int	process_heredocs(t_mini *mini, int heredoc_count)
 				return (1);
 			if (token->type == TOKEN_DLESSER)
 			{
-				if (!heredoc(mini, token->next->value, pipeline))
+				if (exec_heredoc(mini, token->next->value, pipeline) == 1)
 					return (0);
 				heredoc_made++;
 				mini->exec_only_heredoc--;
@@ -68,13 +80,54 @@ static int	process_heredocs(t_mini *mini, int heredoc_count)
 	return (heredoc_made == heredoc_count);
 }
 
+// static int	heredoc_child(t_mini *mini)
+// {
+// 	signal(SIGINT, signals_heredoc);
+// 	heredoc(mini, , mini->pipeline);
+// 	exit(0);
+// }
+
+// static int	heredoc_parent(t_mini *mini)
+// {
+// 	int	exit_status;
+	
+// 	signal(SIGINT, SIG_IGN);
+// 	wait(&exit_status);
+// 	if (WIFEXITED(exit_status))
+// 	{
+// 		mini->exec_status = WEXITSTATUS(exit_status);
+// 		if (mini->exec_status == 1)
+// 			return (0);
+// 	}
+// 	signals(mini);
+// 	return (1);
+// }
+
+// int	handle_heredoc(t_mini *mini)
+// {
+// 	int	pid;
+	
+// 	pid = fork();
+// 	if (pid == 0)
+// 		heredoc_child(mini);
+// 	else
+// 		return (heredoc_parent(mini));
+// }
+
 int	handle_heredoc(t_mini *mini)
 {
+	int		ret;
 	int		heredoc_count;
 
 	heredoc_count = ft_lstcount_tokentype_pipeline(mini->pipeline, \
 		TOKEN_DLESSER);
 	if (!heredoc_count)
-		return (0);
-	return (process_heredocs(mini, heredoc_count));
+		return (-1);
+	signal(SIGQUIT, &signals_heredoc_parents);
+	signal(SIGINT, &signals_heredoc_parents);
+	ret = process_heredocs(mini, heredoc_count);
+	signal(SIGQUIT, SIG_DFL);
+	signal(SIGINT, SIG_DFL);
+	signals(mini);
+	return (ret);
 }
