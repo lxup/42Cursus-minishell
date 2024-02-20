@@ -1,30 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signals_heredoc.c                                  :+:      :+:    :+:   */
+/*   executor_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/18 11:28:00 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/20 19:25:56 by lquehec          ###   ########.fr       */
+/*   Created: 2024/02/20 16:14:51 by lquehec           #+#    #+#             */
+/*   Updated: 2024/02/20 16:16:55 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// pid_t	g_status;
-
-void	signals_heredoc_parents(int sig)
+int	clear_heredoc_after_exec(t_mini *mini)
 {
-	if (sig == SIGINT)
-		printf("\n");
-}
-
-void	signals_heredoc(int sig)
-{
-	(void)sig;
-	// ft_nsm(130);
-	g_status = 130;
-	close(STDIN_FILENO);
-	return ;
+	t_pipeline	*pipeline;
+	
+	(void)mini;
+	pipeline = mini->pipeline;
+	while (pipeline)
+	{
+		if (pipeline->heredoc)
+		{
+			if (access(pipeline->heredoc, F_OK) == 0)
+				unlink(pipeline->heredoc);
+		}
+		pipeline = pipeline->next;
+	}
+	return (1);
 }

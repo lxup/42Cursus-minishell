@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 17:31:59 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/20 12:59:12 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/20 19:31:58 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@
 # include "typedef.h"
 
 /* Global variables */
-extern pid_t	g_pid;
+extern pid_t	g_status;
+
+int	*ft_nsm(int stp);
 
 /* ************************************************************************** */
 /*                                  SYSTEM                                    */
@@ -251,6 +253,8 @@ char			*expander_heredoc(t_mini *mini, char *str);
 /* ************************************************************************** */
 
 int				executor(t_mini *mini);
+
+int				clear_heredoc_after_exec(t_mini *mini);
 
 int				handle_heredoc(t_mini *mini);
 char			*heredoc_filename(t_pipeline *pipeline);

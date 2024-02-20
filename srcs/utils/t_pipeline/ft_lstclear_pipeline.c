@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 16:12:34 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/19 21:15:01 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/20 16:13:42 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ static void	clear_file(t_pipeline *pipeline)
 {
 	if (pipeline->infile)
 	{
-		printf("freeing infile\n");
 		free(pipeline->infile);
 		pipeline->infile = NULL;
 	}
@@ -31,7 +30,6 @@ static void	clear_heredoc(t_pipeline *pipeline)
 {
 	if (pipeline->heredoc)
 	{
-		unlink(pipeline->heredoc);
 		free(pipeline->heredoc);
 		pipeline->heredoc = NULL;
 	}

@@ -6,47 +6,79 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 18:43:41 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/20 11:30:00 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/20 20:17:47 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	*ft_nsm(int stp)
+{
+	static int	*status = {0};
+
+	if (stp)
+		*status = stp;
+	return (status);
+}
 
 static int	heredoc(t_mini *mini, char *delim, t_pipeline *pipeline)
 {
 	int		fd;
 	char	*str;
 
-	pipeline->heredoc = heredoc_filename(pipeline);
-	if (!pipeline->heredoc)
-		return (0);
 	fd = open(pipeline->heredoc, O_RDWR | O_CREAT | O_EXCL, 0644);
 	if (fd == -1)
 		return (0);
+	signal(SIGINT, &signals_heredoc);
+	// g_status = 150;
+	printf("GSTATUS FDP = %d\n", g_status);
 	while (1)
 	{
-		// signal(SIGQUIT, SIG_IGN);
-		signal(SIGINT, &signals_heredoc);
+		// if (*(ft_nsm(0)) == 130)
+		// {
+		// 	ft_free_mini(mini);
+		// 	exit(1);
+		// }
 		str = readline("heredoc> ");
 		if (!str)
 			return (close(fd), 1);
 		if (!ft_strcmp(delim, str))
-			break ;
+			return (free(str), close(fd), 1);
 		str = expander_heredoc(mini, str);
 		ft_putstr_fdnl(fd, str);
 		free(str);
 	}
-	return (free(str), close(fd), 1);
+	printf("gp = %d\n", g_status);
+	return (close(fd), 0);
 }
 
 int	exec_heredoc(t_mini *mini, char *delim, t_pipeline *pipeline)
 {
 	int	pid;
 	
+	pipeline->heredoc = heredoc_filename(pipeline);
+	if (!pipeline->heredoc)
+		return (ft_exit(mini), 0);
+	signal(SIGINT, SIG_IGN);
 	pid = fork();
 	if (pid == 0)
-		heredoc(mini, delim, pipeline);
-	waitpid(pid, &mini->exec_status, 0);
+	{
+		if (!heredoc(mini, delim, pipeline))
+		{
+			ft_free_mini(mini);
+			exit (1);
+		}
+		// printf("ft_nsm(0) = %d\n", *(ft_nsm(0)));
+		// if (*(ft_nsm(0)) != 0 || !heredoc(mini, delim, pipeline))
+		// {
+		// 	ft_free_mini(mini);
+		// 	exit (1);
+		// }
+		ft_free_mini(mini);
+		exit(0);
+	}
+	else
+		waitpid(pid, &mini->exec_status, 0);
 	mini->exec_status = WEXITSTATUS(mini->exec_status);
 	return (mini->exec_status);
 }
@@ -68,7 +100,7 @@ int	process_heredocs(t_mini *mini, int heredoc_count)
 				return (1);
 			if (token->type == TOKEN_DLESSER)
 			{
-				if (exec_heredoc(mini, token->next->value, pipeline) == 1)
+				if (exec_heredoc(mini, token->next->value, pipeline))
 					return (0);
 				heredoc_made++;
 				mini->exec_only_heredoc--;
@@ -80,40 +112,6 @@ int	process_heredocs(t_mini *mini, int heredoc_count)
 	return (heredoc_made == heredoc_count);
 }
 
-// static int	heredoc_child(t_mini *mini)
-// {
-// 	signal(SIGINT, signals_heredoc);
-// 	heredoc(mini, , mini->pipeline);
-// 	exit(0);
-// }
-
-// static int	heredoc_parent(t_mini *mini)
-// {
-// 	int	exit_status;
-	
-// 	signal(SIGINT, SIG_IGN);
-// 	wait(&exit_status);
-// 	if (WIFEXITED(exit_status))
-// 	{
-// 		mini->exec_status = WEXITSTATUS(exit_status);
-// 		if (mini->exec_status == 1)
-// 			return (0);
-// 	}
-// 	signals(mini);
-// 	return (1);
-// }
-
-// int	handle_heredoc(t_mini *mini)
-// {
-// 	int	pid;
-	
-// 	pid = fork();
-// 	if (pid == 0)
-// 		heredoc_child(mini);
-// 	else
-// 		return (heredoc_parent(mini));
-// }
-
 int	handle_heredoc(t_mini *mini)
 {
 	int		ret;
@@ -123,11 +121,10 @@ int	handle_heredoc(t_mini *mini)
 		TOKEN_DLESSER);
 	if (!heredoc_count)
 		return (-1);
-	signal(SIGQUIT, &signals_heredoc_parents);
-	signal(SIGINT, &signals_heredoc_parents);
+	// signal(SIGQUIT, &signals_heredoc_parents);
+	// signal(SIGINT, &signals_heredoc_parents);
+	// printf("g_status = %d\n", g_status);
 	ret = process_heredocs(mini, heredoc_count);
-	signal(SIGQUIT, SIG_DFL);
-	signal(SIGINT, SIG_DFL);
-	signals(mini);
+	// printf("g_status = %d\n", g_status);
 	return (ret);
 }

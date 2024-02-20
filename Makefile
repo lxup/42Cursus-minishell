@@ -6,7 +6,7 @@
 #    By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/06 19:51:48 by lquehec           #+#    #+#              #
-#    Updated: 2024/02/20 12:19:33 by lquehec          ###   ########.fr        #
+#    Updated: 2024/02/20 16:16:00 by lquehec          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -132,7 +132,8 @@ SRCS 			+=	$(addprefix srcs/expander/, $(addsuffix .c, \
 					expander_heredoc))
 # EXECUTOR
 SRCS 			+=	$(addprefix srcs/executor/, $(addsuffix .c, \
-					executor))
+					executor \
+					executor_utils))
 # EXECUTOR/HEREDOC
 SRCS 			+=	$(addprefix srcs/executor/heredoc/, $(addsuffix .c, \
 					heredoc \

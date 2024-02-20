@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 10:56:17 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/20 10:02:55 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/20 16:17:39 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,5 +99,6 @@ int	executor(t_mini *mini)
 			return (1);
 		pipex(mini);
 	}
+	clear_heredoc_after_exec(mini);
 	return (1);
 }
