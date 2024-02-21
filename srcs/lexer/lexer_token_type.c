@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 11:02:35 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/19 22:33:22 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/21 12:04:15 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,14 +62,14 @@ static int	define_token_type(t_mini *mini, int *i, int arg_index)
 	start = *i;
 	
 	type = TOKEN_NOT_SET;
-	if (is_greater(mini->prompt + *i))
-		type = TOKEN_GREATER, *i += 1;
-	else if (is_dgreater(mini->prompt + *i))
-		type = TOKEN_DGREATER, *i += 2;
-	else if (is_lesser(mini->prompt + *i))
-		type = TOKEN_LESSER, *i += 1;
-	else if (is_dlesser(mini->prompt + *i))
-		type = TOKEN_DLESSER, *i += 2;
+	if (is_greater(mini->prompt + *i, &type))
+		*i += 1;
+	else if (is_dgreater(mini->prompt + *i, &type))
+		*i += 2;
+	else if (is_lesser(mini->prompt + *i, &type))
+		*i += 1;
+	else if (is_dlesser(mini->prompt + *i, &type))
+		*i += 2;
 	else if (is_pipe(mini->prompt + *i))
 		type = TOKEN_PIPE, *i += 1;
 	else if (is_word(mini->prompt, *i))

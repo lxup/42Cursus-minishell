@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 06:15:39 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/19 21:58:28 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/21 12:13:32 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,11 @@ static int	create_pwd(t_mini *mini)
 
 	pwd = getcwd(NULL, 0);
 	if (!pwd)
-		return (ft_exit(mini), 0);
+	{
+		pwd = ft_strdup("?");
+		if (!pwd)
+			return (ft_exit(mini), 0);
+	}
 	ft_lstupsert_env(&mini->env, "PWD", pwd);
 	free(pwd);
 	pwd = NULL;

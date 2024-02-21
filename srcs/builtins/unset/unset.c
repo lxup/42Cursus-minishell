@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 21:57:38 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/19 21:57:58 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/21 11:58:04 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,6 @@ int	unset_env(t_mini *mini, t_pipeline *pipeline)
 
 void	unset_builtin(t_mini *mini, t_pipeline *pipeline)
 {
-	ft_printf("unset_builtin\n");
-	(void)pipeline;
 	if (pipeline->args[1] == NULL)
 	{
 		ft_dprintf("%sunset: not enough arguments\n", SHELL);

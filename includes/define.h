@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 12:03:17 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/19 22:34:56 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/21 11:14:06 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,20 @@
 /*                                     EXEC                                     */
 /* **************************************************************************** */
 
-# define EXEC_SUCCESS 0
-# define EXEC_FAILURE 1
-# define EXEC_CTRL_D 130
-# define EXEC_SYNTAX_ERROR 258
-# define EXEC_CMD_NOT_FOUND 127
+# ifdef __APPLE__
+#  define EXEC_SUCCESS 0
+#  define EXEC_FAILURE 1
+#  define EXEC_CTRL_D 130
+#  define EXEC_SYNTAX_ERROR 258
+#  define EXEC_CMD_NOT_FOUND 127
+# elif __linux__
+#  define EXEC_SUCCESS 0
+#  define EXEC_FAILURE 1
+#  define EXEC_CTRL_D 130
+#  define EXEC_SYNTAX_ERROR 2
+#  define EXEC_CMD_NOT_FOUND 127
+# endif
+
 
 
 /* **************************************************************************** */
@@ -97,6 +106,8 @@
 # define ERR_ENV_HOME "Error->HOME not found in env\n"
 
 # define ERR_SYNTAX "syntax error near unexpected token"
+# define ERR_PROHIBIDED_CHAR "prohibited character"
+# define ERR_UNCLOSE_CHAR "unclosed character"
 # define ERR_PWD_NOT_SET "Environment variable PWD not set"
 
 /* **************************************************************************** */

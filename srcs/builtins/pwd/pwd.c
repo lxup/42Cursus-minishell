@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 23:05:50 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/19 20:49:38 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/21 11:58:27 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	pwd_builtin(t_mini *mini, t_pipeline *pipeline)
 {
 	char	*pwd;
 
-	ft_printf("pwd_builtin\n");
 	(void)pipeline;
 	pwd = getcwd(NULL, 0);
 	if (pwd)
@@ -28,7 +27,9 @@ void	pwd_builtin(t_mini *mini, t_pipeline *pipeline)
 	}
 	else
 	{
-		ft_dprintf("%spwd: %s\n", SHELL, ERR_PWD_NOT_SET);
+		ft_dprintf("%spwd: error retrieving current directory: getcwd: \
+			cannot access parent directories: %s\n", SHELL, \
+			strerror(errno));
 		mini->exec_status = 1;
 	}
 }

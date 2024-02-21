@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 20:49:58 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/18 15:43:00 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/21 11:36:18 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static int	expand_env_var(t_mini *mini, t_token *token)
 		if (env_var)
 			env_var_value = ft_strdup(env_var->value);
 		else
-			env_var_value = ft_strdup("");
+			return (0);
 	}
 	if (!env_var_value)
 		return (ft_exit(mini), 0);
@@ -54,15 +54,22 @@ static int	expand_env_var(t_mini *mini, t_token *token)
 
 int	expander_env_var(t_mini *mini)
 {
-	t_token		*tmp_token;
+	t_token		*token;
+	t_token		*tmp;
 
-	tmp_token = mini->tokens;
-	while (tmp_token)
+	token = mini->tokens;
+	while (token)
 	{
-		if (tmp_token->type == TOKEN_ENV_VAR)
-			if (expand_env_var(mini, tmp_token) == 0)
-				ft_lstremove_token(&mini->tokens, tmp_token);
-		tmp_token = tmp_token->next;
+		tmp = NULL;
+		if (token->type == TOKEN_ENV_VAR)
+			if (expand_env_var(mini, token) == 0)
+			{
+				tmp = token->next;
+				ft_lstremove_token(&mini->tokens, token);
+				token = tmp;
+				continue ;
+			}
+		token = token->next;
 	}
 	return (1);
 }

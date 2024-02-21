@@ -1,21 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   p_err_syntax.c                                     :+:      :+:    :+:   */
+/*   p_err_unclose_char.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 10:14:31 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/21 11:08:12 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/21 11:13:36 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	p_err_syntax(t_mini *mini, char c)
+int	p_err_unclose_char(t_mini *mini, char c)
 {
 	mini->exec_status = EXEC_SYNTAX_ERROR;
-	if (c == '\n')
-		return (ft_dprintf("%s%s `%s'\n", SHELL, ERR_SYNTAX, "newline"));
-	return (ft_dprintf("%s%s `%c'\n", SHELL, ERR_SYNTAX, c));
+	return (ft_dprintf("%s%s `%c'\n", SHELL, ERR_UNCLOSE_CHAR, c));
 }

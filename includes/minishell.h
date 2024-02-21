@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 17:31:59 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/20 19:31:58 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/21 12:04:04 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,25 +153,25 @@ int				is_pipe(char *prompt);
 ** Check if the token is a greater '>'
 ** ./lexer/is/is_greater.c
 */
-int				is_greater(char *prompt);
+int				is_greater(char *prompt, t_token_type *type);
 
 /*
 ** Check if the token is a double greater '>>'
 ** ./lexer/is/is_dgreater.c
 */
-int				is_dgreater(char *prompt);
+int				is_dgreater(char *prompt, t_token_type *type);
 
 /*
 ** Check if the token is a lesser '<'
 ** ./lexer/is/is_lesser.c
 */
-int				is_lesser(char *prompt);
+int				is_lesser(char *prompt, t_token_type *type);
 
 /*
 ** Check if the token is a double lesser '<<'
 ** ./lexer/is/is_dlesser.c
 */
-int				is_dlesser(char *prompt);
+int				is_dlesser(char *prompt, t_token_type *type);
 
 /*
 ** Check if the token is a quote
@@ -352,6 +352,8 @@ void			unset_builtin(t_mini *mini, t_pipeline *pipeline);
 /* ************************************************************************** */
 
 int				p_err_syntax(t_mini *mini, char c);
+int				p_err_prohibited_char(t_mini *mini, char c);
+int				p_err_unclose_char(t_mini *mini, char c);
 
 /* ================================= TOOLS ================================= */
 
@@ -359,6 +361,7 @@ int				p_err_syntax(t_mini *mini, char c);
 
 char			*ft_strjoin_bs(char const *s1, char const *s2);
 char			**env_to_str(t_env *env);
+int				ft_count_chars_outside_quotes(char *str, char c);
 /*
 ** Get the OS
 ** ./tools/shell/get_os.c

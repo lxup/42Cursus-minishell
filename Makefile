@@ -6,7 +6,7 @@
 #    By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/06 19:51:48 by lquehec           #+#    #+#              #
-#    Updated: 2024/02/20 16:16:00 by lquehec          ###   ########.fr        #
+#    Updated: 2024/02/21 11:13:47 by lquehec          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -98,7 +98,9 @@ SRCS			+=	$(addprefix srcs/env/, $(addsuffix .c, \
 					env_update))
 # ERROR
 SRCS			+=	$(addprefix srcs/error/, $(addsuffix .c, \
-					p_err_syntax))
+					p_err_syntax \
+					p_err_prohibited_char \
+					p_err_unclose_char))
 # HISTORY
 SRCS 			+=	$(addprefix srcs/history/, $(addsuffix .c, \
 					history \
@@ -156,7 +158,8 @@ SRCS 			+=	$(addprefix srcs/builtins/, $(addsuffix .c, \
 # TOOLS
 SRCS 			+=	$(addprefix srcs/tools/, $(addsuffix .c, \
 					ft_strjoin_bs \
-					env_to_str))
+					env_to_str \
+					ft_count_chars_outside_quotes))
 # UTILS
 SRCS 			+=	$(addprefix srcs/utils/, $(addsuffix .c, \
 					utils \
