@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 12:47:13 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/22 14:15:58 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/22 14:30:27 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ static int	insert_new_token(t_mini *mini, t_token *token, char **split)
 	t_token	*current;
 	t_token	*new_token;
 	int		current_index;
+	char	*value;
 	int		i;
 	
 	i = 0;
@@ -24,7 +25,11 @@ static int	insert_new_token(t_mini *mini, t_token *token, char **split)
 	current_index = token->index + 1;
 	while (split[++i])
 	{
-		new_token = ft_lstnew_token(split[i], TOKEN_WORD, current_index);
+		value = NULL;
+		value = ft_strdup(split[i]);
+		if (!value)
+			return (ft_free_array((void **)split), ft_exit(mini), 0);
+		new_token = ft_lstnew_token(value, TOKEN_WORD, current_index);
 		if (!new_token)
 			return (ft_free_array((void **)split), ft_exit(mini), 0);
 		ft_lstinsertafter_token(&mini->tokens, current, new_token);
@@ -47,10 +52,11 @@ int	expander_env_var_split(t_mini *mini, t_token *token)
 	if (ft_2d_strlen(split) > 1)
 	{
 		free(token->value);
-		token->value = split[0];
+		token->value = ft_strdup(split[0]);
+		if (!token->value)
+			return (ft_free_array((void **)split), ft_exit(mini), 0);
 		insert_new_token(mini, token, split);
 	}
-	else
-		ft_free_array((void **)split);
+	ft_free_array((void **)split);
 	return (1);
 }
