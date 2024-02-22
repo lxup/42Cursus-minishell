@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 06:46:56 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/19 22:32:05 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/22 23:30:56 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ static int	parser_checker_order_if_3(t_mini *mini, t_token *token)
 		|| token->type == TOKEN_DLESSER || token->type == TOKEN_DGREATER)
 		&& (!token->next || (token->next && token->next->type != TOKEN_FILE)))
 	{
-		ft_dprintf("ok\n");
 		mini->exec_only_heredoc = ft_lstcountprev_tokentype_token(token, \
 			TOKEN_DLESSER);
 		if (!token->next)
 			return (p_err_syntax(mini, '\n'), 1);
 		else
 			return (p_err_syntax(mini, token->next->value[0]), 1);
+		g_status = EXEC_SYNTAX_ERROR;
 	}
 	return (1);
 }

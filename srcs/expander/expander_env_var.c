@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 20:49:58 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/22 16:49:42 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/22 23:38:11 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ int	expander_env_var(t_mini *mini)
 	{
 		tmp = NULL;
 		if (token->type == TOKEN_ENV_VAR)
-		{	
+		{
 			ret = expand_env_var(mini, token);
 			if (ret == 0)
 			{

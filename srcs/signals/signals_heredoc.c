@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 11:28:00 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/21 16:01:18 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/22 23:26:53 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	signals_heredoc(int sig)
 	(void)sig;
 	if (sig == SIGINT)
 	{
-		g_status = 130;
+		g_status = EXEC_CTRL_C;
 		close(STDIN_FILENO);
 		return ;
 	}

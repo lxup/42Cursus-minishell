@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 19:35:42 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/22 22:04:17 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/23 00:46:53 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,6 @@ int	reset_mini(t_mini *mini)
 	return (1);
 }
 
-int	is_empty(char *str)
-{
-	while (str && *str)
-	{
-		if (!ft_iswhitespace(*str))
-			return (0);
-		str++;
-	}
-	return (1);
-}
-
 void	minishell(t_mini *mini)
 {
 	while (1)
@@ -55,7 +44,7 @@ void	minishell(t_mini *mini)
 			ft_dprintf("exit\n");
 			break ;
 		}
-		if (!*mini->prompt || is_empty(mini->prompt))
+		if (!*mini->prompt || ft_strwhitespace(mini->prompt))
 			continue ;
 		add_to_history(mini);
 		if (lexer(mini) && parser(mini))
