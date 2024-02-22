@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 06:15:39 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/22 11:54:10 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/22 22:02:00 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,31 @@ static int	create_pwd(t_mini *mini)
 	return (1);
 }
 
+static int	create_cmd(t_mini *mini)
+{
+	t_env	*cmd_path;
+	
+	if (mini->cmd_path)
+	{
+		ft_free_array((void **)mini->cmd_path);
+		mini->cmd_path = NULL;
+	}
+	cmd_path = ft_lstfind_env(&mini->env, "PATH");
+	if (!cmd_path)
+		return (1);
+	mini->cmd_path = ft_split(cmd_path->value, ":");
+	if (!mini->cmd_path)
+		return (ft_exit(mini), 0);
+	return (1);
+}
+
 int	env_update(t_mini *mini)
 {
 	if (!create_pwd(mini))
 		return (0);
 	if (!create_shell_lvl(mini))
+		return (0);
+	if (!create_cmd(mini))
 		return (0);
 	ft_lstinsert_env(&mini->env, "_", "/usr/bin/env", 1);
 	ft_lstinsert_env(&mini->env, "TERM", "xterm-256color", 1);

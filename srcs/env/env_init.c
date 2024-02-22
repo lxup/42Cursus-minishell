@@ -6,18 +6,17 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 06:12:43 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/22 11:38:54 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/22 22:00:23 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	*env_init(t_mini *mini, char **env)
+static void	*get_env(t_mini *mini, char **env)
 {
 	int		i;
 	char	**tmp;
 	t_env	*new;
-	t_env	*cmd_path;
 
 	i = -1;
 	while (env && env[++i])
@@ -31,12 +30,15 @@ void	*env_init(t_mini *mini, char **env)
 		ft_lstadd_back_env(&mini->env, new);
 		ft_free_array((void **)tmp);
 	}
-	cmd_path = ft_lstfind_env(&mini->env, "PATH");
-	if (!cmd_path)
-		return (ft_exit(mini), NULL);
-	mini->cmd_path = ft_split(cmd_path->value, ":");
-	if (!mini->cmd_path)
-		return (ft_exit(mini), NULL);
+	return (NULL);
+}
+
+void	*env_init(t_mini *mini, char **env)
+{
+	if (env && *env)
+		get_env(mini, env);
+	ft_lstinsert_env(&mini->env, "PATH", \
+		"/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin", 1);
 	env_update(mini);
 	return (NULL);
 }

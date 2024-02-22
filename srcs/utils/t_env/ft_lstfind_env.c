@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 16:33:05 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/18 15:24:01 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/22 21:52:14 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ t_env	*ft_lstfind_env(t_env **env, char *name)
 		if (ft_strcmp(tmp->name, name) == 0)
 			return (tmp);
 		tmp = tmp->next;
-		if (tmp == start)
-			break ;
 	}
 	return (NULL);
 }

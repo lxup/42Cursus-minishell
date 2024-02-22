@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 17:31:59 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/22 17:21:08 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/22 19:41:16 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,10 @@
 # include "lib.h"
 # include "typedef.h"
 
+typedef __int32_t t_superstatussatus;
+
 /* Global variables */
-extern pid_t	g_status;
+extern t_superstatussatus	g_status;
 
 /* ************************************************************************** */
 /*                                  SYSTEM                                    */

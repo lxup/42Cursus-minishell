@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 13:42:05 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/22 11:38:06 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/22 21:51:45 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_env	*ft_lstnew_env(char *name, char *value, int equal_sign)
 	if (!new_lst->value)
 		return (free(new_lst->name), free(new_lst), NULL);
 	new_lst->equal_sign = equal_sign;
-	new_lst->next = new_lst;
-	new_lst->prev = new_lst;
+	new_lst->next = NULL;
+	new_lst->prev = NULL;
 	return (new_lst);
 }

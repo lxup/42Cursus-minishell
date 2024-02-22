@@ -6,49 +6,34 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 12:55:09 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/22 18:11:29 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/22 22:07:14 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	is_out_long(char *str, int sign)
+static int	check_atol(char *str)
 {
-	if (sign == -1)
-	{
-		if (ft_strcmp(str, "9223372036854775808") < 0)
-			return (1);
-	}
-	else
-	{
-		if (ft_strcmp(str, "9223372036854775807") > 0)
-			return (1);
-	}
-	return (0);
-}
-
-static int	numeric_arg(char *str)
-{
-	size_t	i;
-	int		sign;
-
-	i = 0;
-	if (str == NULL)
-		return (i);
-	while (str[i] && ft_iswhitespace(str[i]))
-		i++;
+	int i;
+	unsigned long res;
+	int sign;
+	
 	sign = 1;
-	if (str[i] == '-' || str[i] == '+')
-	{
-		if (str[i] == '-')
-			sign = -1;
+	res = 0;
+	i = 0;
+	while (ft_iswhitespace(str[i]))
 		i++;
-	}
-	if (is_out_long(str + i, sign))
-		return (0);
+	str = str + i;
+	i = 0;
+	i = (str[i] == '-' || str[i] == '+');
+	if (str[i] == '-')
+		sign = -1;
 	while (str[i])
 	{
 		if (!ft_isdigit(str[i]))
+			return (0);
+		res = res * 10 + str[i] - '0';
+		if (res * sign > LONG_MAX || (long long)res * sign < LONG_MIN)
 			return (0);
 		i++;
 	}
@@ -58,37 +43,36 @@ static int	numeric_arg(char *str)
 static int	check_arguments(t_mini *mini, t_pipeline *pipeline)
 {
 	int	argc;
-
+	
+	(void)mini;
 	argc = ft_2d_strlen(pipeline->args);
-	if (argc > 1 && !numeric_arg(pipeline->args[1]))
+	if (argc > 1 && !check_atol(pipeline->args[1]))
 	{
 		ft_dprintf("%s%s: %s: %s\n", SHELL, pipeline->args[0], \
 			pipeline->args[1], "numeric argument required");
-		mini->exit_code = EXIT_BUILTIN_NONUM;
+		g_status = EXIT_BUILTIN_NONUM;
 	}
 	else if (argc > 2)
 	{
 		ft_dprintf("%s%s: %s\n", SHELL, pipeline->args[0], \
 			"too many arguments");
-		mini->exit_code = 1;
+		g_status = 1;
 		return (0);
 	}
 	else if (argc == 2)
 	{
-		mini->exit_code = ft_atol(pipeline->args[1]) % 256;
-		if (mini->exit_code < 0)
-			mini->exit_code = 256 + mini->exit_code;
+		g_status = ft_atol(pipeline->args[1]);
 	}
 	return (1);
 }
 
 void	exit_builtin(t_mini *mini, t_pipeline *pipeline)
 {
-	mini->exit_code = 0;
+	g_status = 0;
 	if (!check_arguments(mini, pipeline))
 		return ;
 	if (ft_lstsize_pipeline(mini->pipeline) == 1 \
-		&& write(STDOUT_FILENO, "exit\n", 5) == -1)
+		&& write(STDERR_FILENO, "exit\n", 5) == -1)
 		ft_dprintf("%s%s\n", SHELL, strerror(errno));
 	ft_exit(mini);
 }

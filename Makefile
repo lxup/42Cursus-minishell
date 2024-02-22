@@ -6,7 +6,7 @@
 #    By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/06 19:51:48 by lquehec           #+#    #+#              #
-#    Updated: 2024/02/22 12:52:21 by lquehec          ###   ########.fr        #
+#    Updated: 2024/02/22 19:38:35 by lquehec          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,7 +56,7 @@ NAME			=	minishell
 
 CC				=	cc
 RM				=	rm -rf
-CFLAGS			+=	-Wall -Wextra -Werror -g3
+CFLAGS			+=	-Wall -Wextra -Werror -g3 -MMD -MP
 
 # **************************************************************************** #
 #                                    PATHS                                     #
@@ -213,6 +213,8 @@ SRCS 			+=	$(addprefix srcs/debug/, $(addsuffix .c, \
 
 OBJS			=	$(SRCS:%.c=$(OBJ_PATH)/%.o)
 
+DEPS			=	$(OBJS:.o=.d)
+
 # **************************************************************************** #
 #                                     LIBS                                     #
 # **************************************************************************** #
@@ -279,6 +281,9 @@ fclean:		clean
 			@$(RM) $(NAME)
 			@echo "${YELLOW}> Cleaning of $(NAME) has been done ❌${END}"
 
-re:			fclean all
+re:			fclean 
+			make all
+
+-include $(DEPS)
 
 .PHONY: all clean fclean re

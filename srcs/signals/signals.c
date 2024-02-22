@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 12:18:31 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/22 16:56:25 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/22 19:38:58 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,6 @@ static void	sig_handler(int sig)
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
-	}
-	else if (sig == SIGQUIT)
-	{
-		rl_on_new_line();
-		rl_redisplay();
-		ft_putstr_nl(MSG_EXIT);
 	}
 }
 
@@ -55,7 +49,10 @@ static void	signal_terms(void)
 	struct termios	term;
 
 	if (tcgetattr(1, &term))
+	{
 		ft_dprintf("%stcgetattr\n", SHELL);
+		return ;
+	}
 	term.c_lflag &= ~ECHOCTL;
 	if (tcsetattr(1, 0, &term))
 		ft_dprintf("%stcsetattr\n", SHELL);

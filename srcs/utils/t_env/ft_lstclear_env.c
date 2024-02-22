@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 16:12:34 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/11 10:31:42 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/22 21:52:18 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@ void	ft_lstclear_env(t_env **lst)
 			free(current->value);
 		free(current);
 		current = tmp;
-		if (current == start)
-			break ;
 	}
 	*lst = NULL;
 }

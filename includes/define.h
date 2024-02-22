@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 12:03:17 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/22 17:07:08 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/22 18:59:09 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@
 #  define EXEC_FAILURE 1
 #  define EXEC_CTRL_D 0
 #  define EXEC_CTRL_C 1
+#  define EXEC_CTRL_BS 131
 #  define EXEC_SYNTAX_ERROR 258
 #  define EXEC_CMD_NOT_FOUND 127
 # elif __linux__
@@ -57,15 +58,10 @@
 #  define EXEC_FAILURE 1
 #  define EXEC_CTRL_D 0
 #  define EXEC_CTRL_C 130
+#  define EXEC_CTRL_BS 131
 #  define EXEC_SYNTAX_ERROR 2
 #  define EXEC_CMD_NOT_FOUND 127
 # endif
-
-/* ************************************************************************** */
-/*                                    MSG                                     */
-/* ************************************************************************** */
-
-# define MSG_EXIT "Bye"
 
 /* ************************************************************************** */
 /*                                PERMISSIONS                                 */
@@ -145,7 +141,7 @@
 # define BG_MAGENTA "\033[45m" /* - Magenta background */
 # define BG_CYAN "\033[46m" /* - Cyan background */
 # define BG_WHITE "\033[47m" /* - White background */
-# define BG_TRANSPARENT "\033[49m" /* - Transparent background */
+# define BG_TRANSPARENT "\1\033[49m\2" /* - Transparent background */
 
 /* Prompt */
 // # define PROMPT_TEMPLATE BG_WHITE C_BLACK " %s " BG_BLUE C_WHITE "  %s "

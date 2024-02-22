@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 18:43:41 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/22 16:58:20 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/22 20:56:45 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int	heredoc(t_mini *mini, char *delim, t_pipeline *pipeline)
 	int		fd;
 	char	*str;
 
-	fd = open(pipeline->heredoc, O_RDWR | O_CREAT | O_EXCL, 0644);
+	fd = open(pipeline->heredoc, O_RDWR | O_CREAT | O_EXCL, PERM_RW);
 	if (fd == -1)
 		return (0);
 	signal(SIGINT, &signals_heredoc);
@@ -27,7 +27,7 @@ static int	heredoc(t_mini *mini, char *delim, t_pipeline *pipeline)
 		if (!str)
 		{
 			if (g_status == 130)
-				return (close(fd), ft_free_mini(mini), exit(1), 0);
+				return (close(fd), ft_free_mini(mini), exit(g_status), 0);
 			ft_dprintf("%swarning: here-document delimited by end-of-file (wanted `%s')\n", SHELL, delim);
 			return (close(fd), 1);
 		}
@@ -54,7 +54,7 @@ int	exec_heredoc(t_mini *mini, char *delim, t_pipeline *pipeline)
 		if (!heredoc(mini, delim, pipeline))
 		{
 			ft_free_mini(mini);
-			exit(1);
+			exit(EXEC_CTRL_C);
 		}
 		ft_free_mini(mini);
 		exit(0);

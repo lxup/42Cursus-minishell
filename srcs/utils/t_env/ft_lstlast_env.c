@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 13:47:35 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/11 10:31:44 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/22 21:52:07 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 t_env	*ft_lstlast_env(t_env *lst)
 {
 	if (!lst)
-		return (NULL);
-	return (lst->prev);
+		return (lst);
+	while (lst->next)
+		lst = lst->next;
+	return (lst);
 }

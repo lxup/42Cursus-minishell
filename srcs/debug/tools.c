@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 14:37:42 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/16 19:23:25 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/22 21:54:55 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ void	print_env(t_mini *mini)
 	tmp = start;
 	while (tmp)
 	{
-		printf("%s=%s\n", tmp->name, tmp->value);
+		printf("%s=%s , prev: %p, next: %p\n", tmp->name, tmp->value, tmp->prev, tmp->next);
 		tmp = tmp->next;
 		if (tmp == start)
 			break ;

@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 06:05:38 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/22 16:56:56 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/22 19:58:24 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,13 @@ int	ft_lstupsert_env(t_env **env, char *name, char *value, int equal_sign)
 	t_env	*tmp;
 
 	return_value = 0;
-	if (!env || !*env)
-		return (return_value);
+	if (!env || !name)
+		return (0);
+	if (!*env)
+	{
+		*env = ft_lstnew_env(name, value, equal_sign);
+		return (1);
+	}
 	start = *env;
 	tmp = start;
 	while (tmp)

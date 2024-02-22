@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 11:28:00 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/22 18:29:19 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/22 18:43:16 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@ static void	sig_handler(int sig)
 {
 	if (sig == SIGINT)
 	{
-		g_status = 130;
+		g_status = 0;
 		write(1, "\n", 1);
 	}
 	else if (sig == SIGQUIT)
 	{
-		g_status = 131;
+		g_status = EXEC_CTRL_BS;
 		ft_dprintf("Quit (core dumped)\n");
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 11:32:13 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/10 11:52:57 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/22 21:51:32 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,6 @@ int	ft_lstreplace_env(t_env **env, char *name, char *value)
 			return_value++;
 		}
 		tmp = tmp->next;
-		if (tmp == start)
-			break ;
 	}
 	return (return_value);
 }
