@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 17:31:59 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/21 12:04:04 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/21 18:44:38 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@
 
 /* Global variables */
 extern pid_t	g_status;
-
-int	*ft_nsm(int stp);
 
 /* ************************************************************************** */
 /*                                  SYSTEM                                    */
@@ -125,11 +123,7 @@ int				lexer(t_mini *mini);
 
 int				create_tokens(t_mini *mini);
 
-/*
-** Define the token type
-** ./lexer/lexer_token_type.c
-*/
-// int			define_token_type(char *prompt, t_token_type *type, int *i);
+int				lexer_define_token_type(t_mini *mini, int *i, int arg_index);
 
 /*
 ** Complete the token type for each token
@@ -242,11 +236,16 @@ int				parser_fix_quote(t_mini *mini);
 */
 int				expander_env_var(t_mini *mini);
 
+/* ********** HEREDOC ********** */
 /*
 ** Expand the env variable inside heredoc by replacing the $ by the value
 ** ./expander/expander_env_var_heredoc.c
 */
 char			*expander_heredoc(t_mini *mini, char *str);
+int				expander_heredoc_get_env_var_name_len(char *str);
+char			*expander_heredoc_get_env_var(t_mini *mini, char *str);
+int				expander_heredoc_set_new_value(t_mini *mini, char **str,
+					char *prev_str);
 
 /* ************************************************************************** */
 /*                                  EXECUTOR                                  */
@@ -334,6 +333,9 @@ void			exit_builtin(t_mini *mini, t_pipeline *pipeline);
 ** ./builtins/export/export.c
 */
 void			export_builtin(t_mini *mini, t_pipeline *pipeline);
+void			export_add(t_mini *mini, t_pipeline *pipeline);
+int				export_is_valid_env(t_pipeline *pipeline, char **env);
+void			export_print(t_mini *mini);
 
 /*
 ** Pwd builtin
@@ -362,27 +364,32 @@ int				p_err_unclose_char(t_mini *mini, char c);
 char			*ft_strjoin_bs(char const *s1, char const *s2);
 char			**env_to_str(t_env *env);
 int				ft_count_chars_outside_quotes(char *str, char c);
+
+/* ************************************************************************** */
+/*                                    SHELL                                   */
+/* ************************************************************************** */
+
 /*
 ** Get the OS
-** ./tools/shell/get_os.c
+** ./shell/get_os.c
 */
 char			*get_os(void);
 
 /*
 ** Get the pwd
-** ./tools/shell/get_path.c
+** ./shell/get_path.c
 */
 char			*get_path(t_mini *mini);
 
 /*
 ** Build the left side of the prompt
-** ./tools/shell/build_left_side.c
+** ./shell/build_left_side.c
 */
 void			build_left_side(t_mini *mini, char *os, char *path);
 
 /*
 ** Build the separator
-** ./tools/shell/build_separator.c
+** ./shell/shell_separator.c
 */
 void			*build_separator(t_mini *mini);
 

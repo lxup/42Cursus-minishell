@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 00:30:40 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/20 12:57:38 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/21 18:40:52 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,39 +20,6 @@ char	*get_os(void)
 		return ("🐧");
 	else
 		return ("?");
-}
-
-char	*get_path(t_mini *mini)
-{
-	char	*path;
-	char	*tmp;
-	t_env	*home_path;
-	t_env	*pwd;
-
-	pwd = ft_lstfind_env(&mini->env, "PWD");
-	home_path = ft_lstfind_env(&mini->env, "HOME");
-	if (pwd && home_path && !ft_strncmp(pwd->value, home_path->value, ft_strlen(home_path->value)))
-	{
-		path = ft_strdup(pwd->value + ft_strlen(home_path->value));
-		if (!path)
-			ft_exit(mini);
-		tmp = ft_strjoin("~", path);
-		free(path);
-		if (!tmp)
-			ft_exit(mini);
-		return (tmp);
-	}
-	else if (pwd)
-	{
-		path = ft_strdup(pwd->value);
-		if (!path)
-			ft_exit(mini);
-		return (path);
-	}
-	path = ft_strdup("?");
-	if (!path)
-		ft_exit(mini);
-	return (path);
 }
 
 int	get_terminal_width(void)
@@ -81,9 +48,11 @@ void	build_left_side(t_mini *mini, char *os, char *path)
 	tmp = ft_strjoin(mini->shell_prompt.prompt, " " BG_BLACK C_BLUE "");
 	free(mini->shell_prompt.prompt);
 	if (mini->last_exec_status == EXIT_SUCCESS)
-		mini->shell_prompt.prompt = ft_strjoin(tmp, PROMPTE_SUCCESS_TEMPLATE);
+		mini->shell_prompt.prompt = ft_strjoin(tmp, BG_BLACK C_GREEN " ✔ " \
+			BG_TRANSPARENT C_BLACK "");
 	else
-		mini->shell_prompt.prompt = ft_strjoin(tmp, PROMPTE_ERROR_TEMPLATE);
+		mini->shell_prompt.prompt = ft_strjoin(tmp, BG_BLACK C_RED " ✘ " \
+			BG_TRANSPARENT C_BLACK "");
 	free(tmp);
 	mini->shell_prompt.prompt_size = 3 + 1 + 5 + len_path + 6;
 }

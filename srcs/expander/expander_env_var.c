@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 20:49:58 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/21 11:36:18 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/21 16:58:10 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,20 @@ static t_token_type	prev_token_type(t_token *token)
 	if (tmp)
 		return (tmp->type);
 	return (TOKEN_NOT_SET);
+}
+
+static int	ambiguous_redirect(t_token *token)
+{
+	if ((!token->next || (token->next && token->next->index != token->index)) \
+		&& token->prev && (token->prev->type == TOKEN_DLESSER \
+		|| token->prev->type == TOKEN_LESSER \
+		|| token->prev->type == TOKEN_GREATER \
+		|| token->prev->type == TOKEN_DGREATER))
+	{
+		ft_dprintf("%s%s: ambiguous redirect\n", SHELL, token->value);
+		return (-1);
+	}
+	return (0);
 }
 
 static int	expand_env_var(t_mini *mini, t_token *token)
@@ -42,10 +56,10 @@ static int	expand_env_var(t_mini *mini, t_token *token)
 		if (env_var)
 			env_var_value = ft_strdup(env_var->value);
 		else
-			return (0);
+			return (ambiguous_redirect(token));
 	}
 	if (!env_var_value)
-		return (ft_exit(mini), 0);
+		return (ft_exit(mini));
 	tmp = token->value;
 	token->value = env_var_value;
 	free(tmp);
@@ -54,6 +68,7 @@ static int	expand_env_var(t_mini *mini, t_token *token)
 
 int	expander_env_var(t_mini *mini)
 {
+	int			ret;
 	t_token		*token;
 	t_token		*tmp;
 
@@ -62,13 +77,18 @@ int	expander_env_var(t_mini *mini)
 	{
 		tmp = NULL;
 		if (token->type == TOKEN_ENV_VAR)
-			if (expand_env_var(mini, token) == 0)
+		{	
+			ret = expand_env_var(mini, token);
+			if (ret == 0)
 			{
 				tmp = token->next;
 				ft_lstremove_token(&mini->tokens, token);
 				token = tmp;
 				continue ;
 			}
+			if (ret == -1)
+				return (0);
+		}
 		token = token->next;
 	}
 	return (1);

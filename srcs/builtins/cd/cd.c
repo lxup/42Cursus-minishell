@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 21:52:55 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/19 21:54:04 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/21 16:29:33 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ static int	go_home(t_mini *mini, t_pipeline *pipeline)
 
 void	cd_builtin(t_mini *mini, t_pipeline *pipeline)
 {
-	ft_printf("cd_builtin\n");
 	if (ft_2d_strlen(pipeline->args) > 2)
 	{
 		ft_dprintf("%scd: too many arguments\n", SHELL);

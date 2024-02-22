@@ -6,7 +6,7 @@
 #    By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/06 19:51:48 by lquehec           #+#    #+#              #
-#    Updated: 2024/02/21 11:13:47 by lquehec          ###   ########.fr        #
+#    Updated: 2024/02/21 18:44:09 by lquehec          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -85,7 +85,8 @@ SRCS 			=	$(addprefix srcs/system/, $(addsuffix .c, \
 SRCS			+=	$(addprefix srcs/shell/, $(addsuffix .c, \
 					shell \
 					shell_left_side \
-					shell_separator))
+					shell_separator \
+					shell_get_path))
 # SIGNALS
 SRCS			+=	$(addprefix srcs/signals/, $(addsuffix .c, \
 					signals \
@@ -109,7 +110,8 @@ SRCS 			+=	$(addprefix srcs/history/, $(addsuffix .c, \
 SRCS 			+=	$(addprefix srcs/lexer/, $(addsuffix .c, \
 					lexer \
 					syntax \
-					lexer_token_type))
+					lexer_token_type \
+					lexer_token_type_utils))
 # LEXER/IS
 SRCS 			+=	$(addprefix srcs/lexer/is/, $(addsuffix .c, \
 					is_env_var \
@@ -131,7 +133,8 @@ SRCS 			+=	$(addprefix srcs/parser/, $(addsuffix .c, \
 # EXPANDER
 SRCS 			+=	$(addprefix srcs/expander/, $(addsuffix .c, \
 					expander_env_var \
-					expander_heredoc))
+					expander_heredoc \
+					expander_heredoc_utils))
 # EXECUTOR
 SRCS 			+=	$(addprefix srcs/executor/, $(addsuffix .c, \
 					executor \
@@ -153,6 +156,8 @@ SRCS 			+=	$(addprefix srcs/builtins/, $(addsuffix .c, \
 					env/env \
 					exit/exit \
 					export/export \
+					export/export_utils \
+					export/export_add \
 					pwd/pwd \
 					unset/unset))
 # TOOLS

@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 20:49:58 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/18 15:33:52 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/21 17:15:58 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static char	*get_env_var_name(char *str)
 	return (env_var);
 }
 
-static int	get_env_var_name_len(char *str)
+int	expander_heredoc_get_env_var_name_len(char *str)
 {
 	int		i;
 	char	*var_name;
@@ -48,7 +48,7 @@ static int	get_env_var_name_len(char *str)
 	return (i);
 }
 
-static char	*get_env_var(t_mini *mini, char *str)
+char	*expander_heredoc_get_env_var(t_mini *mini, char *str)
 {
 	t_env	*env_var;
 	char	*env_var_value;
@@ -88,8 +88,8 @@ static int	get_new_len(t_mini *mini, char *str)
 			&& str[i + 1] != '\'' && str[i + 1] != '\"')
 		{
 			i++;
-			env_var = get_env_var(mini, &str[i]);
-			i += get_env_var_name_len(&str[i]);
+			env_var = expander_heredoc_get_env_var(mini, &str[i]);
+			i += expander_heredoc_get_env_var_name_len(&str[i]);
 			len += ft_strlen(env_var);
 			if (env_var)
 				free(env_var);
@@ -100,42 +100,6 @@ static int	get_new_len(t_mini *mini, char *str)
 		}
 	}
 	return (len);
-}
-
-static int	set_new_value(t_mini *mini, char **str, char *prev_str)
-{
-	int		i;
-	int		j;
-	int		k;
-	char	*env_var;
-
-	i = 0;
-	j = 0;
-	while (prev_str[i])
-	{
-		if (prev_str[i] == '$' && prev_str[i + 1] \
-			&& !ft_iswhitespace(prev_str[i + 1]) \
-			&& prev_str[i + 1] != '\'' && prev_str[i + 1] != '\"')
-		{
-			i++;
-			env_var = get_env_var(mini, &prev_str[i]);
-			k = 0;
-			if (env_var)
-			{
-				while (env_var && env_var[k])
-					(*str)[j++] = env_var[k++];
-				free(env_var);
-			}
-			i += get_env_var_name_len(&prev_str[i]) - 1;
-		}
-		else
-		{
-			(*str)[j] = prev_str[i];
-			j++;
-		}
-		i++;
-	}
-	return (1);
 }
 
 char	*expander_heredoc(t_mini *mini, char *str)
@@ -150,7 +114,7 @@ char	*expander_heredoc(t_mini *mini, char *str)
 	new_value = ft_calloc(new_len + 1, sizeof(char));
 	if (!new_value)
 		return (str);
-	set_new_value(mini, &new_value, str);
+	expander_heredoc_set_new_value(mini, &new_value, str);
 	tmp = str;
 	str = new_value;
 	free(tmp);
