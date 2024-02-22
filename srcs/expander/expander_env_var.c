@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 20:49:58 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/22 14:13:59 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/22 16:49:42 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,8 @@ static int	expand_env_var(t_mini *mini, t_token *token)
 	tmp = token->value;
 	token->value = env_var_value;
 	free(tmp);
-	expander_env_var_split(mini, token);
-	return (1);
+	return (expander_env_var_split(mini, token, ft_strlen(token->value) \
+		&& token->value[ft_strlen(token->value) - 1] == ' '), 1);
 }
 
 int	expander_env_var(t_mini *mini)
@@ -108,8 +108,6 @@ int	expander_env_var(t_mini *mini)
 			if (ret == -1)
 				return (0);
 		}
-		printf("PRINT TOKENS\n");
-		print_tokens(mini->tokens);
 		token = token->next;
 	}
 	return (1);

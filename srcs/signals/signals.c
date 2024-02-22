@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 12:18:31 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/22 12:29:23 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/22 16:56:25 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ static void	signal_terms(void)
 void	signals(t_mini *mini)
 {
 	(void)mini;
-	// g_status = 0;
 	signal_terms();
 	signal_ctrl_c();
 	signal_ctrl_backslash();

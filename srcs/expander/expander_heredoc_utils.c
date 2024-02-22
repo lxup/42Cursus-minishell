@@ -6,13 +6,13 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 17:09:45 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/21 18:12:20 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/22 17:31:24 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	expander_heredoc_expand(char **str, char *env_var, int *j)
+void	expander_heredoc_expand(char **str, char *env_var, int *j)
 {
 	int	k;
 
@@ -20,7 +20,11 @@ static void	expander_heredoc_expand(char **str, char *env_var, int *j)
 	if (env_var)
 	{
 		while (env_var && env_var[k])
-			(*str)[*j++] = env_var[k++];
+		{
+			(*str)[*j] = env_var[k];
+			k++;
+			(*j)++;
+		}
 		free(env_var);
 	}
 }

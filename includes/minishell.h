@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 17:31:59 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/22 14:05:50 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/22 17:21:08 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -235,7 +235,8 @@ int				parser_fix_quote(t_mini *mini);
 ** ./expander/expander_env_var.c
 */
 int				expander_env_var(t_mini *mini);
-int				expander_env_var_split(t_mini *mini, t_token *token);
+int				expander_env_var_split(t_mini *mini, t_token *token,
+					int space_at_end);
 
 /* ********** HEREDOC ********** */
 /*
@@ -419,7 +420,8 @@ t_token			*ft_lstprev_tokentype_token(t_token *current,
 int				ft_lstcountprev_tokentype_token(t_token *current,
 					t_token_type type);
 int				ft_lstremove_token(t_token **lst, t_token *token);
-int				ft_lstinsertafter_token(t_token **lst, t_token *target, t_token *new);
+int				ft_lstinsertafter_token(t_token **lst, t_token *target,
+					t_token *new, int space_at_end);
 /* t_pipeline */
 int				create_pipeline(t_mini *mini);
 void			ft_lstadd_back_pipeline(t_pipeline **lst, t_pipeline *new);
@@ -447,13 +449,15 @@ int				ft_lstremove_env(t_env **lst, t_env *env);
 ** Update env variable or add it if it doesn't exist
 ** ./utils/t_env/ft_lstupsert_env.c
 */
-int				ft_lstupsert_env(t_env **env, char *name, char *value, int equal_sign);
+int				ft_lstupsert_env(t_env **env, char *name, char *value,
+					int equal_sign);
 
 /*
 ** Insert env variable and if it already exists, do nothing
 ** ./utils/t_env/ft_lstinsert_env.c
 */
-int				ft_lstinsert_env(t_env **env, char *name, char *value, int equal_sign);
+int				ft_lstinsert_env(t_env **env, char *name, char *value,
+					int equal_sign);
 
 /* utils */
 int				ft_2d_strlen(char **array);

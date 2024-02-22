@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 17:45:06 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/22 12:35:44 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/22 17:01:18 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	export_add(t_mini *mini, t_pipeline *pipeline)
 	while (pipeline->args[++i])
 	{
 		if (pipeline->args[i][0] == '=')
-			// || count_char(pipeline->args[i], '=') > 1)
 		{
 			ft_dprintf("%sexport: `%s': not a valid identifier\n", SHELL, \
 				pipeline->args[i]);

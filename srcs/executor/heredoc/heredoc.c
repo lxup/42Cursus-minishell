@@ -6,20 +6,11 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 18:43:41 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/22 12:24:08 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/22 16:58:20 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int	*ft_nsm(int stp)
-{
-	static int	*status = {0};
-
-	if (stp)
-		*status = stp;
-	return (status);
-}
 
 static int	heredoc(t_mini *mini, char *delim, t_pipeline *pipeline)
 {
@@ -37,6 +28,7 @@ static int	heredoc(t_mini *mini, char *delim, t_pipeline *pipeline)
 		{
 			if (g_status == 130)
 				return (close(fd), ft_free_mini(mini), exit(1), 0);
+			ft_dprintf("%swarning: here-document delimited by end-of-file (wanted `%s')\n", SHELL, delim);
 			return (close(fd), 1);
 		}
 		if (!ft_strcmp(delim, str))
@@ -62,7 +54,7 @@ int	exec_heredoc(t_mini *mini, char *delim, t_pipeline *pipeline)
 		if (!heredoc(mini, delim, pipeline))
 		{
 			ft_free_mini(mini);
-			exit (1);
+			exit(1);
 		}
 		ft_free_mini(mini);
 		exit(0);
@@ -107,11 +99,11 @@ int	process_heredocs(t_mini *mini, int heredoc_count)
 
 int	handle_heredoc(t_mini *mini)
 {
-	int		ret;
-	int		heredoc_count;
+	int	ret;
+	int	heredoc_count;
 
-	heredoc_count = ft_lstcount_tokentype_pipeline(mini->pipeline, \
-		TOKEN_DLESSER);
+	heredoc_count = ft_lstcount_tokentype_pipeline(mini->pipeline,
+			TOKEN_DLESSER);
 	if (!heredoc_count)
 		return (-1);
 	ret = process_heredocs(mini, heredoc_count);

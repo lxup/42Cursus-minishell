@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 12:55:09 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/20 23:04:11 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/22 16:50:58 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,10 +84,7 @@ static int	check_arguments(t_mini *mini, t_pipeline *pipeline)
 
 void	exit_builtin(t_mini *mini, t_pipeline *pipeline)
 {
-	ft_printf("exit_builtin\n");
 	mini->exit_code = 0;
-	if (ft_lstsize_pipeline(mini->pipeline) > 1)
-		return ;
 	if (!check_arguments(mini, pipeline))
 		return ;
 	if (write(STDOUT_FILENO, "exit\n", 5) == -1)

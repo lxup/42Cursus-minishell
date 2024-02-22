@@ -6,13 +6,14 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 06:05:38 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/22 12:16:14 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/22 16:56:56 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	update_value(t_env *tmp, char *value, int equal_sign, int *return_value)
+static void	update_value(t_env *tmp, char *value, int equal_sign, \
+	int *return_value)
 {
 	char	*tmp_value;
 
