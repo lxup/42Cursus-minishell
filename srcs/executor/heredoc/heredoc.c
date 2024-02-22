@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 18:43:41 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/20 23:55:42 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/22 12:24:08 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ static int	heredoc(t_mini *mini, char *delim, t_pipeline *pipeline)
 
 int	exec_heredoc(t_mini *mini, char *delim, t_pipeline *pipeline)
 {
+	int	status;
 	int	pid;
 
 	pipeline->heredoc = heredoc_filename(pipeline);
@@ -69,10 +70,10 @@ int	exec_heredoc(t_mini *mini, char *delim, t_pipeline *pipeline)
 	else
 	{
 		signal(SIGINT, &signals_heredoc_parents);
-		waitpid(pid, &mini->exec_status, 0);
+		waitpid(pid, &status, 0);
 	}
-	mini->exec_status = WEXITSTATUS(mini->exec_status);
-	return (mini->exec_status);
+	g_status = WEXITSTATUS(status);
+	return (g_status);
 }
 
 int	process_heredocs(t_mini *mini, int heredoc_count)

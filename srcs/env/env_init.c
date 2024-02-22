@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 06:12:43 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/18 17:01:35 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/22 11:38:54 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	*env_init(t_mini *mini, char **env)
 		tmp = ft_split(env[i], "=");
 		if (!tmp)
 			return (ft_exit(mini), NULL);
-		new = ft_lstnew_env(tmp[0], tmp[1]);
+		new = ft_lstnew_env(tmp[0], tmp[1], 1);
 		if (!new)
 			return (ft_free_array((void **)tmp), ft_exit(mini), NULL);
 		ft_lstadd_back_env(&mini->env, new);

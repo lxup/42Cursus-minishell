@@ -1,34 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstinsert_env.c                                 :+:      :+:    :+:   */
+/*   ft_lstinsertafter_token.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/16 06:05:38 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/22 11:53:48 by lquehec          ###   ########.fr       */
+/*   Created: 2024/02/22 12:51:14 by lquehec           #+#    #+#             */
+/*   Updated: 2024/02/22 14:21:07 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_lstinsert_env(t_env **env, char *name, char *value, int equal_sign)
+static int	update_index_next(t_token *new)
 {
-	t_env	*start;
-	t_env	*tmp;
+	t_token	*tmp;
 
-	if (!env || !*env)
-		return (0);
-	start = *env;
-	tmp = start;
+	tmp = new->next;
 	while (tmp)
 	{
-		if (ft_strcmp(tmp->name, name) == 0)
-			return (0);
+		tmp->index++;
 		tmp = tmp->next;
-		if (tmp == start)
-			break ;
 	}
-	ft_lstadd_back_env(env, ft_lstnew_env(name, value, equal_sign));
 	return (1);
+}
+
+int	ft_lstinsertafter_token(t_token **lst, t_token *target, t_token *new)
+{
+	t_token	*prev;
+	t_token	*next;
+
+	if (!lst || !new)
+		return (0);
+	if (!*lst)
+	{
+		*lst = new;
+		return (1);
+	}
+	prev = target;
+	next = target->next;
+	if (next)
+		next->prev = new;
+	new->next = next;
+	new->prev = prev;
+	prev->next = new;
+	return(update_index_next(new));
 }

@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 20:49:58 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/21 17:15:58 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/22 12:33:21 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ char	*expander_heredoc_get_env_var(t_mini *mini, char *str)
 	if (!var_name)
 		return (NULL);
 	if (ft_strcmp(var_name, "?") == 0)
-		env_var_value = ft_itoa(mini->last_exec_status);
+		env_var_value = ft_itoa(g_status);
 	else
 	{
 		env_var = ft_lstfind_env(&mini->env, var_name);

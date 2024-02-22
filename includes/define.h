@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 12:03:17 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/21 18:40:02 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/22 12:29:20 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,15 @@
 # ifdef __APPLE__
 #  define EXEC_SUCCESS 0
 #  define EXEC_FAILURE 1
-#  define EXEC_CTRL_D 130
+#  define EXEC_CTRL_D 0
+#  define EXEC_CTRL_C 1
 #  define EXEC_SYNTAX_ERROR 258
 #  define EXEC_CMD_NOT_FOUND 127
 # elif __linux__
 #  define EXEC_SUCCESS 0
 #  define EXEC_FAILURE 1
 #  define EXEC_CTRL_D 130
+#  define EXEC_CTRL_C 1
 #  define EXEC_SYNTAX_ERROR 2
 #  define EXEC_CMD_NOT_FOUND 127
 # endif

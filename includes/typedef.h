@@ -6,35 +6,12 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 11:52:43 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/19 17:40:29 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/22 12:31:41 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TYPEDEF_H
 # define TYPEDEF_H
-
-// typedef enum e_token_type
-// {
-// 	TOKEN_WORD,
-// 	TOKEN_PIPE,
-// 	TOKEN_DPIPE,
-// 	TOKEN_AMPERSAND,
-// 	TOKEN_DAMPERSAND,
-// 	TOKEN_GREATER,
-// 	TOKEN_DGREATER,
-// 	TOKEN_LESSER,
-// 	TOKEN_DLESSER,
-// 	TOKEN_UNKNOWN,
-// 	TOKEN_END,
-// }	t_token_type;
-
-// typedef enum e_token_type
-// {
-// 	TOKEN_COMMAND,
-// 	TOKEN_OPERATOR,
-// 	TOKEN_ARGUMENT,
-// 	TOKEN_UNKNOWN,
-// }	t_token_type;
 
 typedef enum e_token_type
 {
@@ -86,6 +63,7 @@ typedef struct s_env
 {
 	char			*name;
 	char			*value;
+	int				equal_sign;
 	struct s_env	*next;
 	struct s_env	*prev;
 }				t_env;
@@ -111,8 +89,6 @@ typedef struct s_mini
 	int				std_out;
 	struct termios	term;
 	int				exec_only_heredoc;
-	int				last_exec_status;
-	int				exec_status;
 	int				exit_code;
 	int				pipefd[2];
 	int				prevpipe;

@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 15:59:21 by emehdaou          #+#    #+#             */
-/*   Updated: 2024/02/20 22:00:55 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/22 12:27:21 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,11 +68,13 @@ void	ft_waitpid(t_mini *mini, t_pipeline *pipeline)
 {
 	t_pipeline	*curr_pipeline;
 
+	(void)mini;
 	curr_pipeline = pipeline;
 	while (curr_pipeline)
 	{
 		waitpid(curr_pipeline->pid, &curr_pipeline->exec_status, 0);
-		mini->exec_status = WEXITSTATUS(curr_pipeline->exec_status);
+		if (WIFEXITED(curr_pipeline->exec_status))
+			g_status = WEXITSTATUS(curr_pipeline->exec_status);
 		curr_pipeline = curr_pipeline->next;
 	}
 }

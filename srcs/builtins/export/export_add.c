@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 17:45:06 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/21 19:01:56 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/22 12:35:44 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,12 @@ void	export_add(t_mini *mini, t_pipeline *pipeline)
 	i = 0;
 	while (pipeline->args[++i])
 	{
-		if (!ft_strchr(pipeline->args[i], '=') || pipeline->args[i][0] == '=')
+		if (pipeline->args[i][0] == '=')
 			// || count_char(pipeline->args[i], '=') > 1)
 		{
-			mini->exec_status = 1;
 			ft_dprintf("%sexport: `%s': not a valid identifier\n", SHELL, \
-				pipeline->args[i]);		
-			continue ;
-		}
-		if (pipeline->args[i][0] == '-')
-		{
-			mini->exec_status = 2;
+				pipeline->args[i]);
+			g_status = 1;	
 			continue ;
 		}
 		env = ft_split(pipeline->args[i], "=");
@@ -38,16 +33,22 @@ void	export_add(t_mini *mini, t_pipeline *pipeline)
 			ft_exit(mini);
 		else if (!export_is_valid_env(pipeline, env))
 		{
-			mini->exec_status = 1;
 			ft_dprintf("%sexport: `%s': not a valid identifier\n", SHELL, \
 				pipeline->args[i]);
+			g_status = 1;
 		}
 		else
 		{
+
 			if (ft_2d_strlen(env) == 1)
-				ft_lstupsert_env(&mini->env, env[0], NULL);
+			{
+				if (!ft_strchr(pipeline->args[i], '='))
+					ft_lstupsert_env(&mini->env, env[0], NULL, 0);
+				else
+					ft_lstupsert_env(&mini->env, env[0], NULL, 1);
+			}
 			else if (ft_2d_strlen(env) == 2)
-				ft_lstupsert_env(&mini->env, env[0], env[1]);
+				ft_lstupsert_env(&mini->env, env[0], env[1], 1);
 		}
 		ft_free_array((void **)env);
 	}

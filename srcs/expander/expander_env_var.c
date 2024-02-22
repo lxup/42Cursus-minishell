@@ -6,11 +6,29 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 20:49:58 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/21 16:58:10 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/22 14:13:59 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static int	inside_single_quotes(t_token *token)
+{
+	t_token	*tmp;
+	int		count;
+
+	tmp = token;
+	count = 0;
+	while (tmp && tmp->index == token->index)
+	{
+		if (tmp->type == TOKEN_QUOTE)
+			count++;
+		tmp = tmp->prev;
+	}
+	if (count % 2 == 0)
+		return (0);
+	return (1);
+}
 
 static t_token_type	prev_token_type(t_token *token)
 {
@@ -46,10 +64,10 @@ static int	expand_env_var(t_mini *mini, t_token *token)
 
 	env_var = NULL;
 	env_var_value = NULL;
-	if (prev_token_type(token) == TOKEN_DLESSER)
+	if (prev_token_type(token) == TOKEN_DLESSER || inside_single_quotes(token))
 		return (1);
 	if (ft_strcmp(token->value + 1, "?") == 0)
-		env_var_value = ft_itoa(mini->last_exec_status);
+		env_var_value = ft_itoa(g_status);
 	else
 	{
 		env_var = ft_lstfind_env(&mini->env, token->value + 1);
@@ -63,6 +81,7 @@ static int	expand_env_var(t_mini *mini, t_token *token)
 	tmp = token->value;
 	token->value = env_var_value;
 	free(tmp);
+	expander_env_var_split(mini, token);
 	return (1);
 }
 
@@ -89,6 +108,8 @@ int	expander_env_var(t_mini *mini)
 			if (ret == -1)
 				return (0);
 		}
+		printf("PRINT TOKENS\n");
+		print_tokens(mini->tokens);
 		token = token->next;
 	}
 	return (1);

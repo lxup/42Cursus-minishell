@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 21:57:38 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/21 11:58:04 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/22 12:32:19 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	unset_env(t_mini *mini, t_pipeline *pipeline)
 		{
 			ft_dprintf("%sunset: %s: not a valid identifier\n", \
 				SHELL, pipeline->args[i]);
-			mini->exec_status = 1;
+			g_status = 1;
 		}
 		i++;
 	}
@@ -57,7 +57,7 @@ void	unset_builtin(t_mini *mini, t_pipeline *pipeline)
 	if (pipeline->args[1] == NULL)
 	{
 		ft_dprintf("%sunset: not enough arguments\n", SHELL);
-		mini->exec_status = 1;
+		g_status = 1;
 		return ;
 	}
 	else

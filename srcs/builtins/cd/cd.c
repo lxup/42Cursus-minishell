@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 21:52:55 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/21 16:29:33 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/22 12:31:49 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@ static int	go_home(t_mini *mini, t_pipeline *pipeline)
 			{
 				ft_dprintf("%s: cd: %s: %s\n", SHELL, \
 					env->value, strerror(errno));
-				mini->exec_status = 1;
+				g_status = 1;
 			}
 		}
 		else
 		{
 			ft_dprintf("%s: cd: HOME not set\n", SHELL);
-			mini->exec_status = 1;
+			g_status = 1;
 		}
 		return (1);
 	}
@@ -44,7 +44,7 @@ void	cd_builtin(t_mini *mini, t_pipeline *pipeline)
 	if (ft_2d_strlen(pipeline->args) > 2)
 	{
 		ft_dprintf("%scd: too many arguments\n", SHELL);
-		mini->exec_status = 1;
+		g_status = 1;
 		return ;
 	}
 	else if (go_home(mini, pipeline))
@@ -52,6 +52,6 @@ void	cd_builtin(t_mini *mini, t_pipeline *pipeline)
 	if (chdir(pipeline->args[1]) != 0)
 	{
 		ft_dprintf("%scd: %s: %s\n", SHELL, pipeline->args[1], strerror(errno));
-		mini->exec_status = 1;
+		g_status = 1;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 12:18:31 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/21 17:02:14 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/22 12:29:23 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	sig_handler(int sig)
 {
 	if (sig == SIGINT)
 	{
-		g_status = 1;
+		g_status = EXEC_CTRL_C;
 		write(1, "\n", 1);
 		rl_on_new_line();
 		rl_replace_line("", 0);
@@ -64,7 +64,7 @@ static void	signal_terms(void)
 void	signals(t_mini *mini)
 {
 	(void)mini;
-	g_status = 0;
+	// g_status = 0;
 	signal_terms();
 	signal_ctrl_c();
 	signal_ctrl_backslash();

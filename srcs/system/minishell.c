@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 19:35:42 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/21 17:03:45 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/22 12:33:35 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ int	reset_mini(t_mini *mini)
 		ft_lstclear_pipeline(&mini->pipeline);
 	if (mini->tokens)
 		ft_lstclear_token(&mini->tokens);
-	mini->last_exec_status = mini->exec_status;
-	mini->exec_status = EXEC_SUCCESS;
 	mini->exec_only_heredoc = -1;
 	if (mini->prev_prompt)
 		free(mini->prev_prompt);

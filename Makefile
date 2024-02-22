@@ -6,7 +6,7 @@
 #    By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/06 19:51:48 by lquehec           #+#    #+#              #
-#    Updated: 2024/02/21 18:44:09 by lquehec          ###   ########.fr        #
+#    Updated: 2024/02/22 12:52:21 by lquehec          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -133,6 +133,7 @@ SRCS 			+=	$(addprefix srcs/parser/, $(addsuffix .c, \
 # EXPANDER
 SRCS 			+=	$(addprefix srcs/expander/, $(addsuffix .c, \
 					expander_env_var \
+					expander_env_var_split \
 					expander_heredoc \
 					expander_heredoc_utils))
 # EXECUTOR
@@ -193,7 +194,8 @@ SRCS 			+=	$(addprefix srcs/utils/t_token/, $(addsuffix .c, \
 					ft_lstnext_cmd_token \
 					ft_lstprev_tokentype_token \
 					ft_lstcountprev_tokentype_token \
-					ft_lstremove_token))
+					ft_lstremove_token \
+					ft_lstinsertafter_token))
 # UTILS/T_PIPELINE
 SRCS 			+=	$(addprefix srcs/utils/t_pipeline/, $(addsuffix .c, \
 					create_pipeline \

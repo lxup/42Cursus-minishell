@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 18:42:34 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/21 18:55:55 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/22 11:36:32 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,16 @@ static int	lexer_check_case(t_mini *mini, int *i, t_token_type *type)
 	return (0);
 }
 
-static void	lexer_check_case_word(t_mini *mini, int *i, char quote,
+static void	lexer_check_case_word(t_mini *mini, int *i, char *quote,
 		t_token_type *type)
 {
-	if (is_quote(mini->prompt + *i, &quote, type))
+	if (is_quote(mini->prompt + *i, quote, type))
 		*i += 1;
-	else if (is_dquote(mini->prompt + *i, &quote, type))
+	else if (is_dquote(mini->prompt + *i, quote, type))
 		*i += 1;
 	else if (is_env_var(mini->prompt, i))
 		*type = TOKEN_ENV_VAR;
-	else if (is_word_in_quote(mini->prompt, i, quote))
+	else if (is_word_in_quote(mini->prompt, i, *quote))
 		*type = TOKEN_WORD;
 }
 
@@ -55,7 +55,7 @@ static int	define_word_token(t_mini *mini, int *i, int arg_index)
 		tmp = NULL;
 		start = *i;
 		type = TOKEN_NOT_SET;
-		lexer_check_case_word(mini, i, quote, &type);
+		lexer_check_case_word(mini, i, &quote, &type);
 		if (type == TOKEN_NOT_SET)
 			return (0);
 		tmp = ft_strndup(mini->prompt + start, *i - start, 0);

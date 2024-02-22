@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 00:30:40 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/21 18:40:52 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/22 12:32:40 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	build_left_side(t_mini *mini, char *os, char *path)
 	free(path);
 	tmp = ft_strjoin(mini->shell_prompt.prompt, " " BG_BLACK C_BLUE "");
 	free(mini->shell_prompt.prompt);
-	if (mini->last_exec_status == EXIT_SUCCESS)
+	if (g_status == EXIT_SUCCESS)
 		mini->shell_prompt.prompt = ft_strjoin(tmp, BG_BLACK C_GREEN " ✔ " \
 			BG_TRANSPARENT C_BLACK "");
 	else

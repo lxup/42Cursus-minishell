@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 08:25:49 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/19 21:36:29 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/22 12:31:58 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,6 @@ int	is_builtin(t_mini *mini, t_pipeline *pipeline)
 	else if (ft_strcmp(pipeline->args[0], "exit") == 0)
 		return (exit_builtin(mini, pipeline), 1);
 	if (ft_lstsize_env(mini->env) == 0)
-		mini->exec_status = 127;
+		g_status = 127;
 	return (0);
 }

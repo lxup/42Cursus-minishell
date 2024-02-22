@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 15:58:46 by emehdaou          #+#    #+#             */
-/*   Updated: 2024/02/20 11:47:00 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/22 12:32:34 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	ft_exec(t_pipeline *pipeline, t_mini *mini)
 	if (is_builtin(mini, pipeline))
 	{
 		ft_free_mini(mini);
-		exit(mini->exec_status);
+		exit(g_status);
 	}
 	cmd = get_path_pipex(mini, pipeline->args[0]);
 	if (cmd)
