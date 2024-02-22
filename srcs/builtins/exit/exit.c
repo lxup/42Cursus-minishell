@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 12:55:09 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/22 16:50:58 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/22 18:11:29 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,8 @@ void	exit_builtin(t_mini *mini, t_pipeline *pipeline)
 	mini->exit_code = 0;
 	if (!check_arguments(mini, pipeline))
 		return ;
-	if (write(STDOUT_FILENO, "exit\n", 5) == -1)
+	if (ft_lstsize_pipeline(mini->pipeline) == 1 \
+		&& write(STDOUT_FILENO, "exit\n", 5) == -1)
 		ft_dprintf("%s%s\n", SHELL, strerror(errno));
 	ft_exit(mini);
 }
