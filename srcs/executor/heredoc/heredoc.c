@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 18:43:41 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/22 20:56:45 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/22 22:17:30 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ static int	heredoc(t_mini *mini, char *delim, t_pipeline *pipeline)
 		{
 			if (g_status == 130)
 				return (close(fd), ft_free_mini(mini), exit(g_status), 0);
-			ft_dprintf("%swarning: here-document delimited by end-of-file (wanted `%s')\n", SHELL, delim);
+			ft_dprintf("%swarning: here-document delimited by"
+				"end-of-file (wanted `%s')\n", SHELL, delim);
 			return (close(fd), 1);
 		}
 		if (!ft_strcmp(delim, str))

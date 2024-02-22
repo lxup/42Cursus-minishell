@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 10:28:00 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/22 18:49:09 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/22 22:16:32 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,6 @@
 
 int	lexer(t_mini *mini)
 {
-	// if (!edges_cases(mini))
-	// 	return (0);
 	if (mini->tokens)
 		ft_lstclear_token(&mini->tokens);
 	if (!create_tokens(mini))

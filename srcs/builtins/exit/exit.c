@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 12:55:09 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/22 22:07:14 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/22 22:09:31 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 static int	check_atol(char *str)
 {
-	int i;
-	unsigned long res;
-	int sign;
-	
+	int				i;
+	unsigned long	res;
+	int				sign;
+
 	sign = 1;
 	res = 0;
 	i = 0;
@@ -43,18 +43,18 @@ static int	check_atol(char *str)
 static int	check_arguments(t_mini *mini, t_pipeline *pipeline)
 {
 	int	argc;
-	
+
 	(void)mini;
 	argc = ft_2d_strlen(pipeline->args);
 	if (argc > 1 && !check_atol(pipeline->args[1]))
 	{
-		ft_dprintf("%s%s: %s: %s\n", SHELL, pipeline->args[0], \
+		ft_dprintf("%s%s: %s: %s\n", SHELL, pipeline->args[0],
 			pipeline->args[1], "numeric argument required");
 		g_status = EXIT_BUILTIN_NONUM;
 	}
 	else if (argc > 2)
 	{
-		ft_dprintf("%s%s: %s\n", SHELL, pipeline->args[0], \
+		ft_dprintf("%s%s: %s\n", SHELL, pipeline->args[0],
 			"too many arguments");
 		g_status = 1;
 		return (0);
@@ -71,8 +71,8 @@ void	exit_builtin(t_mini *mini, t_pipeline *pipeline)
 	g_status = 0;
 	if (!check_arguments(mini, pipeline))
 		return ;
-	if (ft_lstsize_pipeline(mini->pipeline) == 1 \
-		&& write(STDERR_FILENO, "exit\n", 5) == -1)
+	if (ft_lstsize_pipeline(mini->pipeline) == 1 && write(STDERR_FILENO,
+			"exit\n", 5) == -1)
 		ft_dprintf("%s%s\n", SHELL, strerror(errno));
 	ft_exit(mini);
 }

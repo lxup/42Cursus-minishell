@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 06:15:39 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/22 22:02:00 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/22 22:15:48 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static int	create_pwd(t_mini *mini)
 static int	create_cmd(t_mini *mini)
 {
 	t_env	*cmd_path;
-	
+
 	if (mini->cmd_path)
 	{
 		ft_free_array((void **)mini->cmd_path);

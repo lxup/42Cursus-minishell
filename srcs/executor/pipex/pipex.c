@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 15:58:46 by emehdaou          #+#    #+#             */
-/*   Updated: 2024/02/22 21:07:18 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/22 22:10:03 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,6 @@ void	ft_exec(t_pipeline *pipeline, t_mini *mini)
 	if (cmd)
 		execve(cmd, pipeline->args, mini->env_array);
 	free(cmd);
-	// if (pipeline->args[0][0] == '.' && pipeline->args[0][1] == '/')
-	// {
-	// 	if (access(pipeline->args[0], F_OK) == 0)
-	// 		ft_dprintf("%s%s: Permission denied\n", SHELL, pipeline->args[0]);
-	// 	else
-	// 		ft_dprintf("%s%s: No such file or directory\n", SHELL, pipeline->args[0]);
-	// 	ft_free_mini(mini);
-	// 	exit(127);
-	// }
 	ft_dprintf("%s%s: command not found\n", SHELL, pipeline->args[0]);
 	ft_free_mini(mini);
 	exit(127);
