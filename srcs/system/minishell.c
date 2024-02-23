@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 19:35:42 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/23 19:14:52 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/23 19:32:48 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ void	minishell(t_mini *mini)
 	{
 		signals(mini);
 		get_shell_prompt(mini);
-		// mini->prompt = readline(mini->shell_prompt.prompt);
-		mini->prompt = readline("minishell$ ");
+		mini->prompt = readline(mini->shell_prompt.prompt);
+		// mini->prompt = readline("minishell$ ");
 		if (!mini->prompt)
 		{
 			ft_dprintf("\nexit\n");
