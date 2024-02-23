@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 06:15:39 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/22 22:15:48 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/23 18:57:37 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,31 @@ static int	create_cmd(t_mini *mini)
 	return (1);
 }
 
+static int	update_oldpwd(t_mini *mini)
+{
+	t_env	*pwd;
+	t_env	*oldpwd;
+	char	*new_oldpwd;
+
+	pwd = ft_lstfind_env(&mini->env, "PWD");
+	if (!pwd)
+		return (1);
+	oldpwd = ft_lstfind_env(&mini->env, "PWD");
+	if (!oldpwd)
+		return (1);
+	if (ft_strcmp(oldpwd->value, pwd->value) == 0)
+		return (1);
+	new_oldpwd = ft_strdup(oldpwd->value);
+	if (!new_oldpwd)
+		return (ft_exit(mini), 0);
+	ft_lstreplace_env(&mini->env, "OLDPWD", new_oldpwd);
+	return (1);
+}
+
 int	env_update(t_mini *mini)
 {
+	if (!update_oldpwd(mini))
+		return (0);
 	if (!create_pwd(mini))
 		return (0);
 	if (!create_shell_lvl(mini))
@@ -76,6 +99,5 @@ int	env_update(t_mini *mini)
 	if (!create_cmd(mini))
 		return (0);
 	ft_lstinsert_env(&mini->env, "_", "/usr/bin/env", 1);
-	ft_lstinsert_env(&mini->env, "TERM", "xterm-256color", 1);
 	return (1);
 }

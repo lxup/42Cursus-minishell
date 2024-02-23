@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 12:03:17 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/22 18:59:09 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/23 17:37:18 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,35 +112,35 @@
 # define NEW_PROMPT 0
 
 /* Fonts */
-# define F_BOLD "\033[1m" /* - Bold font */
-# define F_UNDERLINE "\033[4m" /* - Underline font */
-# define F_BLINK "\033[5m" /* - Blink font */
-# define F_REVERSE "\033[7m" /* - Reverse font */
-# define F_CONCEAL "\033[8m" /* - Conceal font */
-# define F_RESET "\033[0m" /* - Reset font */
+# define F_BOLD "\1\033[1m\2" /* - Bold font */
+# define F_UNDERLINE "\1\033[4m\2" /* - Underline font */
+# define F_BLINK "\1\033[5m\2" /* - Blink font */
+# define F_REVERSE "\1\033[7m\2" /* - Reverse font */
+# define F_CONCEAL "\1\033[8m\2" /* - Conceal font */
+# define F_RESET "\1\033[0m\2" /* - Reset font */
 
 /* Colors */
-# define C_BLACK "\033[30m" /* - Black color */
-# define C_RED "\033[31m" /* - Red color */
-# define C_GREEN "\033[32m" /* - Green color */
-# define C_YELLOW "\033[33m" /* - Yellow color */
-# define C_BLUE "\033[34m" /* Blue - color */
-# define C_MAGENTA "\033[35m" /* - Magenta color */
-# define C_CYAN "\033[36m" /* - Cyan color */
-# define C_WHITE "\033[37m" /* - White color */
-# define C_GRAY "\033[90m" /* - Gray color */
-# define C_LIGHT_GRAY "\033[37m" /* - Light gray color */
-# define C_END "\033[0m"
+# define C_BLACK "\1\033[30m\2" /* - Black color */
+# define C_RED "\1\033[31m\2" /* - Red color */
+# define C_GREEN "\1\033[32m\2" /* - Green color */
+# define C_YELLOW "\1\033[33m\2" /* - Yellow color */
+# define C_BLUE "\1\033[34m\2" /* Blue - color */
+# define C_MAGENTA "\1\033[35m\2" /* - Magenta color */
+# define C_CYAN "\1\033[36m\2" /* - Cyan color */
+# define C_WHITE "\1\033[37m\2" /* - White color */
+# define C_GRAY "\1\033[90m\2" /* - Gray color */
+# define C_LIGHT_GRAY "\1\033[37m\2" /* - Light gray color */
+# define C_END "\1\033[0m\2"
 
 /* Backgrounds */
-# define BG_BLACK "\033[40m" /* - Black background */
-# define BG_RED "\033[41m" /* - Red background */
-# define BG_GREEN "\033[42m" /* - Green background */
-# define BG_YELLOW "\033[43m" /* - Yellow background */
-# define BG_BLUE "\033[44m" /* - Blue background */
-# define BG_MAGENTA "\033[45m" /* - Magenta background */
-# define BG_CYAN "\033[46m" /* - Cyan background */
-# define BG_WHITE "\033[47m" /* - White background */
+# define BG_BLACK "\1\033[40m\2" /* - Black background */
+# define BG_RED "\1\033[41m\2" /* - Red background */
+# define BG_GREEN "\1\033[42m\2" /* - Green background */
+# define BG_YELLOW "\1\033[43m\2" /* - Yellow background */
+# define BG_BLUE "\1\033[44m\2" /* - Blue background */
+# define BG_MAGENTA "\1\033[45m\2" /* - Magenta background */
+# define BG_CYAN "\1\033[46m\2" /* - Cyan background */
+# define BG_WHITE "\1\033[47m\2" /* - White background */
 # define BG_TRANSPARENT "\1\033[49m\2" /* - Transparent background */
 
 /* Prompt */

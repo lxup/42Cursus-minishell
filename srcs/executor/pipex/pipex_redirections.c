@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 21:08:27 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/22 18:44:23 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/23 18:59:43 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,17 @@ void	redirections(t_pipeline *pipeline, t_mini *mini)
 	close(mini->pipefd[0]);
 }
 
+static int	is_fd_failed(t_mini *mini, int fd)
+{
+	if (fd < 0)
+	{
+		g_status = 1;
+		ft_exit(mini);
+		return (1);
+	}
+	return (0);
+}
+
 void	init_redir(t_mini *mini, t_pipeline *pipeline)
 {
 	int		fd;
@@ -65,8 +76,8 @@ void	init_redir(t_mini *mini, t_pipeline *pipeline)
 				fd = open(tmp->next->value, O_RDONLY);
 			if (tmp->type == TOKEN_DLESSER)
 				fd = open(pipeline->heredoc, O_RDWR);
-			if (fd < 0)
-				ft_exit(mini);
+			if (is_fd_failed(mini, fd))
+				return ;
 			dup2(fd, (tmp->type != TOKEN_LESSER && tmp->type != TOKEN_DLESSER));
 			close(fd);
 		}

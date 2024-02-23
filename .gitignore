@@ -3,4 +3,5 @@
 *.out
 *.txt
 minishell
+minishell_tester
 .DS_Store

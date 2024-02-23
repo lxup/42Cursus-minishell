@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 12:18:31 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/22 19:38:58 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/23 18:41:07 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,12 @@ static void	signal_terms(void)
 
 	if (tcgetattr(1, &term))
 	{
-		ft_dprintf("%stcgetattr\n", SHELL);
+		ft_dprintf("%stcgetattr failed\n", SHELL);
 		return ;
 	}
 	term.c_lflag &= ~ECHOCTL;
 	if (tcsetattr(1, 0, &term))
-		ft_dprintf("%stcsetattr\n", SHELL);
+		ft_dprintf("%stcsetattr failed\n", SHELL);
 }
 
 void	signals(t_mini *mini)

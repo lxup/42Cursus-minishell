@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 06:12:43 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/22 22:00:23 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/23 18:57:41 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	*env_init(t_mini *mini, char **env)
 		get_env(mini, env);
 	ft_lstinsert_env(&mini->env, "PATH", \
 		"/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin", 1);
+	ft_lstinsert_env(&mini->env, "TERM", "xterm-256color", 1);
 	env_update(mini);
 	return (NULL);
 }

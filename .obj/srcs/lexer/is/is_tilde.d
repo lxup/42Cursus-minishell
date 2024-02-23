@@ -1,12 +1,5 @@
 .obj/srcs/lexer/is/is_tilde.o: srcs/lexer/is/is_tilde.c \
   includes/minishell.h includes/define.h includes/lib.h \
-  /opt/homebrew/opt/readline/include/readline/readline.h \
-  /opt/homebrew/opt/readline/include/readline/rlstdc.h \
-  /opt/homebrew/opt/readline/include/readline/rltypedefs.h \
-  /opt/homebrew/opt/readline/include/readline/keymaps.h \
-  /opt/homebrew/opt/readline/include/readline/chardefs.h \
-  /opt/homebrew/opt/readline/include/readline/tilde.h \
-  /opt/homebrew/opt/readline/include/readline/history.h \
   libft/includes/libft.h libft/includes/libft_checker.h \
   libft/includes/libft_converter.h libft/includes/libft_display.h \
   libft/includes/libft_display_str.h libft/includes/libft_display_char.h \
@@ -21,20 +14,6 @@ includes/minishell.h:
 includes/define.h:
 
 includes/lib.h:
-
-/opt/homebrew/opt/readline/include/readline/readline.h:
-
-/opt/homebrew/opt/readline/include/readline/rlstdc.h:
-
-/opt/homebrew/opt/readline/include/readline/rltypedefs.h:
-
-/opt/homebrew/opt/readline/include/readline/keymaps.h:
-
-/opt/homebrew/opt/readline/include/readline/chardefs.h:
-
-/opt/homebrew/opt/readline/include/readline/tilde.h:
-
-/opt/homebrew/opt/readline/include/readline/history.h:
 
 libft/includes/libft.h:
 
