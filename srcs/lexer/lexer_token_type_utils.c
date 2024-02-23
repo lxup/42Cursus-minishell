@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 18:42:34 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/22 11:36:32 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/23 12:32:11 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ static void	lexer_check_case_word(t_mini *mini, int *i, char *quote,
 		*i += 1;
 	else if (is_env_var(mini->prompt, i))
 		*type = TOKEN_ENV_VAR;
+	else if (is_tilde(mini->prompt, i))
+		*type = TOKEN_TILDE;
 	else if (is_word_in_quote(mini->prompt, i, *quote))
 		*type = TOKEN_WORD;
 }

@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 17:31:59 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/22 19:41:16 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/23 12:47:55 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,8 @@
 # include "lib.h"
 # include "typedef.h"
 
-typedef __int32_t t_superstatussatus;
-
 /* Global variables */
-extern t_superstatussatus	g_status;
+extern int		g_status;
 
 /* ************************************************************************** */
 /*                                  SYSTEM                                    */
@@ -188,6 +186,12 @@ int				is_dquote(char *prompt, char *quote, t_token_type *type);
 int				is_env_var(char *prompt, int *i);
 
 /*
+** Check if the token is a tilde
+** ./lexer/is/is_tilde.c
+*/
+int				is_tilde(char *prompt, int *i);
+
+/*
 ** Check if the token is a word in quote
 ** ./lexer/lexer_is_2.c
 */
@@ -240,6 +244,12 @@ int				expander_env_var(t_mini *mini);
 int				expander_env_var_split(t_mini *mini, t_token *token,
 					int space_at_end);
 
+/*
+** Expand the tilde by replacing the ~ by the value
+** ./expander/expander_tilde.c
+*/
+int				expander_tilde(t_mini *mini);
+
 /* ********** HEREDOC ********** */
 /*
 ** Expand the env variable inside heredoc by replacing the $ by the value
@@ -277,6 +287,12 @@ int				pipex(t_mini *mini);
 ** ./executor/pipex/pipex_redirections.c
 */
 void			init_redir(t_mini *mini, t_pipeline *pipeline);
+
+/*
+** Handle the command with the path
+** ./executor/pipex/pipex_cmd_with_path.c
+*/
+int				handle_cmd_with_path(t_pipeline *pipeline, t_mini *mini);
 
 /* PIPEX UTILS */
 

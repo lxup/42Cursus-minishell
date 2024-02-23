@@ -6,7 +6,7 @@
 #    By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/06 19:51:48 by lquehec           #+#    #+#              #
-#    Updated: 2024/02/22 19:38:35 by lquehec          ###   ########.fr        #
+#    Updated: 2024/02/23 12:35:24 by lquehec          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -115,6 +115,7 @@ SRCS 			+=	$(addprefix srcs/lexer/, $(addsuffix .c, \
 # LEXER/IS
 SRCS 			+=	$(addprefix srcs/lexer/is/, $(addsuffix .c, \
 					is_env_var \
+					is_tilde \
 					is_greater \
 					is_dgreater \
 					is_lesser \
@@ -134,6 +135,7 @@ SRCS 			+=	$(addprefix srcs/parser/, $(addsuffix .c, \
 SRCS 			+=	$(addprefix srcs/expander/, $(addsuffix .c, \
 					expander_env_var \
 					expander_env_var_split \
+					expander_tilde \
 					expander_heredoc \
 					expander_heredoc_utils))
 # EXECUTOR
@@ -148,7 +150,8 @@ SRCS 			+=	$(addprefix srcs/executor/heredoc/, $(addsuffix .c, \
 SRCS 			+=	$(addprefix srcs/executor/pipex/, $(addsuffix .c, \
 					pipex \
 					pipex_utils \
-					pipex_redirections))
+					pipex_redirections \
+					pipex_cmd_with_path))
 # BUILTINS
 SRCS 			+=	$(addprefix srcs/builtins/, $(addsuffix .c, \
 					is_builtin \

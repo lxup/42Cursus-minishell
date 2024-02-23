@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 15:17:34 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/22 11:29:51 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/23 12:56:17 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,8 @@ static char	*get_new_value(t_mini *mini, t_token *token, int *is_word)
 		if (current->type != TOKEN_QUOTE && current->type != TOKEN_DQUOTE)
 		{
 			ft_strlcat(new_value, current->value, new_len + 1);
-			if (current->type == TOKEN_WORD || current->type == TOKEN_ENV_VAR)
+			if (current->type == TOKEN_WORD || current->type == TOKEN_ENV_VAR \
+				|| current->type == TOKEN_TILDE)
 				*is_word = 1;
 		}
 		current = current->next;

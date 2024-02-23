@@ -6,18 +6,11 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 15:58:46 by emehdaou          #+#    #+#             */
-/*   Updated: 2024/02/23 00:45:14 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/23 12:02:18 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static int	handle_cmd_with_path(t_pipeline *pipeline, t_mini *mini)
-{
-	(void)pipeline;
-	(void)mini;
-	return (0);
-}
 
 void	*ft_exec(t_pipeline *pipeline, t_mini *mini)
 {
@@ -26,19 +19,19 @@ void	*ft_exec(t_pipeline *pipeline, t_mini *mini)
 	if (!pipeline->args)
 	{
 		ft_free_mini(mini);
-		return(exit(0), NULL);
+		return (exit(0), NULL);
 	}
 	if (is_builtin(mini, pipeline))
 	{
 		ft_free_mini(mini);
-		return(exit(g_status), NULL);
+		return (exit(g_status), NULL);
 	}
 	cmd = get_path_pipex(mini, pipeline->args[0]);
 	if (cmd)
 		execve(cmd, pipeline->args, mini->env_array);
 	free(cmd);
 	if (handle_cmd_with_path(pipeline, mini))
-		return (ft_free_mini(mini), NULL);
+		return (ft_free_mini(mini), exit(g_status), NULL);
 	ft_dprintf("%s%s: command not found\n", SHELL, pipeline->args[0]);
 	ft_free_mini(mini);
 	return (exit(127), NULL);

@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 11:28:00 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/22 18:43:16 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/23 14:05:13 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	sig_handler(int sig)
 	else if (sig == SIGQUIT)
 	{
 		g_status = EXEC_CTRL_BS;
-		ft_dprintf("Quit (core dumped)\n");
+		ft_printf("Quit (core dumped)\n");
 	}
 }
 

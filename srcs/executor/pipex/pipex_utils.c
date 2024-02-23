@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 15:59:21 by emehdaou          #+#    #+#             */
-/*   Updated: 2024/02/23 00:02:02 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/23 11:36:34 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ char	*get_path_pipex(t_mini *mini, char *cmd)
 		return (NULL);
 	if (!*cmd)
 		return (ft_strdup(cmd));
-	if (cmd[0] == '/' || cmd[0] == '.')
+	if (ft_strchr(cmd, '/'))
 		return (ft_strdup(cmd));
-	while (mini->cmd_path[i])
+	while (mini->cmd_path && mini->cmd_path[i])
 	{
 		tmp = ft_strjoin_bs(mini->cmd_path[i], cmd);
 		if (access(tmp, F_OK | X_OK) == 0)

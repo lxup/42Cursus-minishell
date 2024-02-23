@@ -1,28 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   is_tilde.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/08 17:38:04 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/23 12:07:17 by lquehec          ###   ########.fr       */
+/*   Created: 2024/02/23 12:30:34 by lquehec           #+#    #+#             */
+/*   Updated: 2024/02/23 12:33:33 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	g_status;
-
-int	main(int ac, char **av, char **env)
+int	is_tilde(char *prompt, int *i)
 {
-	t_mini	mini;
-
-	(void)ac, (void)av;
-	signal(SIGPIPE, SIG_IGN);
-	if (!isatty(STDIN_FILENO))
+	if (!prompt)
 		return (0);
-	init(&mini, env);
-	minishell(&mini);
-	return (ft_exit(&mini));
+	if (!i)
+		return (prompt[0] == '~');
+	if (prompt[*i] == '~')
+		return (*i = *i + 1, 1);
+	return (0);
 }

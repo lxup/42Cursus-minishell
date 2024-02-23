@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 21:52:55 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/22 16:51:52 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/23 12:57:45 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@ static int	go_home(t_mini *mini, t_pipeline *pipeline)
 {
 	t_env	*env;
 
-	if (ft_2d_strlen(pipeline->args) == 1 || (pipeline->args[1] \
-		&& !ft_strcmp(pipeline->args[1], "~")))
+	if (ft_2d_strlen(pipeline->args) == 1)
 	{
 		env = ft_lstfind_env(&mini->env, "HOME");
 		if (env)

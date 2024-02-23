@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 11:52:43 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/22 12:31:41 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/23 12:32:54 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ typedef enum e_token_type
 	TOKEN_PIPE,
 	TOKEN_FILE,
 	TOKEN_ENV_VAR,
+	TOKEN_TILDE,
 	TOKEN_QUOTE,
 	TOKEN_DQUOTE,
 	TOKEN_CMD,
