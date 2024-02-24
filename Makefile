@@ -6,7 +6,7 @@
 #    By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/06 19:51:48 by lquehec           #+#    #+#              #
-#    Updated: 2024/02/23 12:35:24 by lquehec          ###   ########.fr        #
+#    Updated: 2024/02/23 21:33:56 by lquehec          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -160,6 +160,7 @@ SRCS 			+=	$(addprefix srcs/builtins/, $(addsuffix .c, \
 					env/env \
 					exit/exit \
 					export/export \
+					export/export_print \
 					export/export_utils \
 					export/export_add \
 					pwd/pwd \

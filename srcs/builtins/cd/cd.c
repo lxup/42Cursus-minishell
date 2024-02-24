@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 21:52:55 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/23 18:54:02 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/23 21:34:43 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@ static int	go_home(t_mini *mini, t_pipeline *pipeline)
 		{
 			if (chdir(env->value) == -1)
 			{
-				ft_dprintf("%s: cd: %s: %s\n", SHELL, \
+				ft_dprintf("%scd: %s: %s\n", SHELL, \
 					env->value, strerror(errno));
 				g_status = 1;
 			}
 		}
 		else
 		{
-			ft_dprintf("%s: cd: HOME not set\n", SHELL);
+			ft_dprintf("%scd: HOME not set\n", SHELL);
 			g_status = 1;
 		}
 		return (1);
@@ -50,7 +50,7 @@ static int	go_oldpwd(t_mini *mini, t_pipeline *pipeline)
 		{
 			if (chdir(env->value) == -1)
 			{
-				ft_dprintf("%s: cd: %s: %s\n", SHELL, \
+				ft_dprintf("%scd: %s: %s\n", SHELL, \
 					env->value, strerror(errno));
 				g_status = 1;
 			}
@@ -58,7 +58,7 @@ static int	go_oldpwd(t_mini *mini, t_pipeline *pipeline)
 		}
 		else
 		{
-			ft_dprintf("%s: cd: OLDPWD not set\n", SHELL);
+			ft_dprintf("%scd: OLDPWD not set\n", SHELL);
 			g_status = 1;
 		}
 		return (1);

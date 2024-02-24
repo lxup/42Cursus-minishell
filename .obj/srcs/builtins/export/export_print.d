@@ -1,5 +1,5 @@
-.obj/srcs/utils/t_pipeline/create_pipeline.o: \
-  srcs/utils/t_pipeline/create_pipeline.c includes/minishell.h \
+.obj/srcs/builtins/export/export_print.o: \
+  srcs/builtins/export/export_print.c includes/minishell.h \
   includes/define.h includes/lib.h \
   /opt/homebrew/opt/readline/include/readline/readline.h \
   /opt/homebrew/opt/readline/include/readline/rlstdc.h \

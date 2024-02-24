@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 10:56:17 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/22 20:09:29 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/24 12:29:02 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ int	executor(t_mini *mini)
 	if (mini->tokens)
 		ft_lstclear_token(&mini->tokens);
 	if (!handle_heredoc(mini))
-		return (0);
+		return (clear_heredoc_after_exec(mini), 0);
 	if (mini->exec_only_heredoc <= -1)
 	{
 		if (!mini->pipeline->next && not_in_fork(mini, mini->pipeline) \

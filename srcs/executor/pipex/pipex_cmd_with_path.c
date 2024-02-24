@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 11:47:59 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/23 14:06:42 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/23 21:35:58 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,6 @@ int	handle_cmd_with_path(t_pipeline *pipeline, t_mini *mini)
 		}
 	}
 	ft_dprintf("%s%s: No such file or directory\n", SHELL, pipeline->args[0]);
-	g_status = 127;
+	g_status = EXEC_CMD_NOT_FOUND;
 	return (1);
 }

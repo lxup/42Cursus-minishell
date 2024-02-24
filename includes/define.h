@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 12:03:17 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/23 17:37:18 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/24 12:17:50 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@
 
 /* MSG */
 # ifdef __APPLE__
-#  define EXPORT_BUILTIN_PRINT_ENV "declare -x"
+#  define EXPORT_BUILTIN_PRINT_ENV "export"
 # elif __linux__
 #  define EXPORT_BUILTIN_PRINT_ENV "export"
 # endif
@@ -130,6 +130,7 @@
 # define C_WHITE "\1\033[37m\2" /* - White color */
 # define C_GRAY "\1\033[90m\2" /* - Gray color */
 # define C_LIGHT_GRAY "\1\033[37m\2" /* - Light gray color */
+# define C_BEIGE "\1\033[93m\2" /* - Beige color */
 # define C_END "\1\033[0m\2"
 
 /* Backgrounds */

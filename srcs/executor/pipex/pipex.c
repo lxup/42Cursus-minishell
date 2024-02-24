@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 15:58:46 by emehdaou          #+#    #+#             */
-/*   Updated: 2024/02/23 17:20:59 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/23 21:35:43 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	*ft_exec(t_pipeline *pipeline, t_mini *mini)
 		return (ft_free_mini(mini), exit(g_status), NULL);
 	ft_dprintf("%s%s: command not found\n", SHELL, pipeline->args[0]);
 	ft_free_mini(mini);
-	return (exit(127), NULL);
+	return (exit(EXEC_CMD_NOT_FOUND), NULL);
 }
 
 void	ft_process(t_pipeline *pipeline, t_mini *mini)
