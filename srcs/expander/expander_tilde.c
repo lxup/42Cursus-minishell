@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 12:35:10 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/23 14:07:49 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/24 13:17:38 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ static int	expand_tilde(t_mini *mini, t_token *token)
 		return (0);
 	if ((!token->prev || (token->prev && token->prev->index != token->index)) \
 		&& (!token->next \
-		|| (token->next && token->next->index != token->index)))
+		|| (token->next && token->next->index != token->index) \
+		|| (token->next && token->next->value[0] == '/')))
 	{
 		tmp = ft_strdup(home->value);
 		if (!tmp)

@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 21:55:08 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/22 12:32:03 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/24 13:13:52 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	env_builtin(t_mini *mini, t_pipeline *pipeline)
 {
 	t_env	*env;
 
+	g_status = 0;
 	if (pipeline->args[1] != NULL)
 	{
 		ft_dprintf("%senv: too many arguments\n", SHELL);

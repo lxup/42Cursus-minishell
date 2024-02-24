@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 23:05:50 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/22 12:32:15 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/24 13:14:09 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	pwd_builtin(t_mini *mini, t_pipeline *pipeline)
 
 	(void)pipeline;
 	(void)mini;
+	g_status = 0;
 	pwd = getcwd(NULL, 0);
 	if (pwd)
 	{

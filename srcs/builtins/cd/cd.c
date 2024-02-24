@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 21:52:55 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/23 21:34:43 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/24 13:13:09 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ static int	go_oldpwd(t_mini *mini, t_pipeline *pipeline)
 
 void	cd_builtin(t_mini *mini, t_pipeline *pipeline)
 {
+	g_status = 0;
 	if (ft_2d_strlen(pipeline->args) > 2)
 	{
 		ft_dprintf("%scd: too many arguments\n", SHELL);

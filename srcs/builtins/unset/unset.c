@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 21:57:38 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/22 21:44:53 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/24 13:14:15 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int	unset_env(t_mini *mini, t_pipeline *pipeline)
 
 void	unset_builtin(t_mini *mini, t_pipeline *pipeline)
 {
+	g_status = 0;
 	if (pipeline->args[1] == NULL)
 		return ;
 	else
