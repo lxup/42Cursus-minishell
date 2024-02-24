@@ -6,17 +6,41 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 12:35:10 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/24 13:17:38 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/24 16:13:30 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static int	inside_quotes(t_token *token)
+{
+	t_token	*tmp;
+	int		count_quote;
+	int		count_dquote;
+
+	tmp = token;
+	count_quote = 0;
+	count_dquote = 0;
+	while (tmp && tmp->index == token->index)
+	{
+		if (tmp->type == TOKEN_QUOTE)
+			count_quote++;
+		if (tmp->type == TOKEN_QUOTE)
+			count_quote++;
+		tmp = tmp->prev;
+	}
+	if (count_quote % 2 == 0 || count_dquote % 2 == 0)
+		return (0);
+	return (1);
+}
 
 static int	expand_tilde(t_mini *mini, t_token *token)
 {
 	t_env	*home;
 	char	*tmp;
 
+	if (inside_quotes(token))
+		return (1);
 	home = ft_lstfind_env(&mini->env, "HOME");
 	if (!home)
 		return (0);
