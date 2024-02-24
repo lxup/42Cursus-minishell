@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 11:28:00 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/23 14:05:13 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/24 14:14:45 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	sig_handler(int sig)
 {
 	if (sig == SIGINT)
 	{
-		g_status = 0;
+		g_status = EXEC_CTRL_C;
 		write(1, "\n", 1);
 	}
 	else if (sig == SIGQUIT)
