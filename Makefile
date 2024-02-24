@@ -6,7 +6,7 @@
 #    By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/06 19:51:48 by lquehec           #+#    #+#              #
-#    Updated: 2024/02/23 21:33:56 by lquehec          ###   ########.fr        #
+#    Updated: 2024/02/24 13:05:42 by lquehec          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -240,7 +240,7 @@ LIBFT_DIR 		=	libft
 LIBFT_INC_PATH	=	$(LIBFT_DIR)/includes
 LIBFT			=	$(LIBFT_DIR)/libft.a
 
-CFLAGS				+=	-I$(LIBFT_INC_PATH)
+CFLAGS			+=	-I$(LIBFT_INC_PATH)
 
 LDLIBS			+=	-L$(LIBFT_DIR)
 

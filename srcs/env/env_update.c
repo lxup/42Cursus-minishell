@@ -6,7 +6,7 @@
 /*   By: lquehec <lquehec@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 06:15:39 by lquehec           #+#    #+#             */
-/*   Updated: 2024/02/23 18:57:37 by lquehec          ###   ########.fr       */
+/*   Updated: 2024/02/24 13:01:38 by lquehec          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,19 +69,23 @@ static int	create_cmd(t_mini *mini)
 
 static int	update_oldpwd(t_mini *mini)
 {
+	char	*new_pwd;
 	t_env	*pwd;
 	t_env	*oldpwd;
 	char	*new_oldpwd;
 
+	new_pwd = getcwd(NULL, 0);
+	if (!new_pwd)
+		return (1);
 	pwd = ft_lstfind_env(&mini->env, "PWD");
 	if (!pwd)
-		return (1);
-	oldpwd = ft_lstfind_env(&mini->env, "PWD");
+		return (free(new_pwd), 1);
+	if (ft_strcmp(pwd->value, new_pwd) == 0)
+		return (free(new_pwd), 1);
+	oldpwd = ft_lstfind_env(&mini->env, "OLDPWD");
 	if (!oldpwd)
 		return (1);
-	if (ft_strcmp(oldpwd->value, pwd->value) == 0)
-		return (1);
-	new_oldpwd = ft_strdup(oldpwd->value);
+	new_oldpwd = ft_strdup(pwd->value);
 	if (!new_oldpwd)
 		return (ft_exit(mini), 0);
 	ft_lstreplace_env(&mini->env, "OLDPWD", new_oldpwd);
